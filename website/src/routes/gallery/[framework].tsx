@@ -18,7 +18,14 @@ interface GallerySection {
 }
 
 export default function GalleryPage(props: RouteSectionProps) {
-	const framework = () => "tailwind" as ComponentFramework;
+	const framework = () => {
+		const maybeFramework = props.params.framework;
+		if (maybeFramework !== "tailwind" && maybeFramework !== "panda") {
+			throw new Error("Invalid framework");
+		}
+
+		return maybeFramework as ComponentFramework;
+	};
 
 	const sections = createMemo<readonly GallerySection[]>(() =>
 		getGallerySections(framework()),
@@ -63,11 +70,9 @@ export default function GalleryPage(props: RouteSectionProps) {
 							page
 						</h1>
 						<p class={css({ color: "fg.muted", fontSize: "lg" })}>
-							Every library component is shown as a committed Playwright
-							screenshot plus a live embedded preview that loads only when the
-							card approaches the viewport. The current gallery uses the
-							tailwind demo set because it covers the full public component
-							surface.
+							Each framework gallery shows the components available for that
+							framework as committed Playwright screenshots plus lazy live
+							previews that load only when each card approaches the viewport.
 						</p>
 						<GalleryFrameworkSwitcher framework={framework()} />
 						<p class={css({ color: "fg.muted", fontSize: "sm" })}>
