@@ -122,7 +122,6 @@ const missingByCategory = {
 	background: [
 		"dotted-map",
 		"interactive-grid-pattern",
-		"light-rays",
 		"neon-gradient-card",
 		"particles",
 		"pixel-image",
@@ -171,6 +170,13 @@ export const upstreamComponentParityManifest = [
 	),
 	createEntry(
 		"flickering-grid",
+		"background",
+		"partial",
+		createSupport(true, true, true),
+		[...overlapNotes],
+	),
+	createEntry(
+		"light-rays",
 		"background",
 		"partial",
 		createSupport(true, true, true),
