@@ -119,7 +119,7 @@ const missingByCategory = {
 		"scroll-progress",
 		"terminal",
 	] as const,
-	text: ["animated-theme-toggler", "highlighter", "video-text"] as const,
+	text: ["highlighter", "video-text"] as const,
 	background: [
 		"animated-grid-pattern",
 		"blur-fade",
@@ -150,6 +150,13 @@ export const upstreamComponentParityManifest = [
 	createEntry(
 		"animated-circular-progress-bar",
 		"widget",
+		"partial",
+		createSupport(true, true, true),
+		[...overlapNotes],
+	),
+	createEntry(
+		"animated-theme-toggler",
+		"text",
 		"partial",
 		createSupport(true, true, true),
 		[...overlapNotes],
