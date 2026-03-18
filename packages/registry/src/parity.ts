@@ -104,7 +104,6 @@ const tailwindOnlyOverlap = [] as const;
 
 const missingByCategory = {
 	widget: [
-		"animated-circular-progress-bar",
 		"animated-list",
 		"avatar-circles",
 		"code-comparison",
@@ -162,6 +161,13 @@ const overlapNotes = [
 ] as const;
 
 export const upstreamComponentParityManifest = [
+	createEntry(
+		"animated-circular-progress-bar",
+		"widget",
+		"partial",
+		createSupport(true, true, true),
+		[...overlapNotes],
+	),
 	createEntry(
 		"animated-gradient-text",
 		"text",
