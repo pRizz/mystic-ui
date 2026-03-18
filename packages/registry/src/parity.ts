@@ -118,7 +118,7 @@ const missingByCategory = {
 		"scroll-progress",
 		"terminal",
 	] as const,
-	text: ["highlighter", "video-text"] as const,
+	text: ["video-text"] as const,
 	background: [
 		"dotted-map",
 		"interactive-grid-pattern",
@@ -173,6 +173,13 @@ export const upstreamComponentParityManifest = [
 	createEntry(
 		"flickering-grid",
 		"background",
+		"partial",
+		createSupport(true, true, true),
+		[...overlapNotes],
+	),
+	createEntry(
+		"highlighter",
+		"text",
 		"partial",
 		createSupport(true, true, true),
 		[...overlapNotes],
