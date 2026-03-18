@@ -337,13 +337,11 @@ export const upstreamComponentParityManifest = [
 	createEntry(
 		"animated-subscribe-button",
 		"interactive",
-		"exception",
+		"missing",
 		createSupport(false, false, false),
 		[
-			"Upstream source exists, but there is no public registry artifact to mirror cleanly.",
-			"This should only be revisited if Mystic explicitly adopts undocumented upstream helpers.",
+			"Upstream now exposes a public component implementation, so this should stay in the missing backlog until Mystic ports it.",
 		],
-		"Undocumented upstream helper without a public registry entry.",
 	),
 	createEntry(
 		"client-tweet-card",

@@ -16,8 +16,8 @@ The machine-readable source of truth lives in `packages/registry/src/parity.ts`.
   - Pages with props guidance: **52 / 52**
 - Current parity status counts:
   - Partial: **44**
-  - Missing: **23**
-  - Exception: **3**
+  - Missing: **24**
+  - Exception: **2**
 - Fork-only Mystic extras tracked separately: **12**
 
 ## Infrastructure status
@@ -48,11 +48,12 @@ An entry is marked `exception` when it is intentionally outside the current pari
 
 Current component exceptions are limited to:
 
-- `animated-subscribe-button`
 - `tweet-card`
 - `client-tweet-card`
 
-These are excluded because they either lack a public upstream registry artifact or depend on React-specific infrastructure that does not map cleanly into SolidJS today.
+These are excluded because they depend on React-specific infrastructure that does not map cleanly into SolidJS today.
+
+`animated-subscribe-button` is no longer treated as an exception. Upstream now exposes a public component implementation, so Mystic tracks it as part of the normal missing backlog.
 
 ## Fork-only components
 
