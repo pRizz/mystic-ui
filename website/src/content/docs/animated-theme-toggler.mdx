@@ -1,0 +1,28 @@
+---
+title: Theme Toggler
+description: An animated theme toggler component for switching between light and dark mode.
+category: component
+---
+
+## Usage
+
+```tsx
+import { AnimatedThemeToggler } from "@/components/mystic-ui/animated-theme-toggler";
+
+export default function Example() {
+	return <AnimatedThemeToggler />;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `duration` | `number` | `400` | Duration of the view-transition reveal animation in milliseconds. |
+| `class` | `string` | `undefined` | Additional classes applied to the button. |
+
+## Notes
+
+- The component syncs with the document `dark` class.
+- It also persists theme state into `localStorage` under both `theme` and `darkMode`.
+- The required `::view-transition-*` CSS is injected by the component itself.
