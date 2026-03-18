@@ -128,7 +128,6 @@ const missingByCategory = {
 		"neon-gradient-card",
 		"particles",
 		"pixel-image",
-		"progressive-blur",
 		"striped-pattern",
 		"warp-background",
 	] as const,
@@ -161,6 +160,13 @@ export const upstreamComponentParityManifest = [
 	),
 	createEntry(
 		"animated-grid-pattern",
+		"background",
+		"partial",
+		createSupport(true, true, true),
+		[...overlapNotes],
+	),
+	createEntry(
+		"progressive-blur",
 		"background",
 		"partial",
 		createSupport(true, true, true),
