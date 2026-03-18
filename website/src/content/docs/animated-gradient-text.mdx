@@ -1,0 +1,27 @@
+---
+title: Animated Gradient Text
+description: An animated gradient background which transitions between colors for text.
+category: text
+---
+
+## Usage
+
+```tsx
+import { AnimatedGradientText } from "@/components/mystic-ui/animated-gradient-text";
+
+export default function Example() {
+	return (
+		<h2 class="text-4xl font-semibold">
+			<AnimatedGradientText>Animated Gradient Text</AnimatedGradientText>
+		</h2>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `speed` | `number` | `1` | Multiplier applied to the gradient background size and perceived animation speed. |
+| `colorFrom` | `string` | `"#ffaa40"` | Starting gradient color. |
+| `colorTo` | `string` | `"#9c40ff"` | Midpoint and ending gradient color. |

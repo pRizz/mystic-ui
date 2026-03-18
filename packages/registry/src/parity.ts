@@ -98,11 +98,7 @@ const overlapNeedsAudit = [
 	"word-rotate",
 ] as const;
 
-const tailwindOnlyOverlap = [
-	"animated-gradient-text",
-	"bento-grid",
-	"shimmer-button",
-] as const;
+const tailwindOnlyOverlap = ["bento-grid", "shimmer-button"] as const;
 
 const missingByCategory = {
 	widget: [
@@ -165,22 +161,23 @@ const overlapNotes = [
 ] as const;
 
 export const upstreamComponentParityManifest = [
+	createEntry(
+		"animated-gradient-text",
+		"text",
+		"partial",
+		createSupport(true, true, true),
+		[...overlapNotes],
+	),
 	...overlapNeedsAudit.map((id) =>
 		createEntry(id, "widget", "partial", createSupport(true, true, true), [
 			...overlapNotes,
 		]),
 	),
 	...tailwindOnlyOverlap.map((id) =>
-		createEntry(
-			id,
-			"widget",
-			"partial",
-			createSupport(true, false, false),
-			[
-				...overlapNotes,
-				"Tailwind implementation exists, but Panda, docs, and multi-demo coverage are still missing.",
-			],
-		),
+		createEntry(id, "widget", "partial", createSupport(true, false, false), [
+			...overlapNotes,
+			"Tailwind implementation exists, but Panda, docs, and multi-demo coverage are still missing.",
+		]),
 	),
 	...missingByCategory.widget.map((id) =>
 		createEntry(id, "widget", "missing", createSupport(false, false, false)),
