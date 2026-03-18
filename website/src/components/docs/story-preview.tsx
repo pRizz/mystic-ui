@@ -1,5 +1,5 @@
 import { createAsync } from "@solidjs/router";
-import { TbReload } from "solid-icons/tb";
+import { TbOutlineReload } from "solid-icons/tb";
 import { type Component, Show, Suspense, createSignal, lazy } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { Center } from "styled-system/jsx";
@@ -71,7 +71,7 @@ export const StoryPreview: Component<StoryPreviewProps> = (props) => {
 						right="1"
 						onClick={() => setReload((r) => r + 1)}
 					>
-						<TbReload />
+						<TbOutlineReload />
 					</IconButton>
 				</Center>
 			</Tabs.Content>

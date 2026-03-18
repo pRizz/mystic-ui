@@ -1,36 +1,68 @@
-import { useParams } from "@solidjs/router";
+import { useLocation } from "@solidjs/router";
 import { useStore } from "@tanstack/solid-store";
-import { TbBrandGithubFilled, TbMenu2, TbX } from "solid-icons/tb";
-import { type Component, Show } from "solid-js";
+import type { Component } from "solid-js";
 import { css } from "styled-system/css";
 import { Container, Flex, HStack } from "styled-system/jsx";
 import { store } from "~/lib/store";
 import { ThemeSwitcher } from "./theme-switcher";
 import { Badge } from "./ui/badge";
-import { IconButton } from "./ui/icon-button";
+
+const navbarIconButtonClass = css({
+	alignItems: "center",
+	borderRadius: "l2",
+	color: "fg.default",
+	cursor: "pointer",
+	display: "inline-flex",
+	height: "8",
+	justifyContent: "center",
+	minWidth: "12",
+	px: "3",
+	transitionDuration: "normal",
+	transitionProperty: "common",
+	_hover: {
+		backgroundColor: "bg.default",
+	},
+});
 
 const DocsSideNavToggle = () => {
-	const params = useParams();
+	const location = useLocation();
 	const open = useStore(store, (state) => state.sideNavOpen);
 
+	if (!location.pathname.startsWith("/docs/")) {
+		return null;
+	}
+
 	return (
-		<Show when={params.framework}>
-			<IconButton
-				variant="ghost"
-				size="sm"
-				hideFrom="md"
-				onClick={() =>
-					store.setState((state) => ({
-						...state,
-						sideNavOpen: !state.sideNavOpen,
-					}))
-				}
-			>
-				<Show when={open()} fallback={<TbMenu2 />}>
-					<TbX />
-				</Show>
-			</IconButton>
-		</Show>
+		<button
+			type="button"
+			class={css({
+				alignItems: "center",
+				borderRadius: "l2",
+				color: "fg.default",
+				cursor: "pointer",
+				display: "inline-flex",
+				fontSize: "sm",
+				fontWeight: "medium",
+				height: "8",
+				hideFrom: "md",
+				justifyContent: "center",
+				minWidth: "12",
+				px: "3",
+				transitionDuration: "normal",
+				transitionProperty: "common",
+				_hover: {
+					backgroundColor: "bg.default",
+				},
+			})}
+			onClick={() =>
+				store.setState((state) => ({
+					...state,
+					sideNavOpen: !state.sideNavOpen,
+				}))
+			}
+		>
+			{open() ? "Close" : "Menu"}
+		</button>
 	);
 };
 
@@ -54,22 +86,31 @@ export const Navbar: Component = () => {
 							Mystic UI
 						</a>
 						<Badge>alpha</Badge>
+						<HStack gap="3" hideBelow="md" ml="4">
+							<a
+								href="/docs/panda"
+								class={css({ color: "fg.muted", textStyle: "sm" })}
+							>
+								Docs
+							</a>
+							<a
+								href="/gallery/tailwind"
+								class={css({ color: "fg.muted", textStyle: "sm" })}
+							>
+								Gallery
+							</a>
+						</HStack>
 					</HStack>
 					<HStack gap="1">
-						<IconButton
-							size="sm"
-							variant="ghost"
-							asChild={(parentProps) => (
-								<a
-									href="https://github.com/TheComputerM/mystic-ui"
-									target="_blank"
-									aria-label="GitHub"
-									{...parentProps()}
-								>
-									<TbBrandGithubFilled />
-								</a>
-							)}
-						/>
+						<a
+							href="https://github.com/TheComputerM/mystic-ui"
+							target="_blank"
+							aria-label="GitHub"
+							class={navbarIconButtonClass}
+							rel="noreferrer"
+						>
+							GitHub
+						</a>
 						<ThemeSwitcher />
 					</HStack>
 				</HStack>

@@ -3,7 +3,7 @@ import type { RouteSectionProps } from "@solidjs/router";
 import { A, useLocation, useNavigate } from "@solidjs/router";
 import { useStore } from "@tanstack/solid-store";
 import { allDocs } from "content-collections";
-import { TbChevronDown, TbStarFilled } from "solid-icons/tb";
+import { TbFillStar, TbOutlineChevronDown } from "solid-icons/tb";
 import { type Component, For, Index, type ParentComponent } from "solid-js";
 import { css } from "styled-system/css";
 import { Box, Container, Divider, HStack, Stack } from "styled-system/jsx";
@@ -72,7 +72,7 @@ const SelectFramework: Component<{ value: ComponentFramework }> = (props) => {
 			<Select.Control>
 				<Select.Trigger>
 					<Select.ValueText />
-					<TbChevronDown />
+					<TbOutlineChevronDown />
 				</Select.Trigger>
 			</Select.Control>
 			<Select.Positioner>
@@ -212,7 +212,7 @@ export default function DocsLayout(props: RouteSectionProps) {
 								href="https://github.com/TheComputerM/mystic-ui/stargazers"
 								class={css({ _hover: { color: "yellow.300" } })}
 							>
-								<TbStarFilled />
+								<TbFillStar />
 							</a>
 						</HStack>
 					</footer>
