@@ -1,0 +1,32 @@
+---
+title: Spinning Text
+description: Text arranged in a circular path that spins continuously.
+category: text
+---
+
+## Examples
+
+### Reverse
+
+<DocStory name="reverse" />
+
+## Usage
+
+```tsx
+import { SpinningText } from "@/components/mystic-ui/spinning-text";
+
+export default function Example() {
+	return <SpinningText>learn more • earn more • grow more •</SpinningText>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `string \| string[]` | required | Text content arranged around the circle. |
+| `duration` | `number` | `10` | Duration of a full rotation in seconds. |
+| `reverse` | `boolean` | `false` | Rotate counterclockwise instead of clockwise. |
+| `radius` | `number` | `5` | Radius of the circular text path in `ch` units. |
+| `transition` | `Record<string, unknown>` | `undefined` | Transition overrides for the container animation. |
+| `variants` | `{ container?: Record<string, unknown>; item?: Record<string, unknown> }` | `undefined` | Variant overrides for container or character spans. |
