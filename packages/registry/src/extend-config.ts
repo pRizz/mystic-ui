@@ -8,6 +8,18 @@ interface ConfigModifications {
 }
 
 const config: ConfigModifications = {
+	"animated-gradient-text": {
+		animation: {
+			gradient: "gradient 8s linear infinite",
+		},
+		keyframes: {
+			gradient: {
+				to: {
+					backgroundPosition: "var(--bg-size, 300%) 0",
+				},
+			},
+		},
+	},
 	"animated-shiny-text": {
 		animation: {
 			"shiny-text": "shiny-text 8s infinite",

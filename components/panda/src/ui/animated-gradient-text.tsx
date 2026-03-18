@@ -1,10 +1,10 @@
-import { cn } from "@/lib/utils";
 import {
 	type JSX,
 	type ParentComponent,
 	mergeProps,
 	splitProps,
 } from "solid-js";
+import { css, cx } from "styled-system/css";
 
 export interface AnimatedGradientTextProps
 	extends JSX.HTMLAttributes<HTMLSpanElement> {
@@ -39,8 +39,16 @@ export const AnimatedGradientText: ParentComponent<
 				"--color-from": localProps.colorFrom,
 				"--color-to": localProps.colorTo,
 			}}
-			class={cn(
-				"animate-gradient inline bg-gradient-to-r from-[var(--color-from)] via-[var(--color-to)] to-[var(--color-from)] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent",
+			class={cx(
+				css({
+					animation: "gradient 8s linear infinite",
+					display: "inline",
+					backgroundImage:
+						"linear-gradient(to right, var(--color-from), var(--color-to), var(--color-from))",
+					backgroundSize: "var(--bg-size) 100%",
+					backgroundClip: "text",
+					color: "transparent",
+				}),
 				localProps.class,
 			)}
 			{...forwardProps}
