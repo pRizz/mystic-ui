@@ -3,6 +3,7 @@
 import type { Component } from "solid-js";
 import { Box, Divider, styled } from "styled-system/jsx";
 import { RawCodeBlock } from "~/components/code-block";
+import { StoryPreview } from "~/components/docs/story-preview";
 import { Code } from "~/components/ui/code";
 import { Heading } from "~/components/ui/heading";
 import { Link } from "~/components/ui/link";
@@ -23,12 +24,21 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
 	Text,
 	Box,
 	RawCodeBlock,
+	StoryPreview,
 	a: (props) => <Link {...props} />,
 	hr: (props) => <Divider my="8" {...props} />,
 	i: (props) => <i {...props} />,
 	b: (props) => <b {...props} />,
 	em: (props) => <em {...props} />,
 	strong: (props) => <strong {...props} />,
+	ol: (props) => (
+		<styled.ol
+			marginInlineStart="4"
+			spaceY="2"
+			listStyleType="decimal"
+			{...props}
+		/>
+	),
 	ul: (props) => (
 		<styled.ul
 			marginInlineStart="4"
@@ -38,5 +48,29 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
 		/>
 	),
 	li: (props) => <styled.li color="fg.muted" {...props} />,
+	table: (props) => (
+		<styled.table width="full" my="6" textAlign="left" {...props} />
+	),
+	thead: (props) => (
+		<styled.thead
+			borderBottomWidth="1px"
+			borderColor="border.default"
+			{...props}
+		/>
+	),
+	tbody: (props) => <styled.tbody {...props} />,
+	tr: (props) => (
+		<styled.tr borderBottomWidth="1px" borderColor="border.subtle" {...props} />
+	),
+	th: (props) => (
+		<styled.th
+			py="2"
+			px="3"
+			fontWeight="semibold"
+			color="fg.default"
+			{...props}
+		/>
+	),
+	td: (props) => <styled.td py="2" px="3" color="fg.muted" {...props} />,
 	br: (props) => <br {...props} />,
 });

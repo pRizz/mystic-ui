@@ -11,6 +11,7 @@ import { Heading } from "~/components/ui/heading";
 import { Link } from "~/components/ui/link";
 import { Select } from "~/components/ui/select";
 import { Text } from "~/components/ui/text";
+import { type ComponentFramework, hasStoryComponent } from "~/lib/docs";
 import { store } from "~/lib/store";
 
 const SideNavHeading: ParentComponent = (props) => {
@@ -35,7 +36,7 @@ const SideNavLink: ParentComponent<{ href: string }> = (props) => {
 	);
 };
 
-const SelectFramework: Component<{ value: string }> = (props) => {
+const SelectFramework: Component<{ value: ComponentFramework }> = (props) => {
 	interface Item {
 		label: string;
 		value: string;
@@ -89,7 +90,7 @@ const SelectFramework: Component<{ value: string }> = (props) => {
 	);
 };
 
-const SideNav: Component<{ framework: string }> = (props) => {
+const SideNav: Component<{ framework: ComponentFramework }> = (props) => {
 	const categoryMap: Record<string, string> = {
 		text: "Text Effects",
 		background: "Backgrounds",
@@ -97,6 +98,9 @@ const SideNav: Component<{ framework: string }> = (props) => {
 		"device-mock": "Device Mocks",
 		effect: "Effects",
 	};
+	const docs = allDocs.filter((doc) =>
+		hasStoryComponent(props.framework, doc._meta.path),
+	);
 
 	const sections = [
 		{
@@ -108,7 +112,7 @@ const SideNav: Component<{ framework: string }> = (props) => {
 			],
 		},
 		...Object.entries(
-			allDocs.reduce(
+			docs.reduce(
 				(acc: Record<string, { title: string; href: string }[]>, doc) => {
 					const category = doc.category;
 					if (!acc[category]) {
@@ -126,7 +130,9 @@ const SideNav: Component<{ framework: string }> = (props) => {
 			.sort()
 			.map(([category, links]) => ({
 				title: categoryMap[category],
-				links: links.sort(),
+				links: links.sort((linkA, linkB) =>
+					linkA.title.localeCompare(linkB.title),
+				),
 			})),
 	];
 
@@ -178,10 +184,13 @@ const SideNav: Component<{ framework: string }> = (props) => {
 };
 
 export default function DocsLayout(props: RouteSectionProps) {
+	const framework = () =>
+		(props.params.framework ?? "tailwind") as ComponentFramework;
+
 	return (
 		<Container>
 			<Box display={{ md: "grid" }} gridTemplateColumns="224px 1fr" gap="12">
-				<SideNav framework={props.params.framework} />
+				<SideNav framework={framework()} />
 				<main class={css({ width: "full", minWidth: "0" })}>
 					{props.children}
 
