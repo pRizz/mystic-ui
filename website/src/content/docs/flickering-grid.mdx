@@ -1,0 +1,33 @@
+---
+title: Flickering Grid
+description: A flickering grid background rendered on a canvas.
+category: background
+---
+
+## Examples
+
+### Rounded
+
+<DocStory name="rounded" />
+
+## Usage
+
+```tsx
+import { FlickeringGrid } from "@/components/mystic-ui/flickering-grid";
+
+export default function Example() {
+	return <FlickeringGrid />;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `squareSize` | `number` | `4` | Size of each square in the grid. |
+| `gridGap` | `number` | `6` | Gap between squares in the grid. |
+| `flickerChance` | `number` | `0.3` | Per-frame probability multiplier for a square changing opacity. |
+| `color` | `string` | `"rgb(0, 0, 0)"` | Base color used for the grid squares. |
+| `width` | `number` | `undefined` | Explicit canvas width. Defaults to the container width. |
+| `height` | `number` | `undefined` | Explicit canvas height. Defaults to the container height. |
+| `maxOpacity` | `number` | `0.3` | Maximum opacity of each square. |
