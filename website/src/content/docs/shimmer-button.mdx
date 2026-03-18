@@ -1,0 +1,25 @@
+---
+title: Shimmer Button
+description: A button with a shimmering light which travels around the perimeter.
+category: component
+---
+
+## Usage
+
+```tsx
+import { ShimmerButton } from "@/components/mystic-ui/shimmer-button";
+
+export default function Example() {
+	return <ShimmerButton>Shimmer Button</ShimmerButton>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `shimmerColor` | `string` | `"#ffffff"` | Color used for the moving shimmer. |
+| `shimmerSize` | `string` | `"0.05em"` | Thickness of the shimmering outline. |
+| `borderRadius` | `string` | `"100px"` | Border radius applied to the button shell. |
+| `shimmerDuration` | `string` | `"3s"` | Duration of the shimmer and spin animations. |
+| `background` | `string` | `"rgba(0, 0, 0, 1)"` | Inner button background. |
