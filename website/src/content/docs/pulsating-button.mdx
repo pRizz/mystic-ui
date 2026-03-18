@@ -1,0 +1,23 @@
+---
+title: Pulsating Button
+description: An animated pulsating button useful for capturing attention.
+category: component
+---
+
+## Usage
+
+```tsx
+import { PulsatingButton } from "@/components/mystic-ui/pulsating-button";
+
+export default function Example() {
+	return <PulsatingButton>Pulsating Button</PulsatingButton>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `pulseColor` | `string` | `"#808080"` | Color of the expanding pulse shadow. |
+| `duration` | `string` | `"1.5s"` | Duration of a single pulse cycle. |
+| `children` | `JSX.Element` | required | Button content. |

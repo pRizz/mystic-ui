@@ -52,6 +52,21 @@ const config: ConfigModifications = {
 			},
 		},
 	},
+	"pulsating-button": {
+		animation: {
+			pulse: "pulse var(--duration) ease-out infinite",
+		},
+		keyframes: {
+			pulse: {
+				"0%, 100%": {
+					boxShadow: "0 0 0 0 var(--pulse-color)",
+				},
+				"50%": {
+					boxShadow: "0 0 0 8px var(--pulse-color)",
+				},
+			},
+		},
+	},
 	"animated-gradient-text": {
 		animation: {
 			gradient: "gradient 8s linear infinite",
