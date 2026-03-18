@@ -1,0 +1,22 @@
+---
+title: Morphing Text
+description: A dynamic text morphing component for Solid.
+category: text
+---
+
+## Usage
+
+```tsx
+import { MorphingText } from "@/components/mystic-ui/morphing-text";
+
+export default function Example() {
+	return <MorphingText texts={["Hello", "World"]} />;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `texts` | `string[]` | required | Array of text values to morph between. |
+| `class` | `string` | `undefined` | Additional classes for the wrapper element. |
