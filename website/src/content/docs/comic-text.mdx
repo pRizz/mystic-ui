@@ -1,0 +1,24 @@
+---
+title: Comic Text
+description: Comic text animation that looks like a comic book headline.
+category: text
+---
+
+## Usage
+
+```tsx
+import { ComicText } from "@/components/mystic-ui/comic-text";
+
+export default function Example() {
+	return <ComicText>Comic Text</ComicText>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `string` | required | Text content rendered with the comic style. |
+| `fontSize` | `number` | `5` | Base font size in `rem`. |
+| `class` | `string` | `undefined` | Additional classes for the wrapper element. |
+| `style` | `JSX.CSSProperties \| string` | `undefined` | Inline style overrides. |
