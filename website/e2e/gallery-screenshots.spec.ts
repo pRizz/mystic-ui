@@ -2,7 +2,7 @@ import { mkdir } from "node:fs/promises";
 import path from "node:path";
 import { type Page, expect, test } from "@playwright/test";
 
-const frameworks = ["tailwind"] as const;
+const frameworks = ["panda", "tailwind"] as const;
 
 async function collectGalleryEntries(
 	page: Page,
