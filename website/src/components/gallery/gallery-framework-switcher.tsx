@@ -12,6 +12,11 @@ const frameworkOptions: {
 	value: ComponentFramework;
 }[] = [
 	{
+		href: "/gallery/panda",
+		label: "Panda preview set",
+		value: "panda",
+	},
+	{
 		href: "/gallery/tailwind",
 		label: "Tailwind preview set",
 		value: "tailwind",

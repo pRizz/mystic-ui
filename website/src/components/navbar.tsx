@@ -94,7 +94,7 @@ export const Navbar: Component = () => {
 								Docs
 							</a>
 							<a
-								href="/gallery/tailwind"
+								href="/gallery/panda"
 								class={css({ color: "fg.muted", textStyle: "sm" })}
 							>
 								Gallery
