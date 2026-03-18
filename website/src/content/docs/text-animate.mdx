@@ -1,0 +1,41 @@
+---
+title: Text Animate
+description: A text animation component that supports multiple splitting modes and presets.
+category: text
+---
+
+## Examples
+
+### Slide Up by Word
+
+<DocStory name="slide-up-word" />
+
+## Usage
+
+```tsx
+import { TextAnimate } from "@/components/mystic-ui/text-animate";
+
+export default function Example() {
+	return (
+		<TextAnimate animation="blurInUp" by="character" once>
+			Blur in by character
+		</TextAnimate>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `string` | required | Text content to animate. |
+| `segmentClass` | `string` | `undefined` | Additional classes applied to each rendered segment. |
+| `delay` | `number` | `0` | Delay before the animation starts. |
+| `duration` | `number` | `0.3` | Base duration used for stagger timing. |
+| `variants` | `{ hidden?: Record<string, unknown>; show?: Record<string, unknown>; exit?: Record<string, unknown> }` | `undefined` | Custom animation states replacing the preset. |
+| `as` | `"article" \| "div" \| "h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "li" \| "p" \| "section" \| "span"` | `"p"` | HTML element used as the animated wrapper. |
+| `by` | `"text" \| "word" \| "character" \| "line"` | `"word"` | How the text should be segmented before animation. |
+| `startOnView` | `boolean` | `true` | Use viewport entry to trigger the animation. |
+| `once` | `boolean` | `false` | Only animate the first time it enters view. |
+| `animation` | `"fadeIn" \| "blurIn" \| "blurInUp" \| "blurInDown" \| "slideUp" \| "slideDown" \| "slideLeft" \| "slideRight" \| "scaleUp" \| "scaleDown"` | `"fadeIn"` | Built-in animation preset. |
+| `accessible` | `boolean` | `true` | Render a screen-reader label while hiding animated segments from assistive tech. |
