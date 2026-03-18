@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { animate, inView } from "motion";
 import {
 	type Component,
@@ -9,6 +10,7 @@ import {
 
 export interface NumberTickerProps extends JSX.HTMLAttributes<HTMLSpanElement> {
 	value?: number;
+	startValue?: number;
 	direction?: "up" | "down";
 	delay?: number;
 	decimalPlaces?: number;
@@ -17,36 +19,67 @@ export interface NumberTickerProps extends JSX.HTMLAttributes<HTMLSpanElement> {
 export const NumberTicker: Component<NumberTickerProps> = (props) => {
 	const [_localProps, forwardProps] = splitProps(props, [
 		"value",
+		"startValue",
 		"direction",
 		"delay",
 		"decimalPlaces",
+		"class",
 	]);
 	const localProps = mergeProps(
-		{ value: 100, direction: "up" as const, delay: 0, decimalPlaces: 0 },
+		{
+			value: 100,
+			startValue: 0,
+			direction: "up" as const,
+			delay: 0,
+			decimalPlaces: 0,
+		},
 		_localProps,
 	);
 	let ref!: HTMLSpanElement;
 
+	const formatValue = (value: number) =>
+		Intl.NumberFormat("en-US", {
+			minimumFractionDigits: localProps.decimalPlaces,
+			maximumFractionDigits: localProps.decimalPlaces,
+		}).format(Number(value.toFixed(localProps.decimalPlaces)));
+
 	onMount(() => {
+		const initialValue =
+			localProps.direction === "down"
+				? localProps.value
+				: localProps.startValue;
+		const targetValue =
+			localProps.direction === "down"
+				? localProps.startValue
+				: localProps.value;
+
+		ref.textContent = formatValue(initialValue);
+
 		inView(ref, () => {
-			animate(0, 1, {
+			animate(initialValue, targetValue, {
 				delay: localProps.delay,
 				type: "spring",
-				damping: 65,
+				damping: 60,
 				stiffness: 100,
-				onUpdate: (progress) => {
-					let latest = progress * localProps.value;
-					if (localProps.direction === "down") {
-						latest = localProps.value - latest;
-					}
-					ref.textContent = Intl.NumberFormat("en-US", {
-						minimumFractionDigits: localProps.decimalPlaces,
-						maximumFractionDigits: localProps.decimalPlaces,
-					}).format(Number(latest.toFixed(localProps.decimalPlaces)));
+				onUpdate: (latest) => {
+					ref.textContent = formatValue(latest);
 				},
 			});
 		});
 	});
 
-	return <span {...forwardProps} ref={ref} />;
+	return (
+		<span
+			class={cn(
+				"inline-block tracking-wider text-black tabular-nums dark:text-white",
+				localProps.class,
+			)}
+			{...forwardProps}
+			ref={ref}
+		>
+			{localProps.direction === "down"
+				? localProps.value
+				: localProps.startValue}
+		</span>
+	);
 };
