@@ -122,7 +122,6 @@ const missingByCategory = {
 	] as const,
 	text: [
 		"animated-theme-toggler",
-		"aurora-text",
 		"comic-text",
 		"highlighter",
 		"hyper-text",
@@ -165,6 +164,13 @@ const overlapNotes = [
 export const upstreamComponentParityManifest = [
 	createEntry(
 		"animated-gradient-text",
+		"text",
+		"partial",
+		createSupport(true, true, true),
+		[...overlapNotes],
+	),
+	createEntry(
+		"aurora-text",
 		"text",
 		"partial",
 		createSupport(true, true, true),
