@@ -3,29 +3,15 @@ import { TbReload } from "solid-icons/tb";
 import { type Component, Show, Suspense, createSignal, lazy } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { Center } from "styled-system/jsx";
+import { type ComponentFramework, getStoryComponent } from "~/lib/docs";
 import { getStorySource } from "~/lib/stories";
 import { RawCodeBlock } from "../code-block";
 import { IconButton } from "../ui/icon-button";
 import { Spinner } from "../ui/spinner";
 import { Tabs } from "../ui/tabs";
 
-const stories = import.meta.glob<{ default: Component }>([
-	"../../../../components/panda/src/stories/**/*.tsx",
-	"!../../../../components/panda/src/stories/**/stories.tsx",
-]);
-
-/**
- * Get the story component that can be imported and used `lazy(getStory(...))`
- */
-function getStory(component: string, name = "default") {
-	// only panda stories are used cause well, the website uses panda css
-	return stories[
-		`../../../../components/panda/src/stories/${component}/${name}.tsx`
-	];
-}
-
 interface StoryPreviewProps {
-	framework: "tailwind" | "panda";
+	framework: ComponentFramework;
 	component: string;
 	name: string;
 }
@@ -41,7 +27,20 @@ export const StoryPreview: Component<StoryPreviewProps> = (props) => {
 			},
 		},
 	);
-	const StoryComponent = () => lazy(getStory(props.component, props.name));
+	const StoryComponent = () => {
+		const loadStory = getStoryComponent(
+			props.framework,
+			props.component,
+			props.name,
+		);
+		if (!loadStory) {
+			throw new Error(
+				`Story ${props.component}/${props.name} not found for ${props.framework}.`,
+			);
+		}
+
+		return lazy(loadStory);
+	};
 	const [reload, setReload] = createSignal(1);
 
 	return (
