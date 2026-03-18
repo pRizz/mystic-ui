@@ -1,0 +1,27 @@
+---
+title: Hyper Text
+description: A text animation that scrambles letters before revealing the final text.
+category: text
+---
+
+## Usage
+
+```tsx
+import { HyperText } from "@/components/mystic-ui/hyper-text";
+
+export default function Example() {
+	return <HyperText>Hover me</HyperText>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `string` | required | Text content to animate. |
+| `duration` | `number` | `800` | Duration of the scramble animation in milliseconds. |
+| `delay` | `number` | `0` | Delay before the initial animation starts in milliseconds. |
+| `as` | `"article" \| "div" \| "h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "li" \| "p" \| "section" \| "span"` | `"div"` | HTML element used for the animated wrapper. |
+| `startOnView` | `boolean` | `false` | Start the initial animation when the component enters the viewport. |
+| `animateOnHover` | `boolean` | `true` | Re-trigger the scramble effect on hover. |
+| `characterSet` | `string[] \| readonly string[]` | `A-Z` | Custom character set used during scrambling. |

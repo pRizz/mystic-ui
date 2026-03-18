@@ -122,7 +122,6 @@ const missingByCategory = {
 	text: [
 		"animated-theme-toggler",
 		"highlighter",
-		"hyper-text",
 		"morphing-text",
 		"spinning-text",
 		"text-animate",
@@ -182,6 +181,13 @@ export const upstreamComponentParityManifest = [
 	),
 	createEntry(
 		"comic-text",
+		"text",
+		"partial",
+		createSupport(true, true, true),
+		[...overlapNotes],
+	),
+	createEntry(
+		"hyper-text",
 		"text",
 		"partial",
 		createSupport(true, true, true),
