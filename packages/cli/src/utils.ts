@@ -1,3 +1,4 @@
+import path from "node:path";
 import { CommanderError } from "commander";
 import { cosmiconfig } from "cosmiconfig";
 import { z } from "zod";
@@ -43,6 +44,13 @@ export const configSchema = z.discriminatedUnion("framework", [
 export type ConfigSchema = z.infer<typeof configSchema>;
 
 /**
+ * Resolve a project-relative path from the directory containing mystic.config.json.
+ */
+export function resolveProjectPath(projectRoot: string, targetPath: string) {
+	return path.resolve(projectRoot, targetPath);
+}
+
+/**
  * Get the mystic config from the project
  */
 export async function getMysticConfig() {
@@ -70,5 +78,9 @@ export async function getMysticConfig() {
 		);
 	}
 
-	return { config: parsed.data, filepath: result.filepath };
+	return {
+		config: parsed.data,
+		configFilePath: result.filepath,
+		projectRoot: path.dirname(result.filepath),
+	};
 }

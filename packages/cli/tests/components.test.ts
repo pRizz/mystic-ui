@@ -1,6 +1,12 @@
 import { describe, expect, test } from "bun:test";
 import { generateCode, parseModule } from "magicast";
-import { mergeConfig, transform } from "../src/commands/components";
+import {
+	getRegistryEntry,
+	getRegistryEntryUrl,
+	mergeConfig,
+	transform,
+} from "../src/commands/components";
+import { resolveProjectPath } from "../src/utils";
 
 describe("transform()", () => {
 	test("should fix imports", async () => {
@@ -104,5 +110,55 @@ export default defineConfig({
 
 		const { code } = generateCode(mod);
 		expect(code).toMatchSnapshot("panda.config.ts");
+	});
+});
+
+describe("resolveProjectPath()", () => {
+	test("resolves project-relative paths from the config directory", () => {
+		expect(
+			resolveProjectPath("/tmp/example-app/.config", "../src/components/mystic-ui"),
+		).toBe("/tmp/example-app/src/components/mystic-ui");
+	});
+});
+
+describe("getRegistryEntryUrl()", () => {
+	test("builds the registry url for a component", () => {
+		expect(getRegistryEntryUrl("tailwind", "dock")).toBe(
+			"https://raw.githubusercontent.com/TheComputerM/mystic-ui/main/packages/registry/tailwind/dock.json",
+		);
+	});
+});
+
+describe("getRegistryEntry()", () => {
+	test("returns parsed registry json for successful responses", async () => {
+		const entry = await getRegistryEntry(
+			"tailwind",
+			"dock",
+			async () =>
+				new Response(JSON.stringify({ id: "dock", content: "export const Dock = () => null;" }), {
+					status: 200,
+					headers: { "Content-Type": "application/json" },
+				}),
+		);
+
+		expect(entry).toEqual({
+			id: "dock",
+			content: "export const Dock = () => null;",
+		});
+	});
+
+	test("throws a CommanderError for non-ok responses", async () => {
+		await expect(
+			getRegistryEntry(
+				"tailwind",
+				"missing-component",
+				async () => new Response("Not found", { status: 404 }),
+			),
+		).rejects.toMatchObject({
+			code: "fetch-fail",
+			exitCode: 1,
+			message:
+				"Component missing-component not found for framework tailwind in registry.",
+		});
 	});
 });
