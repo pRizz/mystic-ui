@@ -10,6 +10,7 @@ import {
 	getDocComponent,
 	hasStoryComponent,
 } from "~/lib/docs";
+import { DocsPageProvider } from "~/lib/docs-page";
 import { getStorySource } from "~/lib/stories";
 import { useMDXComponents } from "~/tools/solid-mdx";
 
@@ -86,7 +87,9 @@ export default function ComponentDocsPage(props: RouteSectionProps) {
 			<MDXComponents.h2>Installation</MDXComponents.h2>
 			<InstallationInstructions />
 			<MDXComponents.hr />
-			<Dynamic component={DocContent()} />
+			<DocsPageProvider framework={framework} componentId={componentId}>
+				<Dynamic component={DocContent()} />
+			</DocsPageProvider>
 		</>
 	);
 }
