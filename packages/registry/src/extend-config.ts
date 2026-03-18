@@ -67,6 +67,21 @@ const config: ConfigModifications = {
 			},
 		},
 	},
+	"rainbow-button": {
+		animation: {
+			rainbow: "rainbow var(--speed, 2s) infinite linear",
+		},
+		keyframes: {
+			rainbow: {
+				"0%": {
+					backgroundPosition: "0%",
+				},
+				"100%": {
+					backgroundPosition: "200%",
+				},
+			},
+		},
+	},
 	"animated-gradient-text": {
 		animation: {
 			gradient: "gradient 8s linear infinite",

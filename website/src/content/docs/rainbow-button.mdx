@@ -1,0 +1,29 @@
+---
+title: Rainbow Button
+description: An animated button with a rainbow border effect.
+category: component
+---
+
+## Examples
+
+### Outline Variant
+
+<DocStory name="outline" />
+
+## Usage
+
+```tsx
+import { RainbowButton } from "@/components/mystic-ui/rainbow-button";
+
+export default function Example() {
+	return <RainbowButton>Rainbow Button</RainbowButton>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "outline"` | `"default"` | Visual treatment for the button shell. |
+| `size` | `"default" \| "sm" \| "lg" \| "icon"` | `"default"` | Predefined size preset. |
+| `children` | `JSX.Element` | required | Button content. |
