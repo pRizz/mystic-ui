@@ -1,0 +1,38 @@
+---
+title: Blur Fade
+description: Blur fade in animation for smoothly revealing content.
+category: effect
+---
+
+## Examples
+
+### Text
+
+<DocStory name="text" />
+
+## Usage
+
+```tsx
+import { BlurFade } from "@/components/mystic-ui/blur-fade";
+
+export default function Example() {
+	return (
+		<BlurFade>
+			<img src="https://picsum.photos/300/200?random=1" alt="Sample" />
+		</BlurFade>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `{ hidden: { x?: number; y?: number; opacity?: number; filter?: string }; visible: { x?: number; y?: number; opacity?: number; filter?: string } }` | derived from `direction`, `offset`, and `blur` | Custom animation states for the hidden and visible phases. |
+| `duration` | `number` | `0.4` | Animation duration in seconds. |
+| `delay` | `number` | `0` | Delay before the animation starts. |
+| `offset` | `number` | `6` | Travel offset applied before the item fades in. |
+| `direction` | `"up" \| "down" \| "left" \| "right"` | `"down"` | Direction of travel for the hidden state. |
+| `inView` | `boolean` | `false` | Only start the animation after the element enters the viewport. |
+| `inViewMargin` | `string` | `"-50px"` | `IntersectionObserver` root margin used with `inView`. |
+| `blur` | `string` | `"6px"` | Blur amount applied while hidden. |
