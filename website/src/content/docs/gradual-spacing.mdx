@@ -3,3 +3,28 @@ title: Gradual Spacing
 description: Word animation for gradual spacing between letters
 category: text
 ---
+
+## Usage
+
+```tsx
+import { GradualSpacing } from "@/components/mystic-ui/gradual-spacing";
+
+export default function Example() {
+	return <GradualSpacing text="Expanded emphasis" />;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | required | Text split into characters before animating. |
+| `duration` | `number` | `0.5` | Duration of each character animation, in seconds. |
+| `delayMultiple` | `number` | `0.04` | Stagger delay applied to each successive character. |
+| `states` | `{ hidden: Options["exit"]; visible: Options["inView"] }` | built-in spacing states | Override the hidden and visible animation states. |
+| `class` | `string` | `undefined` | Additional classes for the wrapper element. |
+
+## Notes
+
+- `GradualSpacing` is a Mystic-only text effect.
+- Override `states` when you want to animate scale, blur, or vertical movement in addition to spacing.

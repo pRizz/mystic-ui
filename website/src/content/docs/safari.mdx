@@ -3,3 +3,32 @@ title: Safari
 description: A safari browser mockup to showcase your website
 category: device-mock
 ---
+
+## Usage
+
+```tsx
+import { Safari } from "@/components/mystic-ui/safari";
+
+export default function Example() {
+	return (
+		<Safari
+			url="mystic-ui.dev"
+			src="https://picsum.photos/1200/750?random=1"
+		/>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `url` | `string` | `undefined` | Text rendered in the browser address bar. |
+| `src` | `string` | `undefined` | Screenshot or image rendered inside the browser viewport. |
+| `width` | `number` | `1203` | Output width of the SVG device mock. |
+| `height` | `number` | `753` | Output height of the SVG device mock. |
+
+## Notes
+
+- The component renders as an SVG, so you can scale it responsively with standard SVG attributes or utility classes.
+- Use a screenshot aspect ratio close to the default frame for the cleanest result.

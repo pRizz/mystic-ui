@@ -3,3 +3,25 @@ title: No Signal Screen
 description: A retro no signal screen background
 category: background
 ---
+
+## Usage
+
+```tsx
+import { NoSignalScreen } from "@/components/mystic-ui/no-signal-screen";
+
+export default function Example() {
+	return <NoSignalScreen class="h-80 w-full rounded-xl" />;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `frameRate` | `number` | `30` | Refresh rate used for the animated canvas noise. |
+| `class` | `string` | `undefined` | Additional classes for the `<canvas>` element. |
+
+## Notes
+
+- `NoSignalScreen` is a Mystic-only extra and not part of the upstream parity surface.
+- The canvas resizes to the current viewport, so place it inside a constrained container when you want a section-scoped effect.

@@ -3,3 +3,45 @@ title: Dock
 description: An implementation of the MacOS dock using solid and motionone
 category: component
 ---
+
+## Usage
+
+```tsx
+import { Dock, DockIcon } from "@/components/mystic-ui/dock";
+
+export default function Example() {
+	return (
+		<Dock>
+			<DockIcon>
+				<button type="button" class="size-10 rounded-full border">
+					A
+				</button>
+			</DockIcon>
+			<DockIcon>
+				<button type="button" class="size-10 rounded-full border">
+					B
+				</button>
+			</DockIcon>
+		</Dock>
+	);
+}
+```
+
+## Props
+
+### `Dock`
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `magnification` | `number` | `60` | Maximum icon size when the pointer is closest to an item. |
+| `distance` | `number` | `150` | Distance threshold used to calculate the hover magnification falloff. |
+| `class` | `string` | `undefined` | Additional classes for the dock container. |
+
+### `DockIcon`
+
+`DockIcon` accepts standard `HTMLDivElement` props and must be rendered inside `Dock`.
+
+## Notes
+
+- `Dock` handles the pointer tracking and sizing context for all nested `DockIcon` items.
+- Put your own buttons, links, or icons inside each `DockIcon` to match your app’s design.

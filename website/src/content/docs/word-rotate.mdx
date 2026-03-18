@@ -3,3 +3,26 @@ title: Word Rotate
 description: A vertical rotation of words
 category: text
 ---
+
+## Usage
+
+```tsx
+import { WordRotate } from "@/components/mystic-ui/word-rotate";
+
+export default function Example() {
+	return <WordRotate words={["animate", "rotate", "highlight"]} />;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `words` | `string[]` | required | Ordered list of words cycled through by the animation. |
+| `duration` | `number` | `2500` | Time, in milliseconds, before moving to the next word. |
+| `class` | `string` | `undefined` | Additional classes for the animated word wrapper. |
+
+## Notes
+
+- The component also forwards Motion One props, so you can refine the entrance or exit animation when needed.
+- Keep the container height stable if you are rotating words with different line heights.

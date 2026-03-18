@@ -3,3 +3,51 @@ title: Animated Beam
 description: An animated beam of light which travels along a path. Useful for showcasing the "integration" features of a website
 category: effect
 ---
+
+## Usage
+
+```tsx
+import { AnimatedBeam } from "@/components/mystic-ui/animated-beam";
+
+export default function Example() {
+	let containerRef!: HTMLDivElement;
+	let sourceRef!: HTMLDivElement;
+	let targetRef!: HTMLDivElement;
+
+	return (
+		<div ref={containerRef} class="relative h-48 w-full">
+			<div ref={sourceRef} class="absolute left-4 top-1/2 size-4 rounded-full bg-foreground" />
+			<div ref={targetRef} class="absolute right-4 top-1/2 size-4 rounded-full bg-foreground" />
+			<AnimatedBeam
+				containerRef={containerRef}
+				fromRef={sourceRef}
+				toRef={targetRef}
+			/>
+		</div>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `containerRef` | `HTMLElement` | required | Shared container used to measure the beam path. |
+| `fromRef` | `HTMLElement` | required | Starting element for the beam path. |
+| `toRef` | `HTMLElement` | required | Ending element for the beam path. |
+| `curvature` | `number` | `0` | Curve intensity applied to the beam path. |
+| `reverse` | `boolean` | `false` | Reverse the direction of the moving gradient. |
+| `pathColor` | `string` | `"gray"` | Base stroke color rendered behind the beam. |
+| `pathWidth` | `number` | `2` | Width of the path stroke. |
+| `pathOpacity` | `number` | `0.2` | Opacity of the base stroke path. |
+| `gradientStartColor` | `string` | `"#ffaa40"` | Leading gradient color for the animated beam. |
+| `gradientStopColor` | `string` | `"#9c40ff"` | Trailing gradient color for the animated beam. |
+| `delay` | `number` | `0` | Delay before the beam animation starts. |
+| `duration` | `number` | random `4–7` | Duration of one beam travel cycle. |
+| `startXOffset` / `startYOffset` | `number` | `0` | Offsets applied to the start anchor position. |
+| `endXOffset` / `endYOffset` | `number` | `0` | Offsets applied to the end anchor position. |
+
+## Notes
+
+- `AnimatedBeam` is most useful when you already have two measured nodes in the same relative container.
+- Adjust curvature and offsets when you need the beam to avoid overlapping nearby UI.

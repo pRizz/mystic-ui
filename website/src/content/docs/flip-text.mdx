@@ -3,3 +3,28 @@ title: Flip Text
 description: Text flipping character animation
 category: text
 ---
+
+## Usage
+
+```tsx
+import { FlipText } from "@/components/mystic-ui/flip-text";
+
+export default function Example() {
+	return <FlipText text="Mystic UI" />;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | required | String split into characters and animated individually. |
+| `duration` | `number` | `0.5` | Duration of each character transition, in seconds. |
+| `delayMultiple` | `number` | `0.08` | Additional stagger delay applied per character. |
+| `states` | `{ initial: VariantDefinition; animate: VariantDefinition }` | built-in flip states | Override the Motion One variants used for the flip effect. |
+| `class` | `string` | `undefined` | Additional classes for the text wrapper. |
+
+## Notes
+
+- `FlipText` is a Mystic-only extra and is not part of the upstream Magic UI parity target.
+- Override `states` when you want a softer or more dramatic rotation effect.

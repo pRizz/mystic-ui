@@ -3,3 +3,32 @@ title: iPhone 15
 description: A mockup of the iPhone 15 Pro
 category: device-mock
 ---
+
+## Usage
+
+```tsx
+import { IPhone15 } from "@/components/mystic-ui/iphone-15";
+
+export default function Example() {
+	return (
+		<IPhone15
+			width={320}
+			height={650}
+			src="https://picsum.photos/900/1800?random=3"
+		/>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `width` | `number` | `433` | Output width of the SVG frame. |
+| `height` | `number` | `882` | Output height of the SVG frame. |
+| `src` | `string` | `undefined` | Image rendered inside the mock device screen. |
+
+## Notes
+
+- `iPhone 15` is a Mystic legacy extra. Prefer the upstream-aligned `iphone` component for new work.
+- This component only supports static images. Use `iphone` when you need parity with the newer video-capable API.

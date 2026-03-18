@@ -3,3 +3,36 @@ title: Dot Pattern
 description: A background dot pattern made with SVGs, fully customizable using CSS
 category: background
 ---
+
+## Usage
+
+```tsx
+import { DotPattern } from "@/components/mystic-ui/dot-pattern";
+
+export default function Example() {
+	return (
+		<div class="relative overflow-hidden rounded-xl border p-10">
+			<DotPattern class="absolute inset-0 opacity-50" />
+			<div class="relative">Dotted background content</div>
+		</div>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `width` | `number` | `16` | Width of each repeated pattern tile. |
+| `height` | `number` | `16` | Height of each repeated pattern tile. |
+| `x` | `number` | `0` | Horizontal offset for the SVG pattern origin. |
+| `y` | `number` | `0` | Vertical offset for the SVG pattern origin. |
+| `cx` | `number` | `1` | Circle center x-position inside each tile. |
+| `cy` | `number` | `1` | Circle center y-position inside each tile. |
+| `cr` | `number` | `1` | Circle radius for each dot. |
+| `class` | `string` | `undefined` | Additional classes for the SVG wrapper. |
+
+## Notes
+
+- This component is ideal for subtle page backgrounds or masked hero sections.
+- Because it renders as a full-size SVG, place it inside a relatively positioned container.

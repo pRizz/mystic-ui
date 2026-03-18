@@ -3,3 +3,36 @@ title: Border Beam
 description: An animated beam of light which travels along the border of its container
 category: effect
 ---
+
+## Usage
+
+```tsx
+import { BorderBeam } from "@/components/mystic-ui/border-beam";
+
+export default function Example() {
+	return (
+		<div class="relative overflow-hidden rounded-xl border p-6">
+			<BorderBeam size={180} duration={12} />
+			<p>Animated border accent</p>
+		</div>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `anchor` | `number` | `90` | Starting anchor position for the beam along the border. |
+| `borderWidth` | `number` | `1.5` | Width of the rendered border track. |
+| `colorFrom` | `string` | `"#ffaa40"` | Starting color of the moving beam gradient. |
+| `colorTo` | `string` | `"#9c40ff"` | Ending color of the moving beam gradient. |
+| `delay` | `number` | `0` | Delay before the beam animation begins. |
+| `duration` | `number` | `15` | Time, in seconds, for one full loop around the border. |
+| `size` | `number` | `200` | Size of the traveling gradient highlight. |
+| `class` | `string` | `undefined` | Additional classes for the beam layer. |
+
+## Notes
+
+- Render `BorderBeam` inside a relatively positioned container so it can align to the element border.
+- Tune `size` and `duration` together to get either a subtle accent or a more obvious sweep.

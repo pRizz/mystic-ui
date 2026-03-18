@@ -3,3 +3,26 @@ title: Letter Pullup
 description: Staggered letter pull up text animation
 category: text
 ---
+
+## Usage
+
+```tsx
+import { LetterPullup } from "@/components/mystic-ui/letter-pullup";
+
+export default function Example() {
+	return <LetterPullup text="Letter by letter" />;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | required | Text split into individual characters for the staggered reveal. |
+| `delay` | `number` | `0.05` | Stagger delay between each character animation. |
+| `class` | `string` | `undefined` | Additional classes for the wrapper element. |
+
+## Notes
+
+- `LetterPullup` is a Mystic-only text effect.
+- Spaces in the input string are preserved so the final layout matches the original copy.

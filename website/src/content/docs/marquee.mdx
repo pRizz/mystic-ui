@@ -3,3 +3,35 @@ title: Marquee
 description: An infinite scrolling component that can be used to display text, images, or videos
 category: component
 ---
+
+## Usage
+
+```tsx
+import { Marquee } from "@/components/mystic-ui/marquee";
+
+export default function Example() {
+	return (
+		<Marquee pauseOnHover>
+			<div class="rounded-lg border px-4 py-2">One</div>
+			<div class="rounded-lg border px-4 py-2">Two</div>
+			<div class="rounded-lg border px-4 py-2">Three</div>
+		</Marquee>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `pauseOnHover` | `boolean` | `false` | Pause the marquee animation while hovering the content. |
+| `repeat` | `number` | `4` | Number of content copies rendered to create a seamless loop. |
+| `reverse` | `boolean` | `false` | Reverse the scroll direction. |
+| `vertical` | `boolean` | `false` | Switch the marquee from horizontal to vertical motion. |
+| `duration` | `number` | `40` | Time, in seconds, for one full loop. |
+| `gap` | `string` | `"1rem"` | Gap inserted between repeated children. |
+
+## Notes
+
+- The component is content-agnostic, so you can scroll text, cards, logos, or screenshots.
+- Increase `repeat` when the children are very small and you want a denser loop.

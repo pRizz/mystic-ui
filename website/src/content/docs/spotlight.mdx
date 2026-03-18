@@ -3,3 +3,30 @@ title: Spotlight
 description: A spotlight effect with CSS, good for drawing attention to a particular element on the page
 category: effect
 ---
+
+## Usage
+
+```tsx
+import { Spotlight } from "@/components/mystic-ui/spotlight";
+
+export default function Example() {
+	return (
+		<div class="relative overflow-hidden rounded-xl border p-10">
+			<Spotlight class="-top-40 left-0" />
+			<div class="relative">Spotlit content</div>
+		</div>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `fill` | `string` | `"white"` | Fill color used for the spotlight ellipse. |
+| `class` | `string` | `undefined` | Additional classes for positioning or sizing the SVG. |
+
+## Notes
+
+- `Spotlight` is a Mystic-only decorative effect.
+- Position the spotlight absolutely inside a relatively positioned section for the intended hero-style glow.
