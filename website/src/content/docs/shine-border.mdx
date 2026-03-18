@@ -3,3 +3,32 @@ title: Shine Border
 description: Shine border is an animated background border effect
 category: effect
 ---
+
+## Usage
+
+```tsx
+import { ShineBorder } from "@/components/mystic-ui/shine-border";
+
+export default function Example() {
+	return (
+		<ShineBorder class="inline-block rounded-xl p-6">
+			<div class="rounded-xl border bg-background p-6">Shining border shell</div>
+		</ShineBorder>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `borderRadius` | `number` | `8` | Border radius in pixels for the wrapper and glow mask. |
+| `borderWidth` | `number` | `2` | Width of the animated border. |
+| `color` | `string \| string[]` | `"#000000"` | One or more colors used inside the radial border gradient. |
+| `duration` | `number` | `14` | Length of one animation cycle in seconds. |
+| `class` | `string` | `undefined` | Additional classes for the outer wrapper. |
+
+## Notes
+
+- `ShineBorder` is a wrapper component, so put the content you want highlighted inside it.
+- Pass an array to `color` when you want a multi-stop animated border.

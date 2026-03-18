@@ -3,3 +3,28 @@ title: Word Fade In
 description: Text animation which fades in word by word
 category: text
 ---
+
+## Usage
+
+```tsx
+import { WordFadeIn } from "@/components/mystic-ui/word-fade-in";
+
+export default function Example() {
+	return <WordFadeIn text="Each word fades into view." />;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | required | Sentence split into words and animated in sequence. |
+| `delay` | `number` | `0.15` | Delay multiplier between each word animation. |
+| `duration` | `number` | `1` | Duration of each word transition, in seconds. |
+| `blur` | `number` | `8` | Initial blur radius applied before the word fades in. |
+| `class` | `string` | `undefined` | Additional classes for the wrapper element. |
+
+## Notes
+
+- `WordFadeIn` is a Mystic-only extra, useful for hero copy and marketing headlines.
+- The component also forwards standard `HTMLDivElement` props to the outer wrapper.

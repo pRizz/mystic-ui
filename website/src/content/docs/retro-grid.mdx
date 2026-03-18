@@ -3,3 +3,30 @@ title: Retro Grid
 description: An animated scrolling retro grid effect
 category: background
 ---
+
+## Usage
+
+```tsx
+import { RetroGrid } from "@/components/mystic-ui/retro-grid";
+
+export default function Example() {
+	return (
+		<div class="relative overflow-hidden rounded-xl border p-10">
+			<RetroGrid class="absolute inset-0" />
+			<div class="relative">Retro-futuristic background</div>
+		</div>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `angle` | `number` | `65` | Perspective angle applied to the scrolling grid plane. |
+| `class` | `string` | `undefined` | Additional classes for the outer wrapper. |
+
+## Notes
+
+- `RetroGrid` is designed as a decorative background layer and is absolutely positioned by default.
+- Lower the angle for a flatter perspective, or increase it for a more dramatic horizon.

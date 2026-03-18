@@ -3,3 +3,28 @@ title: Text Reveal
 description: Fade in text as you scroll down the page
 category: text
 ---
+
+## Usage
+
+```tsx
+import { TextReveal } from "@/components/mystic-ui/text-reveal";
+
+export default function Example() {
+	return (
+		<TextReveal text="Scroll the section to gradually reveal each word." />
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | required | Sentence split into words and revealed during scroll progress. |
+| `space` | `number` | `200` | Additional scrollable distance allocated per word. |
+| `class` | `string` | `undefined` | Additional classes for the outer scroll section. |
+
+## Notes
+
+- The component creates its own sticky full-screen section, so it works best as a standalone block in a page layout.
+- Increase `space` for a slower, longer reveal.

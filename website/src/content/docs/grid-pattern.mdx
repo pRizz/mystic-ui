@@ -3,3 +3,35 @@ title: Grid Pattern
 description: A background grid pattern made with SVGs, fully customizable using CSS
 category: background
 ---
+
+## Usage
+
+```tsx
+import { GridPattern } from "@/components/mystic-ui/grid-pattern";
+
+export default function Example() {
+	return (
+		<div class="relative overflow-hidden rounded-xl border p-10">
+			<GridPattern class="absolute inset-0 opacity-40" />
+			<div class="relative">Grid-backed content</div>
+		</div>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `width` | `number` | `40` | Width of each grid cell in the generated pattern. |
+| `height` | `number` | `40` | Height of each grid cell in the generated pattern. |
+| `x` | `number` | `-1` | Horizontal offset applied to the pattern origin. |
+| `y` | `number` | `-1` | Vertical offset applied to the pattern origin. |
+| `squares` | `Array<[number, number]>` | `[]` | Grid coordinates to highlight with filled squares. |
+| `strokeDasharray` | `string` | `undefined` | Optional SVG dash pattern for the grid lines. |
+| `class` | `string` | `undefined` | Additional classes for the wrapping SVG. |
+
+## Notes
+
+- `GridPattern` is absolutely positioned by default, so it works best inside a relatively positioned parent.
+- Use `squares` to accent a few cells while keeping the rest of the grid subtle.

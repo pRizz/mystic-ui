@@ -3,3 +3,29 @@ title: Meteors
 description: A meteor shower effect
 category: effect
 ---
+
+## Usage
+
+```tsx
+import { Meteors } from "@/components/mystic-ui/meteors";
+
+export default function Example() {
+	return (
+		<div class="relative overflow-hidden rounded-xl border p-10">
+			<Meteors number={24} />
+			<div class="relative">Meteor shower overlay</div>
+		</div>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `number` | `number` | `30` | Total meteors rendered in the effect. |
+
+## Notes
+
+- The effect uses randomly generated positions and timings on mount, so each render feels slightly different.
+- Wrap it in a relatively positioned container when you want the meteors clipped to a section.

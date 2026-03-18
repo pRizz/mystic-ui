@@ -3,3 +3,33 @@ title: Android
 description: A mockup of a standard Android device
 category: device-mock
 ---
+
+## Usage
+
+```tsx
+import { Android } from "@/components/mystic-ui/android";
+
+export default function Example() {
+	return (
+		<Android
+			width={380}
+			height={780}
+			src="https://picsum.photos/900/1800?random=2"
+		/>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `width` | `number` | `433` | Output width of the SVG device frame. |
+| `height` | `number` | `882` | Output height of the SVG device frame. |
+| `src` | `string` | `undefined` | Image rendered inside the device screen. |
+| `videoSrc` | `string` | `undefined` | Video rendered inside the device screen. |
+
+## Notes
+
+- The component accepts standard SVG attributes in addition to the custom props above.
+- Provide either `src` or `videoSrc` depending on whether you want a static screenshot or moving demo.

@@ -3,3 +3,35 @@ title: Orbiting Circles
 description: A collection of circles which move in orbit along a circular path
 category: component
 ---
+
+## Usage
+
+```tsx
+import { OrbitingCircles } from "@/components/mystic-ui/orbiting-circles";
+
+export default function Example() {
+	return (
+		<div class="relative flex h-56 w-56 items-center justify-center rounded-full border">
+			<OrbitingCircles radius={90}>
+				<div class="size-10 rounded-full border bg-background" />
+			</OrbitingCircles>
+		</div>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `duration` | `number` | `20` | Time, in seconds, for one full orbit cycle. |
+| `delay` | `number` | `0` | Delay before the orbit animation starts. |
+| `radius` | `number` | `50` | Distance from the center point to the orbiting child. |
+| `path` | `boolean` | `true` | Whether to render the orbit guide ring. |
+| `reverse` | `boolean` | `false` | Reverse the rotation direction. |
+| `class` | `string` | `undefined` | Additional classes for the orbit wrapper. |
+
+## Notes
+
+- Render any icon, avatar, or custom node as the child of `OrbitingCircles`.
+- The parent container should be positioned relatively so the orbit can center correctly.

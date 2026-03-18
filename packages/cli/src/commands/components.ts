@@ -6,7 +6,25 @@ import { CommanderError } from "commander";
 import { type ProxifiedModule, loadFile, writeFile } from "magicast";
 import { deepMergeObject } from "magicast/helpers";
 import { addDependency, installDependencies } from "nypm";
-import { type ConfigSchema, getMysticConfig } from "../utils";
+import {
+	type ConfigSchema,
+	getMysticConfig,
+	resolveProjectPath,
+} from "../utils";
+
+export const DEFAULT_REGISTRY_BASE_URL =
+	"https://raw.githubusercontent.com/TheComputerM/mystic-ui/main/packages/registry";
+
+export function getRegistryBaseUrl() {
+	return process.env.MYSTIC_UI_REGISTRY_BASE_URL ?? DEFAULT_REGISTRY_BASE_URL;
+}
+
+export function getRegistryEntryUrl(
+	framework: ConfigSchema["framework"],
+	component: string,
+) {
+	return `${getRegistryBaseUrl()}/${framework}/${component}.json`;
+}
 
 /**
  * Fetches the registry entry for a component from github
@@ -14,16 +32,29 @@ import { type ConfigSchema, getMysticConfig } from "../utils";
  * @param component id of component
  * @returns registry entry for the component
  */
-async function getRegistryEntry(
+export async function getRegistryEntry(
 	framework: ConfigSchema["framework"],
 	component: string,
+	fetchImpl: typeof fetch = fetch,
 ) {
+	const url = getRegistryEntryUrl(framework, component);
+
 	try {
-		const response = await fetch(
-			`https://raw.githubusercontent.com/TheComputerM/mystic-ui/main/packages/registry/${framework}/${component}.json`,
-		);
+		const response = await fetchImpl(url);
+		if (!response.ok) {
+			throw new CommanderError(
+				1,
+				"fetch-fail",
+				`Component ${component} not found for framework ${framework} in registry.`,
+			);
+		}
+
 		return (await response.json()) as RegistryEntry;
-	} catch {
+	} catch (error) {
+		if (error instanceof CommanderError) {
+			throw error;
+		}
+
 		throw new CommanderError(
 			1,
 			"fetch-fail",
@@ -81,7 +112,7 @@ export function transform(content: string, config: ConfigSchema) {
 export default async function addComponentCommand(component: string) {
 	intro(`Adding ${component}`);
 
-	const { config, filepath } = await getMysticConfig();
+	const { config, projectRoot } = await getMysticConfig();
 	const s = spinner();
 
 	s.start("Fetching component details");
@@ -97,16 +128,20 @@ export default async function addComponentCommand(component: string) {
 
 	if (entry.config) {
 		s.start("Updating config file");
-		await updateConfig(path.join(filepath, config.configPath), entry.config);
+		await updateConfig(
+			resolveProjectPath(projectRoot, config.configPath),
+			entry.config,
+		);
 		s.stop("Updated config file");
 	}
 
 	s.start("Writing component files");
-	await fs.mkdir(path.join(filepath, config.outputPath), {
+	const outputDirectory = resolveProjectPath(projectRoot, config.outputPath);
+	await fs.mkdir(outputDirectory, {
 		recursive: true,
 	});
 	await fs.writeFile(
-		path.join(filepath, config.outputPath, `${component}.tsx`),
+		path.join(outputDirectory, `${component}.tsx`),
 		transform(entry.content, config),
 	);
 	s.stop("Wrote component files");

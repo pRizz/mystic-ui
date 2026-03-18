@@ -3,3 +3,27 @@ title: Animated Shiny Text
 description: A light glare effect which pans across text making it appear as if it is shimmering
 category: text
 ---
+
+## Usage
+
+```tsx
+import { AnimatedShinyText } from "@/components/mystic-ui/animated-shiny-text";
+
+export default function Example() {
+	return (
+		<AnimatedShinyText>Ships with a moving highlight.</AnimatedShinyText>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `shimmerWidth` | `number` | `100` | Width, in pixels, of the animated shine band. |
+| `class` | `string` | `undefined` | Additional classes for the paragraph element. |
+
+## Notes
+
+- The component renders a `<p>` by default and also accepts standard paragraph attributes.
+- Pair it with muted text colors for the most visible shimmer contrast.

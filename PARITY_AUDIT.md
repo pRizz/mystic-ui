@@ -11,11 +11,26 @@ The machine-readable source of truth lives in `packages/registry/src/parity.ts`.
   - Tailwind: **44**
   - Panda: **44**
   - Docs: **44**
+- Docs authoring coverage for existing component pages:
+  - Pages with usage guidance: **52 / 52**
+  - Pages with props guidance: **52 / 52**
 - Current parity status counts:
   - Partial: **44**
-  - Missing: **23**
-  - Exception: **3**
+  - Missing: **24**
+  - Exception: **2**
 - Fork-only Mystic extras tracked separately: **12**
+
+## Infrastructure status
+
+The core parity infrastructure is now in much better shape:
+
+- component docs render full MDX bodies
+- story previews are framework-aware
+- manual install instructions read from the local in-repo registry artifacts
+- the CLI resolves project-relative paths from the actual project root
+- registry dependency extraction now normalizes subpath imports like `solid-icons/tb` to installable package roots
+
+The main remaining parity work is no longer docs/rendering plumbing; it is the remaining API/runtime parity gaps and the set of still-missing upstream components.
 
 ## What "partial" means
 
@@ -33,11 +48,12 @@ An entry is marked `exception` when it is intentionally outside the current pari
 
 Current component exceptions are limited to:
 
-- `animated-subscribe-button`
 - `tweet-card`
 - `client-tweet-card`
 
-These are excluded because they either lack a public upstream registry artifact or depend on React-specific infrastructure that does not map cleanly into SolidJS today.
+These are excluded because they depend on React-specific infrastructure that does not map cleanly into SolidJS today.
+
+`animated-subscribe-button` is no longer treated as an exception. Upstream now exposes a public component implementation, so Mystic tracks it as part of the normal missing backlog.
 
 ## Fork-only components
 
@@ -63,7 +79,6 @@ The following are explicitly out of scope for component parity:
 ## Execution order
 
 1. Maintain the parity manifest as the source of truth
-2. Fix docs rendering and framework-aware previews
-3. Normalize currently overlapping components toward upstream APIs
-4. Port missing components in batches
-5. Re-run the parity scorecard after each batch
+2. Normalize currently overlapping components toward upstream APIs
+3. Port missing components in batches
+4. Re-run the parity scorecard after each batch

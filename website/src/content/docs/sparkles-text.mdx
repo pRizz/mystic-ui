@@ -3,3 +3,28 @@ title: Sparkles Text
 description: A dynamic text that generates continuous sparkles with smooth transitions, perfect for highlighting text with animated stars.
 category: text
 ---
+
+## Usage
+
+```tsx
+import { SparklesText } from "@/components/mystic-ui/sparkles-text";
+
+export default function Example() {
+	return (
+		<SparklesText sparklesCount={12}>A little extra emphasis</SparklesText>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `colors` | `string[]` | `["#9E7AFF", "#FE8BBB"]` | Palette used for the generated sparkles. |
+| `sparklesCount` | `number` | `10` | Number of sparkle particles rendered around the text. |
+| `class` | `string` | `undefined` | Additional classes for the text wrapper. |
+
+## Notes
+
+- Pass your highlighted text as children.
+- Increase `sparklesCount` sparingly, since every sparkle is animated independently.

@@ -3,3 +3,26 @@ title: Word Pullup
 description: Text animation for words to pull up
 category: text
 ---
+
+## Usage
+
+```tsx
+import { WordPullup } from "@/components/mystic-ui/word-pullup";
+
+export default function Example() {
+	return <WordPullup text="Words rise into place" />;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | required | Sentence split into words for the staggered reveal. |
+| `delay` | `number` | `0.2` | Delay multiplier applied between each word animation. |
+| `class` | `string` | `undefined` | Additional classes for the wrapper row. |
+
+## Notes
+
+- `WordPullup` is a Mystic-only extra rather than an upstream Magic UI parity component.
+- Each word is animated independently, making the effect a good fit for hero copy or headlines.

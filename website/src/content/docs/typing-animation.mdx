@@ -3,3 +3,25 @@ title: Typing Animation
 description: Characters appearing in typed animation
 category: text
 ---
+
+## Usage
+
+```tsx
+import { TypingAnimation } from "@/components/mystic-ui/typing-animation";
+
+export default function Example() {
+	return <TypingAnimation text="Mystic UI ships animated copy." />;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | required | Full string revealed one character at a time. |
+| `duration` | `number` | `200` | Delay in milliseconds between each typed character. |
+
+## Notes
+
+- The component renders plain text, so you can place it inline inside headings or paragraphs.
+- Remount the component if you want to replay the typing animation from the start.
