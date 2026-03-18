@@ -1,0 +1,37 @@
+---
+title: Striped Pattern
+description: A background striped pattern made with SVG lines.
+category: background
+---
+
+## Examples
+
+### Dashed Stroke
+
+<DocStory name="dashed" />
+
+### To Right
+
+<DocStory name="right" />
+
+## Usage
+
+```tsx
+import { StripedPattern } from "@/components/mystic-ui/striped-pattern";
+
+export default function Example() {
+	return (
+		<div class="relative h-64 w-full overflow-hidden">
+			<StripedPattern />
+		</div>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `direction` | `"left" \| "right"` | `"left"` | Direction of the diagonal lines. |
+| `width` | `number` | `10` | Width of each repeated stripe segment. |
+| `height` | `number` | `10` | Height of each repeated stripe segment. |

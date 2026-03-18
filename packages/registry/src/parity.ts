@@ -126,7 +126,6 @@ const missingByCategory = {
 		"neon-gradient-card",
 		"particles",
 		"pixel-image",
-		"striped-pattern",
 		"warp-background",
 	] as const,
 	interactive: [
@@ -250,6 +249,13 @@ export const upstreamComponentParityManifest = [
 	createEntry(
 		"rainbow-button",
 		"interactive",
+		"partial",
+		createSupport(true, true, true),
+		[...overlapNotes],
+	),
+	createEntry(
+		"striped-pattern",
+		"background",
 		"partial",
 		createSupport(true, true, true),
 		[...overlapNotes],
