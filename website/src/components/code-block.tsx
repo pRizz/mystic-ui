@@ -1,7 +1,7 @@
 import { useClipboard } from "@ark-ui/solid";
 import { createAsync } from "@solidjs/router";
 import type { BundledLanguage } from "shiki";
-import { TbCheck, TbCopy } from "solid-icons/tb";
+import { TbOutlineCheck, TbOutlineCopy } from "solid-icons/tb";
 import type { Component } from "solid-js";
 import { css, cx } from "styled-system/css";
 import { Box } from "styled-system/jsx";
@@ -46,8 +46,8 @@ export const RawCodeBlock: Component<CodeBlockProps & { html?: string }> = (
 				<Clipboard.Trigger
 					asChild={(parentProps) => (
 						<IconButton size="sm" variant="ghost" {...parentProps()}>
-							<Clipboard.Indicator copied={<TbCheck />}>
-								<TbCopy />
+							<Clipboard.Indicator copied={<TbOutlineCheck />}>
+								<TbOutlineCopy />
 							</Clipboard.Indicator>
 						</IconButton>
 					)}

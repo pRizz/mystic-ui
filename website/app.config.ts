@@ -1,13 +1,17 @@
-import { defineConfig } from "@solidjs/start/config";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { fileURLToPath } from "node:url";
 import contentCollections from "@content-collections/solid-start";
+import { defineConfig } from "@solidjs/start/config";
 import { createHighlighter } from "shiki";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 /* @ts-ignore */
 import pkg from "@vinxi/plugin-mdx";
 const { default: mdx } = pkg;
 import remarkFrontmatter from "remark-frontmatter";
-import { visit as remarkVisit, SKIP as REMARK_VISIT_SKIP } from "unist-util-visit";
+import {
+	SKIP as REMARK_VISIT_SKIP,
+	visit as remarkVisit,
+} from "unist-util-visit";
 
 const highlighter = await createHighlighter({
 	themes: ["vesper"],
@@ -27,7 +31,7 @@ function remarkCodeBlock() {
 						value: highlighter.codeToHtml(node.value, {
 							theme: "vesper",
 							lang: node.lang,
-						})
+						}),
 					},
 					{
 						type: "mdxJsxAttribute",
@@ -56,6 +60,25 @@ function remarkCodeBlock() {
 export default defineConfig({
 	extensions: ["mdx"],
 	vite: {
+		resolve: {
+			alias: {
+				clsx: fileURLToPath(
+					new URL("./src/lib/shims/clsx.ts", import.meta.url),
+				),
+				"rough-notation": fileURLToPath(
+					new URL("./src/lib/shims/rough-notation.ts", import.meta.url),
+				),
+				"rough-notation/lib/model": fileURLToPath(
+					new URL("./src/lib/shims/rough-notation-model.ts", import.meta.url),
+				),
+				"solid-icons/tb": fileURLToPath(
+					new URL("./src/lib/shims/solid-icons-tb.ts", import.meta.url),
+				),
+				"tailwind-merge": fileURLToPath(
+					new URL("./src/lib/shims/tailwind-merge.ts", import.meta.url),
+				),
+			},
+		},
 		plugins: [
 			tsconfigPaths(),
 			contentCollections(),

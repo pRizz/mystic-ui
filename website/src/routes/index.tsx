@@ -2,7 +2,6 @@ import { DotPattern } from "@mystic-ui/panda/src/ui/dot-pattern";
 import { Marquee } from "@mystic-ui/panda/src/ui/marquee";
 import { ShineBorder } from "@mystic-ui/panda/src/ui/shine-border";
 import { WordRotate } from "@mystic-ui/panda/src/ui/word-rotate";
-import { TbBrandGithub, TbBrandSolidjs, TbBrandTailwind } from "solid-icons/tb";
 import { For } from "solid-js";
 import { css } from "styled-system/css";
 import {
@@ -20,10 +19,58 @@ import { Button } from "~/components/ui/button";
 import { Heading } from "~/components/ui/heading";
 import { Text } from "~/components/ui/text";
 
+const SolidLogo = () => (
+	<svg height="1.5em" viewBox="0 0 166 155" fill="none">
+		<title>SolidJS</title>
+		<path
+			d="M163.903 35.51c-.164-.57-.492-1.078-.983-1.53L129.714 2.304c-.656-.507-1.353-.762-2.091-.762-.492 0-.963.102-1.414.304L4.174 54.695c-1.23.468-2.03 1.322-2.399 2.56-.37 1.238-.123 2.375.738 3.41l33.206 31.676c.615.51 1.312.765 2.091.765.492 0 .963-.102 1.414-.305l122.035-52.85c1.23-.467 2.03-1.32 2.399-2.56.328-1.239.082-2.373-.738-3.412Z"
+			fill="#76B3E1"
+		/>
+		<path
+			d="M163.903 35.51c-.164-.57-.492-1.078-.983-1.53L129.714 2.304c-.656-.507-1.353-.762-2.091-.762-.492 0-.963.102-1.414.304L4.174 54.695c-1.23.468-2.03 1.322-2.399 2.56-.37 1.238-.123 2.375.738 3.41l33.206 31.676c.615.51 1.312.765 2.091.765.492 0 .963-.102 1.414-.305l122.035-52.85c1.23-.467 2.03-1.32 2.399-2.56.328-1.239.082-2.373-.738-3.412Z"
+			fill="url(#solid-gradient)"
+		/>
+		<path
+			d="m45.82 100.053 37.971 35.901c.656.508 1.353.762 2.092.762.492 0 .963-.101 1.414-.304l34.148-14.81c1.23-.468 2.03-1.322 2.399-2.56.328-1.239.082-2.376-.738-3.412L85.135 79.73c-.615-.507-1.312-.762-2.092-.762-.492 0-.963.101-1.414.304l-34.148 14.81c-1.23.467-2.03 1.32-2.399 2.56-.328 1.239-.082 2.374.738 3.411Z"
+			fill="#518AC8"
+		/>
+		<defs>
+			<linearGradient
+				id="solid-gradient"
+				x1="35.159"
+				y1="43.275"
+				x2="129.385"
+				y2="91.322"
+				gradientUnits="userSpaceOnUse"
+			>
+				<stop stop-color="#76B3E1" />
+				<stop offset="1" stop-color="#4377BB" />
+			</linearGradient>
+		</defs>
+	</svg>
+);
+
+const TailwindLogo = () => (
+	<svg height="1.5em" viewBox="0 0 54 33" fill="none">
+		<title>TailwindCSS</title>
+		<path
+			fill="currentColor"
+			d="M27 0c-7.2 0-11.7 3.6-13.5 10.8 2.7-3.6 5.85-4.95 9.45-4.05 2.054.513 3.522 2.004 5.147 3.655 2.645 2.686 5.708 5.79 12.403 5.79 7.2 0 11.7-3.6 13.5-10.8-2.7 3.6-5.85 4.95-9.45 4.05-2.054-.513-3.522-2.004-5.147-3.655C36.758 2.104 33.695 0 27 0Zm-13.5 16.2C6.3 16.2 1.8 19.8 0 27c2.7-3.6 5.85-4.95 9.45-4.05 2.054.513 3.522 2.004 5.147 3.655C17.242 29.296 20.305 32.4 27 32.4c7.2 0 11.7-3.6 13.5-10.8-2.7 3.6-5.85 4.95-9.45 4.05-2.054-.513-3.522-2.004-5.147-3.655C23.258 19.304 20.195 16.2 13.5 16.2Z"
+		/>
+	</svg>
+);
+
+const GitHubLogo = () => (
+	<svg height="1.25em" viewBox="0 0 16 16" fill="currentColor">
+		<title>GitHub</title>
+		<path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.5 7.5 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+	</svg>
+);
+
 const CompatileEcosystem = () => {
 	const ecosystem = [
 		{
-			icon: <TbBrandSolidjs size="1.5em" />,
+			icon: <SolidLogo />,
 			label: "SolidJS",
 		},
 		{
@@ -39,7 +86,7 @@ const CompatileEcosystem = () => {
 			label: "Motion",
 		},
 		{
-			icon: <TbBrandTailwind size="1.5em" />,
+			icon: <TailwindLogo />,
 			label: "TailwindCSS",
 		},
 		{
@@ -127,7 +174,7 @@ export default function Home() {
 										href="https://github.com/TheComputerM/mystic-ui"
 										{...parentProps()}
 									>
-										<TbBrandGithub />
+										<GitHubLogo />
 										Star on GitHub
 									</a>
 								)}
