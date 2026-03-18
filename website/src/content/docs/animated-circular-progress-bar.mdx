@@ -1,0 +1,31 @@
+---
+title: Animated Circular Progress Bar
+description: Animated Circular Progress Bar displays a circular gauge with a percentage value.
+category: text
+---
+
+## Usage
+
+```tsx
+import { AnimatedCircularProgressBar } from "@/components/mystic-ui/animated-circular-progress-bar";
+
+export default function Example() {
+	return (
+		<AnimatedCircularProgressBar
+			value={65}
+			gaugePrimaryColor="#0ea5e9"
+			gaugeSecondaryColor="#e2e8f0"
+		/>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `max` | `number` | `100` | Maximum gauge value. |
+| `min` | `number` | `0` | Minimum gauge value. |
+| `value` | `number` | required | Current gauge value. |
+| `gaugePrimaryColor` | `string` | required | Color of the active gauge segment. |
+| `gaugeSecondaryColor` | `string` | required | Color of the remaining gauge segment. |
