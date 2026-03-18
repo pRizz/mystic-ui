@@ -92,6 +92,7 @@ const overlapNeedsAudit = [
 	"retro-grid",
 	"ripple",
 	"safari",
+	"shimmer-button",
 	"shine-border",
 	"sparkles-text",
 	"text-reveal",
@@ -99,7 +100,7 @@ const overlapNeedsAudit = [
 	"word-rotate",
 ] as const;
 
-const tailwindOnlyOverlap = ["shimmer-button"] as const;
+const tailwindOnlyOverlap = [] as const;
 
 const missingByCategory = {
 	widget: [
