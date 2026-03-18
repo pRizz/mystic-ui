@@ -1,0 +1,23 @@
+---
+title: Line Shadow Text
+description: A text component with a moving line shadow.
+category: text
+---
+
+## Usage
+
+```tsx
+import { LineShadowText } from "@/components/mystic-ui/line-shadow-text";
+
+export default function Example() {
+	return <LineShadowText>Magic UI</LineShadowText>;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `string` | required | Text displayed with the moving shadow effect. |
+| `shadowColor` | `string` | `"black"` | Color used for the animated line shadow. |
+| `as` | `"article" \| "div" \| "h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "li" \| "p" \| "section" \| "span"` | `"span"` | HTML tag used for the rendered text. |

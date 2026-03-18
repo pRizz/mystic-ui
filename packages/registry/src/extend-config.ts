@@ -37,6 +37,21 @@ const config: ConfigModifications = {
 			},
 		},
 	},
+	"line-shadow-text": {
+		animation: {
+			"line-shadow": "line-shadow 15s linear infinite",
+		},
+		keyframes: {
+			"line-shadow": {
+				"0%": {
+					backgroundPosition: "0 0",
+				},
+				"100%": {
+					backgroundPosition: "100% -100%",
+				},
+			},
+		},
+	},
 	"animated-gradient-text": {
 		animation: {
 			gradient: "gradient 8s linear infinite",
