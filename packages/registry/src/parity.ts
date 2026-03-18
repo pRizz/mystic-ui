@@ -121,7 +121,6 @@ const missingByCategory = {
 	text: ["highlighter", "video-text"] as const,
 	background: [
 		"dotted-map",
-		"flickering-grid",
 		"interactive-grid-pattern",
 		"light-rays",
 		"neon-gradient-card",
@@ -166,6 +165,13 @@ export const upstreamComponentParityManifest = [
 	),
 	createEntry(
 		"blur-fade",
+		"background",
+		"partial",
+		createSupport(true, true, true),
+		[...overlapNotes],
+	),
+	createEntry(
+		"flickering-grid",
 		"background",
 		"partial",
 		createSupport(true, true, true),
