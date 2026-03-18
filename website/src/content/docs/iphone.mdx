@@ -1,0 +1,30 @@
+---
+title: iPhone
+description: A mockup of the iPhone
+category: device-mock
+---
+
+## Usage
+
+```tsx
+import { Iphone } from "@/components/mystic-ui/iphone";
+
+export default function Example() {
+	return <Iphone />;
+}
+```
+
+## Props
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `src` | `string` | Image source rendered inside the device frame. |
+| `videoSrc` | `string` | Video source rendered inside the device frame. |
+| `class` | `string` | Additional classes applied to the wrapper `<div>`. |
+| `style` | `JSX.CSSProperties \| string` | Inline wrapper styles. |
+
+## Notes
+
+- Sizing is controlled by the wrapper `<div>`, not width/height props.
+- The component preserves the original iPhone aspect ratio of `433 / 882`.
+- Screen masking is only applied when `src` or `videoSrc` is provided.

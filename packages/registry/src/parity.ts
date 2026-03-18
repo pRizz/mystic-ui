@@ -155,7 +155,7 @@ const missingByCategory = {
 		"shiny-button",
 		"smooth-cursor",
 	] as const,
-	media: ["iphone"] as const,
+	media: [] as const,
 } satisfies Record<ParityCategory, readonly string[]>;
 
 const overlapNotes = [
@@ -170,6 +170,10 @@ export const upstreamComponentParityManifest = [
 		createSupport(true, true, true),
 		[...overlapNotes],
 	),
+	createEntry("iphone", "media", "partial", createSupport(true, true, true), [
+		...overlapNotes,
+		"Fork-only `iphone-15` can now be treated as a legacy extra while new work targets upstream `iphone` parity.",
+	]),
 	...overlapNeedsAudit.map((id) =>
 		createEntry(id, "widget", "partial", createSupport(true, true, true), [
 			...overlapNotes,
