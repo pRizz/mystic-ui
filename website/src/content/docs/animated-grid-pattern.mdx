@@ -1,0 +1,29 @@
+---
+title: Animated Grid Pattern
+description: An animated background grid pattern made with SVG squares.
+category: background
+---
+
+## Usage
+
+```tsx
+import { AnimatedGridPattern } from "@/components/mystic-ui/animated-grid-pattern";
+
+export default function Example() {
+	return <AnimatedGridPattern />;
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `width` | `number` | `40` | Width of each grid cell. |
+| `height` | `number` | `40` | Height of each grid cell. |
+| `x` | `number` | `-1` | Horizontal offset for the pattern origin. |
+| `y` | `number` | `-1` | Vertical offset for the pattern origin. |
+| `strokeDasharray` | `number` | `0` | Dash spacing for the base grid lines. |
+| `numSquares` | `number` | `50` | Number of animated highlight squares. |
+| `maxOpacity` | `number` | `0.5` | Peak opacity reached by animated squares. |
+| `duration` | `number` | `4` | Duration of the fade cycle in seconds. |
+| `repeatDelay` | `number` | `0.5` | Delay before the square animation repeats. |
