@@ -5,9 +5,10 @@ import {
 	TbFileText,
 	TbGlobe,
 } from "solid-icons/tb";
+import { For } from "solid-js";
+import { css } from "styled-system/css";
 
 import { BentoCard, BentoGrid } from "@/ui/bento-grid";
-import { For } from "solid-js";
 
 const features = [
 	{
@@ -18,12 +19,22 @@ const features = [
 		cta: "Learn more",
 		background: (
 			<img
-				class="absolute -right-20 -top-20 opacity-60"
+				class={css({
+					position: "absolute",
+					right: "-20",
+					top: "-20",
+					opacity: "0.6",
+				})}
 				aria-hidden="true"
 				alt="bg"
 			/>
 		),
-		class: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3",
+		class: css({
+			lg: {
+				gridRow: "1 / 4",
+				gridColumn: "2 / 3",
+			},
+		}),
 	},
 	{
 		Icon: TbCursorText,
@@ -33,12 +44,22 @@ const features = [
 		cta: "Learn more",
 		background: (
 			<img
-				class="absolute -right-20 -top-20 opacity-60"
+				class={css({
+					position: "absolute",
+					right: "-20",
+					top: "-20",
+					opacity: "0.6",
+				})}
 				aria-hidden="true"
 				alt="bg"
 			/>
 		),
-		class: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
+		class: css({
+			lg: {
+				gridColumn: "1 / 2",
+				gridRow: "1 / 3",
+			},
+		}),
 	},
 	{
 		Icon: TbGlobe,
@@ -48,12 +69,22 @@ const features = [
 		cta: "Learn more",
 		background: (
 			<img
-				class="absolute -right-20 -top-20 opacity-60"
+				class={css({
+					position: "absolute",
+					right: "-20",
+					top: "-20",
+					opacity: "0.6",
+				})}
 				aria-hidden="true"
 				alt="bg"
 			/>
 		),
-		class: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4",
+		class: css({
+			lg: {
+				gridColumn: "1 / 2",
+				gridRow: "3 / 4",
+			},
+		}),
 	},
 	{
 		Icon: TbCalendar,
@@ -63,12 +94,22 @@ const features = [
 		cta: "Learn more",
 		background: (
 			<img
-				class="absolute -right-20 -top-20 opacity-60"
+				class={css({
+					position: "absolute",
+					right: "-20",
+					top: "-20",
+					opacity: "0.6",
+				})}
 				aria-hidden="true"
 				alt="bg"
 			/>
 		),
-		class: "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
+		class: css({
+			lg: {
+				gridColumn: "3 / 4",
+				gridRow: "1 / 2",
+			},
+		}),
 	},
 	{
 		Icon: TbBell,
@@ -79,18 +120,34 @@ const features = [
 		cta: "Learn more",
 		background: (
 			<img
-				class="absolute -right-20 -top-20 opacity-60"
+				class={css({
+					position: "absolute",
+					right: "-20",
+					top: "-20",
+					opacity: "0.6",
+				})}
 				aria-hidden="true"
 				alt="bg"
 			/>
 		),
-		class: "lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-4",
+		class: css({
+			lg: {
+				gridColumn: "3 / 4",
+				gridRow: "2 / 4",
+			},
+		}),
 	},
 ];
 
 export default function BentoDemo() {
 	return (
-		<BentoGrid class="lg:grid-rows-3">
+		<BentoGrid
+			class={css({
+				lg: {
+					gridTemplateRows: "repeat(3, minmax(0, 1fr))",
+				},
+			})}
+		>
 			<For each={features}>{(feature) => <BentoCard {...feature} />}</For>
 		</BentoGrid>
 	);

@@ -1,0 +1,39 @@
+---
+title: Bento Grid
+description: Bento grid is a layout used to showcase the features of a product in a simple and elegant way.
+category: component
+---
+
+## Usage
+
+```tsx
+import { BentoCard, BentoGrid } from "@/components/mystic-ui/bento-grid";
+
+export default function Example() {
+	return (
+		<BentoGrid>
+			<BentoCard
+				name="Save your files"
+				description="We automatically save your files as you type."
+				href="/"
+				cta="Learn more"
+				Icon={() => <div />}
+				background={<div />}
+			/>
+		</BentoGrid>
+	);
+}
+```
+
+## Props
+
+### `BentoCard`
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `name` | `string` | Primary card heading. |
+| `description` | `string` | Supporting card copy. |
+| `href` | `string` | Destination for the CTA link. |
+| `cta` | `string` | CTA label rendered in the link action. |
+| `Icon` | `Component` | Visual icon displayed near the title. |
+| `background` | `JSX.Element` | Decorative background content. |
