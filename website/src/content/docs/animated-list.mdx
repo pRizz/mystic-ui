@@ -1,0 +1,28 @@
+---
+title: Animated List
+description: A list that animates each item into view in sequence.
+category: component
+---
+
+## Usage
+
+```tsx
+import { AnimatedList } from "@/components/mystic-ui/animated-list";
+
+export default function Example() {
+	return (
+		<AnimatedList>
+			<p>Item 1</p>
+			<p>Item 2</p>
+			<p>Item 3</p>
+		</AnimatedList>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `delay` | `number` | `1000` | Delay in milliseconds before revealing the next item. |
+| `children` | `JSX.Element` | required | List items to reveal. |
