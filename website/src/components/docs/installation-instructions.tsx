@@ -1,9 +1,10 @@
 import type { RegistryEntry } from "@mystic-ui/registry/src/schema";
 import { useParams } from "@solidjs/router";
-import { type Component, For, Show, createResource } from "solid-js";
+import { type Component, For, Show, createMemo } from "solid-js";
 import { CodeBlock } from "~/components/code-block";
 import { Step, Steps } from "~/components/ui/stepper";
 import { Tabs } from "~/components/ui/tabs";
+import { getLocalRegistryEntry } from "~/lib/registry";
 
 const instructions: {
 	title: string;
@@ -37,37 +38,20 @@ const instructions: {
 	},
 ];
 
-async function fetchRegistryEntry([framework, component]: [
-	string,
-	string,
-]): Promise<RegistryEntry> {
-	const response = await fetch(
-		`https://raw.githubusercontent.com/TheComputerM/mystic-ui/main/packages/registry/${framework}/${component}.json`,
-	);
-
-	if (response.ok) {
-		return (await response.json()) as RegistryEntry;
-	}
-
-	return {
-		id: "not-found",
-		content: "Component not found",
-	};
-}
-
 export const InstallationInstructions: Component = () => {
 	const params = useParams() satisfies {
 		framework: "tailwind" | "panda";
 		id: string;
 	};
 
-	const [entry] = createResource(
-		() => [params.framework, params.id] satisfies [string, string],
-		fetchRegistryEntry,
-		{
-			name: "fetch registry component",
-		},
-	);
+	const entry = createMemo<RegistryEntry>(() => {
+		return (
+			getLocalRegistryEntry(params.framework, params.id) ?? {
+				id: "not-found",
+				content: "Component not found",
+			}
+		);
+	});
 
 	return (
 		<Tabs.Root defaultValue="cli">
@@ -83,11 +67,11 @@ export const InstallationInstructions: Component = () => {
 				<Steps>
 					<Show when={entry()}>
 						<For
-							each={instructions.filter(({ condition }) => condition(entry()!))}
+							each={instructions.filter(({ condition }) => condition(entry()))}
 						>
 							{(instruction, i) => (
 								<Step number={i() + 1} title={instruction.title}>
-									<instruction.component entry={entry()!} />
+									<instruction.component entry={entry()} />
 								</Step>
 							)}
 						</For>
