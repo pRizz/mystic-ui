@@ -1,0 +1,40 @@
+---
+title: Text Highlighter
+description: A text highlighter that mimics a hand-drawn marker stroke.
+category: text
+---
+
+## Usage
+
+```tsx
+import { Highlighter } from "@/components/mystic-ui/highlighter";
+
+export default function Example() {
+	return (
+		<p>
+			The{" "}
+			<Highlighter action="underline" color="#FF9800">
+				Magic UI Highlighter
+			</Highlighter>{" "}
+			makes important{" "}
+			<Highlighter action="highlight" color="#87CEFA">
+				text stand out
+			</Highlighter>{" "}
+			effortlessly.
+		</p>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `action` | `"highlight" \| "underline" \| "box" \| "circle" \| "strike-through" \| "crossed-off" \| "bracket"` | `"highlight"` | Annotation style applied to the highlighted content. |
+| `color` | `string` | `"#ffd1dc"` | Color of the annotation stroke or fill. |
+| `strokeWidth` | `number` | `1.5` | Width of the annotation stroke. |
+| `animationDuration` | `number` | `600` | Duration of the hand-drawn animation in milliseconds. |
+| `iterations` | `number` | `2` | Number of redraw passes used to create the sketch effect. |
+| `padding` | `number` | `2` | Padding between the content and the annotation. |
+| `multiline` | `boolean` | `true` | Allow the annotation to continue across line breaks. |
+| `isView` | `boolean` | `false` | Delay rendering the annotation until the content enters the viewport. |
