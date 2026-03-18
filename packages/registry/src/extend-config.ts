@@ -82,6 +82,22 @@ const config: ConfigModifications = {
 			},
 		},
 	},
+	"ripple-button": {
+		animation: {
+			rippling: "rippling var(--duration) ease-out",
+		},
+		keyframes: {
+			rippling: {
+				"0%": {
+					opacity: "1",
+				},
+				"100%": {
+					transform: "scale(2)",
+					opacity: "0",
+				},
+			},
+		},
+	},
 	"animated-gradient-text": {
 		animation: {
 			gradient: "gradient 8s linear infinite",

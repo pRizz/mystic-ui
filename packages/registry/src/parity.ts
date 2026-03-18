@@ -136,7 +136,6 @@ const missingByCategory = {
 	] as const,
 	interactive: [
 		"interactive-hover-button",
-		"ripple-button",
 		"scroll-based-velocity",
 		"shiny-button",
 		"smooth-cursor",
@@ -207,6 +206,13 @@ export const upstreamComponentParityManifest = [
 	),
 	createEntry(
 		"rainbow-button",
+		"interactive",
+		"partial",
+		createSupport(true, true, true),
+		[...overlapNotes],
+	),
+	createEntry(
+		"ripple-button",
 		"interactive",
 		"partial",
 		createSupport(true, true, true),
