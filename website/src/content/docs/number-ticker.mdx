@@ -18,11 +18,22 @@ export default function Example() {
 }
 ```
 
+## Examples
+
+### Decimal
+
+Use `decimalPlaces` when you want a ticker to keep fixed precision.
+
+### Start Value
+
+Use `startValue` to begin from a non-zero number before animating to the target.
+
 ## Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `value` | `number` | `100` | Target value to animate toward. |
+| `startValue` | `number` | `0` | Number to render before the animation begins. |
 | `direction` | `"up" \| "down"` | `"up"` | Whether the count increases or decreases. |
 | `delay` | `number` | `0` | Delay, in seconds, before the animation starts. |
 | `decimalPlaces` | `number` | `0` | Number of fixed decimal places to render. |
