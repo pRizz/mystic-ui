@@ -80,6 +80,7 @@ const overlapNeedsAudit = [
 	"android",
 	"animated-beam",
 	"animated-shiny-text",
+	"bento-grid",
 	"border-beam",
 	"dock",
 	"dot-pattern",
@@ -98,7 +99,7 @@ const overlapNeedsAudit = [
 	"word-rotate",
 ] as const;
 
-const tailwindOnlyOverlap = ["bento-grid", "shimmer-button"] as const;
+const tailwindOnlyOverlap = ["shimmer-button"] as const;
 
 const missingByCategory = {
 	widget: [
