@@ -1,0 +1,29 @@
+---
+title: Light Rays
+description: Animated light rays which shine down from above.
+category: background
+---
+
+## Usage
+
+```tsx
+import { LightRays } from "@/components/mystic-ui/light-rays";
+
+export default function Example() {
+	return (
+		<div class="relative h-64 w-full overflow-hidden rounded-xl border">
+			<LightRays />
+		</div>
+	);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `count` | `number` | `7` | Number of animated light rays. |
+| `color` | `string` | `"rgba(160, 210, 255, 0.2)"` | Base color used for the ray gradients. |
+| `blur` | `number` | `36` | Blur radius applied to each ray. |
+| `speed` | `number` | `14` | Average duration of a full ray cycle in seconds. |
+| `length` | `string` | `"70vh"` | CSS length used for each ray height. |
