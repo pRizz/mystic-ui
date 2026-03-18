@@ -119,12 +119,7 @@ const missingByCategory = {
 		"scroll-progress",
 		"terminal",
 	] as const,
-	text: [
-		"animated-theme-toggler",
-		"highlighter",
-		"text-animate",
-		"video-text",
-	] as const,
+	text: ["animated-theme-toggler", "highlighter", "video-text"] as const,
 	background: [
 		"animated-grid-pattern",
 		"blur-fade",
@@ -219,6 +214,13 @@ export const upstreamComponentParityManifest = [
 	),
 	createEntry(
 		"spinning-text",
+		"text",
+		"partial",
+		createSupport(true, true, true),
+		[...overlapNotes],
+	),
+	createEntry(
+		"text-animate",
 		"text",
 		"partial",
 		createSupport(true, true, true),

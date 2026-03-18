@@ -8,12 +8,12 @@ The machine-readable source of truth lives in `packages/registry/src/parity.ts`.
 
 - Upstream Magic UI public components tracked: **70**
 - Current Mystic overlap by name:
-  - Tailwind: **32**
-  - Panda: **32**
-  - Docs: **32**
+  - Tailwind: **33**
+  - Panda: **33**
+  - Docs: **33**
 - Current parity status counts:
-  - Partial: **32**
-  - Missing: **35**
+  - Partial: **33**
+  - Missing: **34**
   - Exception: **3**
 - Fork-only Mystic extras tracked separately: **12**
 
