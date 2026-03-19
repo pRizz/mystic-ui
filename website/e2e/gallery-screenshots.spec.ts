@@ -8,7 +8,7 @@ async function collectGalleryEntries(
 	page: Page,
 	framework: (typeof frameworks)[number],
 ) {
-	await page.goto(`/gallery/${framework}`);
+	await page.goto(`gallery/${framework}`);
 	await expect(page.locator("[data-gallery-card]").first()).toBeVisible();
 
 	return page.locator("[data-gallery-card]").evaluateAll((cards) =>

@@ -46,12 +46,22 @@ jobs:
       - name: Install Playwright Chromium
         run: pnpm --filter @mystic-ui/website exec playwright install --with-deps chromium
 
+      - name: Smoke test GitHub Pages routing
+        env:
+          BASE_PATH: ${{ vars.PAGES_BASE_PATH }}
+          DEPLOY_TARGET: github-pages
+        run: pnpm --filter @mystic-ui/website smoke:test
+
       - name: Generate gallery screenshots
+        env:
+          BASE_PATH: ${{ vars.PAGES_BASE_PATH }}
+          DEPLOY_TARGET: github-pages
         run: pnpm --filter @mystic-ui/website gallery:screenshots
 
       - name: Build static Pages artifact
         env:
-          BASE_PATH: /${{ github.event.repository.name }}
+          BASE_PATH: ${{ vars.PAGES_BASE_PATH }}
+          DEPLOY_TARGET: github-pages
         run: pnpm --filter @mystic-ui/website build:pages
 
       - name: Upload GitHub Pages artifact

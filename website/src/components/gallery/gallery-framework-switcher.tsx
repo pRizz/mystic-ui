@@ -14,12 +14,12 @@ const frameworkOptions: {
 }[] = [
 	{
 		href: "/gallery/panda",
-		label: "Panda preview set",
+		label: "Panda gallery",
 		value: "panda",
 	},
 	{
 		href: "/gallery/tailwind",
-		label: "Tailwind preview set",
+		label: "Tailwind gallery",
 		value: "tailwind",
 	},
 ];

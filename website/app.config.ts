@@ -4,6 +4,7 @@ import { defineConfig } from "@solidjs/start/config";
 import { createHighlighter } from "shiki";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { prerenderRoutes } from "./prerender-routes";
+import { resolveDeployConfig } from "./scripts/deploy-config.mjs";
 
 /* @ts-ignore */
 import pkg from "@vinxi/plugin-mdx";
@@ -19,16 +20,8 @@ const highlighter = await createHighlighter({
 	langs: ["typescript", "tsx", "javascript", "jsx", "json", "shell"],
 });
 
-const basePath = normalizeBasePath(process.env.BASE_PATH);
+const { basePath } = resolveDeployConfig(process.env);
 const viteBasePath = basePath === "/" ? "/" : `${basePath}/`;
-
-function normalizeBasePath(maybeBasePath?: string) {
-	if (!maybeBasePath || maybeBasePath === "/") {
-		return "/";
-	}
-
-	return `/${maybeBasePath.replace(/^\/+|\/+$/g, "")}`;
-}
 
 function remarkCodeBlock() {
 	return (tree) => {

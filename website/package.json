@@ -9,6 +9,8 @@
 		"build:pages": "panda prepare && vinxi build && node ./scripts/finalize-pages.mjs",
 		"start": "vinxi start",
 		"gallery:screenshots": "playwright test e2e/gallery-screenshots.spec.ts",
+		"smoke:test": "playwright test e2e/site-smoke.spec.ts",
+		"smoke:test:pages": "PLAYWRIGHT_BASE_PATH=${PLAYWRIGHT_BASE_PATH:-/mystic-ui} playwright test e2e/site-smoke.spec.ts",
 		"version": "vinxi version",
 		"format": "biome format src",
 		"lint": "biome lint src",

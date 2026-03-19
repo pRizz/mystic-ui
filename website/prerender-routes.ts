@@ -20,6 +20,7 @@ function createRouteSet() {
 		"/docs/panda/setup",
 		"/docs/tailwind",
 		"/docs/tailwind/setup",
+		"/gallery",
 		"/gallery/panda",
 		"/gallery/tailwind",
 	]);
@@ -77,7 +78,15 @@ function getComponentDocsRoutes() {
 	});
 }
 
-function getGalleryPreviewRoutes() {
+function getDemoRoutes() {
+	return componentFrameworks.flatMap((framework) =>
+		getGalleryComponentIds(framework).map(
+			(componentId) => `/demos/${framework}/${componentId}`,
+		),
+	);
+}
+
+function getLegacyGalleryPreviewRoutes() {
 	return componentFrameworks.flatMap((framework) =>
 		getGalleryComponentIds(framework).map(
 			(componentId) => `/gallery-preview/${framework}/${componentId}`,
@@ -89,6 +98,7 @@ export const prerenderRoutes = Array.from(
 	new Set([
 		...createRouteSet(),
 		...getComponentDocsRoutes(),
-		...getGalleryPreviewRoutes(),
+		...getDemoRoutes(),
+		...getLegacyGalleryPreviewRoutes(),
 	]),
 ).sort((routeA, routeB) => routeA.localeCompare(routeB));
