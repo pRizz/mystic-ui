@@ -94,7 +94,7 @@ export const Navbar: Component = () => {
 								Docs
 							</A>
 							<A
-								href="/gallery/panda"
+								href="/gallery"
 								class={css({ color: "fg.muted", textStyle: "sm" })}
 							>
 								Gallery

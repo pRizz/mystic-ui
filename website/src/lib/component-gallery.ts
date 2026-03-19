@@ -187,7 +187,7 @@ function getDocsHref(framework: ComponentFramework, id: string) {
 }
 
 function getPreviewHref(framework: ComponentFramework, id: string) {
-	return withBasePath(`/gallery-preview/${framework}/${id}`);
+	return withBasePath(`/demos/${framework}/${id}`);
 }
 
 function getScreenshotPath(framework: ComponentFramework, id: string) {

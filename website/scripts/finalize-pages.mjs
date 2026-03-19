@@ -3,17 +3,10 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { resolveDeployConfig } from "./deploy-config.mjs";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const outputDirectory = path.join(scriptDirectory, "..", ".output", "public");
-
-function normalizeBasePath(maybeBasePath) {
-	if (!maybeBasePath || maybeBasePath === "/") {
-		return "/";
-	}
-
-	return `/${maybeBasePath.replace(/^\/+|\/+$/gu, "")}`;
-}
 
 function createNotFoundPage(basePath) {
 	const baseHref = basePath === "/" ? "/" : `${basePath}/`;
@@ -48,7 +41,7 @@ function createNotFoundPage(basePath) {
 `;
 }
 
-const basePath = normalizeBasePath(process.env.BASE_PATH);
+const { basePath } = resolveDeployConfig(process.env);
 
 await mkdir(outputDirectory, { recursive: true });
 await writeFile(

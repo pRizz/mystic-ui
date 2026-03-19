@@ -10,7 +10,8 @@ const Layout: ParentComponent = (props) => {
 	const location = useLocation();
 	const showChrome = () =>
 		!location.pathname.startsWith("/gallery-preview/") &&
-		!location.pathname.startsWith("/gallery/");
+		!location.pathname.startsWith("/gallery/") &&
+		!location.pathname.startsWith("/demos/");
 
 	return (
 		<>

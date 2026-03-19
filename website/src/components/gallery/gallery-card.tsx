@@ -84,9 +84,15 @@ export const GalleryCard: Component<GalleryCardProps> = (props) => {
 									{props.entry.description}
 								</p>
 							</div>
-							<Show when={props.entry.docsHref}>
+							<div
+								class={css({
+									display: "flex",
+									flexWrap: "wrap",
+									gap: "3",
+								})}
+							>
 								<A
-									href={props.entry.docsHref}
+									href={props.entry.previewHref}
 									class={css({
 										color: "fg.default",
 										fontSize: "sm",
@@ -94,9 +100,22 @@ export const GalleryCard: Component<GalleryCardProps> = (props) => {
 										whiteSpace: "nowrap",
 									})}
 								>
-									Docs
+									Open demo
 								</A>
-							</Show>
+								<Show when={props.entry.docsHref}>
+									<A
+										href={props.entry.docsHref}
+										class={css({
+											color: "fg.default",
+											fontSize: "sm",
+											fontWeight: "medium",
+											whiteSpace: "nowrap",
+										})}
+									>
+										Docs
+									</A>
+								</Show>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -40,6 +40,7 @@ export const GalleryPreviewPage: Component<GalleryPreviewPageProps> = (
 					entry()?.description ?? "Isolated component preview for the gallery."
 				}
 			/>
+			<Meta name="robots" content="noindex" />
 			<Show
 				when={entry()}
 				fallback={
@@ -54,7 +55,7 @@ export const GalleryPreviewPage: Component<GalleryPreviewPageProps> = (
 							isDocumented: false,
 							isExtra: false,
 							previewHref: withBasePath(
-								`/gallery-preview/${props.framework}/${props.componentId}`,
+								`/demos/${props.framework}/${props.componentId}`,
 							),
 							screenshotPath: withBasePath(
 								`/component-gallery/${props.framework}/${props.componentId}.png`,
