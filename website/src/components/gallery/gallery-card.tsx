@@ -1,3 +1,4 @@
+import { A } from "@solidjs/router";
 import { type Component, Show, createSignal } from "solid-js";
 import { css } from "styled-system/css";
 import type { GalleryEntry } from "~/lib/component-gallery";
@@ -84,7 +85,7 @@ export const GalleryCard: Component<GalleryCardProps> = (props) => {
 								</p>
 							</div>
 							<Show when={props.entry.docsHref}>
-								<a
+								<A
 									href={props.entry.docsHref}
 									class={css({
 										color: "fg.default",
@@ -94,7 +95,7 @@ export const GalleryCard: Component<GalleryCardProps> = (props) => {
 									})}
 								>
 									Docs
-								</a>
+								</A>
 							</Show>
 						</div>
 					</div>

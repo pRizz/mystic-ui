@@ -2,6 +2,7 @@ import { DotPattern } from "@mystic-ui/panda/src/ui/dot-pattern";
 import { Marquee } from "@mystic-ui/panda/src/ui/marquee";
 import { ShineBorder } from "@mystic-ui/panda/src/ui/shine-border";
 import { WordRotate } from "@mystic-ui/panda/src/ui/word-rotate";
+import { A } from "@solidjs/router";
 import { For } from "solid-js";
 import { css } from "styled-system/css";
 import {
@@ -160,9 +161,9 @@ export default function Home() {
 							<Button
 								size="2xl"
 								asChild={(parentProps) => (
-									<a href="/docs/tailwind" {...parentProps()}>
+									<A href="/docs/tailwind" {...parentProps()}>
 										Explore Components
-									</a>
+									</A>
 								)}
 							/>
 							<Button

@@ -25,6 +25,7 @@ const Layout: ParentComponent = (props) => {
 export default function App() {
 	return (
 		<Router
+			base={import.meta.env.SERVER_BASE_URL}
 			root={(props) => (
 				<MetaProvider>
 					<Title>Mystic UI</Title>

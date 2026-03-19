@@ -6,6 +6,7 @@ import {
 import { allDocs } from "content-collections";
 import type { Component } from "solid-js";
 import type { ComponentFramework } from "./docs";
+import { withBasePath } from "./site-path";
 
 export type GalleryCategory =
 	| "text"
@@ -185,6 +186,14 @@ function getDocsHref(framework: ComponentFramework, id: string) {
 		: undefined;
 }
 
+function getPreviewHref(framework: ComponentFramework, id: string) {
+	return withBasePath(`/gallery-preview/${framework}/${id}`);
+}
+
+function getScreenshotPath(framework: ComponentFramework, id: string) {
+	return withBasePath(`/component-gallery/${framework}/${id}.png`);
+}
+
 function getSupportRecord(framework: Framework) {
 	return upstreamComponentParityManifest
 		.filter((component) => component.support[framework])
@@ -258,8 +267,8 @@ export function getGalleryEntries(
 				id: entry.id,
 				isDocumented: docMetadata.has(entry.id),
 				isExtra: entry.isExtra,
-				previewHref: `/gallery-preview/${framework}/${entry.id}`,
-				screenshotPath: `/component-gallery/${framework}/${entry.id}.png`,
+				previewHref: getPreviewHref(framework, entry.id),
+				screenshotPath: getScreenshotPath(framework, entry.id),
 				supportsLivePreview: Boolean(
 					getGalleryPreviewLoader(framework, entry.id),
 				),

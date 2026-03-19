@@ -6,6 +6,7 @@
 		"prepare": "panda codegen",
 		"dev": "vinxi dev",
 		"build": "panda prepare && vinxi build",
+		"build:pages": "panda prepare && vinxi build && node ./scripts/finalize-pages.mjs",
 		"start": "vinxi start",
 		"gallery:screenshots": "playwright test e2e/gallery-screenshots.spec.ts",
 		"version": "vinxi version",

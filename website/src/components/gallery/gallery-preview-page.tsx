@@ -8,6 +8,7 @@ import {
 	getGalleryPreviewLoader,
 } from "~/lib/component-gallery";
 import type { ComponentFramework } from "~/lib/docs";
+import { withBasePath } from "~/lib/site-path";
 
 interface GalleryPreviewPageProps {
 	componentId: string;
@@ -52,8 +53,12 @@ export const GalleryPreviewPage: Component<GalleryPreviewPageProps> = (
 							id: props.componentId,
 							isDocumented: false,
 							isExtra: false,
-							previewHref: `/gallery-preview/${props.framework}/${props.componentId}`,
-							screenshotPath: `/component-gallery/${props.framework}/${props.componentId}.png`,
+							previewHref: withBasePath(
+								`/gallery-preview/${props.framework}/${props.componentId}`,
+							),
+							screenshotPath: withBasePath(
+								`/component-gallery/${props.framework}/${props.componentId}.png`,
+							),
 							supportsLivePreview: false,
 							title: "Preview unavailable",
 						}}

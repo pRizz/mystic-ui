@@ -3,6 +3,7 @@ import contentCollections from "@content-collections/solid-start";
 import { defineConfig } from "@solidjs/start/config";
 import { createHighlighter } from "shiki";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { prerenderRoutes } from "./prerender-routes";
 
 /* @ts-ignore */
 import pkg from "@vinxi/plugin-mdx";
@@ -17,6 +18,17 @@ const highlighter = await createHighlighter({
 	themes: ["vesper"],
 	langs: ["typescript", "tsx", "javascript", "jsx", "json", "shell"],
 });
+
+const basePath = normalizeBasePath(process.env.BASE_PATH);
+const viteBasePath = basePath === "/" ? "/" : `${basePath}/`;
+
+function normalizeBasePath(maybeBasePath?: string) {
+	if (!maybeBasePath || maybeBasePath === "/") {
+		return "/";
+	}
+
+	return `/${maybeBasePath.replace(/^\/+|\/+$/g, "")}`;
+}
 
 function remarkCodeBlock() {
 	return (tree) => {
@@ -60,6 +72,7 @@ function remarkCodeBlock() {
 export default defineConfig({
 	extensions: ["mdx"],
 	vite: {
+		base: viteBasePath,
 		resolve: {
 			alias: {
 				clsx: fileURLToPath(
@@ -91,8 +104,12 @@ export default defineConfig({
 		],
 	},
 	server: {
+		baseURL: basePath,
+		static: true,
 		prerender: {
 			crawlLinks: true,
+			failOnError: true,
+			routes: prerenderRoutes,
 		},
 		// see https://github.com/solidjs/solid-start/issues/1614
 		esbuild: { options: { target: "esnext" } },
