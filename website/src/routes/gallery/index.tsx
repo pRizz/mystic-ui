@@ -64,8 +64,8 @@ export default function GalleryIndexPage() {
 						</h1>
 						<p class={css({ color: "fg.muted", fontSize: "lg" })}>
 							Each framework page pairs committed screenshots with embedded live
-							demos so GitHub Pages stays fast while individual components remain
-							easy to inspect.
+							demos so GitHub Pages stays fast while individual components
+							remain easy to inspect.
 						</p>
 					</div>
 
