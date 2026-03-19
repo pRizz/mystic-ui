@@ -20,7 +20,8 @@ test("loads the marketing site sections in both hosting modes", async ({
 	await page.goto("gallery/panda");
 	const firstGalleryCard = page.locator("[data-gallery-card]").first();
 	await expect(firstGalleryCard).toBeVisible();
-	const maybeDemoHref = await firstGalleryCard.getAttribute("data-preview-href");
+	const maybeDemoHref =
+		await firstGalleryCard.getAttribute("data-preview-href");
 	expect(maybeDemoHref).toBeTruthy();
 
 	await page.goto(maybeDemoHref ?? "demos/panda/accordion");
@@ -29,7 +30,7 @@ test("loads the marketing site sections in both hosting modes", async ({
 	await page.goto("docs/panda");
 	await expect(
 		page.getByRole("heading", {
-			name: "Introduction",
+			name: "Mystic UI",
 		}),
 	).toBeVisible();
 });

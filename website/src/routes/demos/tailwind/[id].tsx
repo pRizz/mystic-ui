@@ -13,5 +13,7 @@ export default function TailwindDemoRoute(props: RouteSectionProps) {
 		return maybeComponentId;
 	};
 
-	return <GalleryPreviewPage framework="tailwind" componentId={componentId()} />;
+	return (
+		<GalleryPreviewPage framework="tailwind" componentId={componentId()} />
+	);
 }
