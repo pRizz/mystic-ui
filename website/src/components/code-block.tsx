@@ -1,11 +1,10 @@
 import { useClipboard } from "@ark-ui/solid";
-import { createAsync } from "@solidjs/router";
 import type { BundledLanguage } from "shiki";
 import { TbOutlineCheck, TbOutlineCopy } from "solid-icons/tb";
-import type { Component } from "solid-js";
+import { type Component, createMemo } from "solid-js";
 import { css, cx } from "styled-system/css";
 import { Box } from "styled-system/jsx";
-import { highlight } from "~/lib/shiki";
+import { renderCodeHtml } from "~/lib/code-html";
 import { Clipboard } from "./ui/clipboard";
 import { IconButton } from "./ui/icon-button";
 
@@ -19,6 +18,9 @@ export const RawCodeBlock: Component<CodeBlockProps & { html?: string }> = (
 	props,
 ) => {
 	const clipboard = useClipboard({ value: props.code });
+	const html = createMemo(
+		() => props.html ?? renderCodeHtml(props.code, props.lang),
+	);
 
 	return (
 		<Clipboard.RootProvider
@@ -40,7 +42,7 @@ export const RawCodeBlock: Component<CodeBlockProps & { html?: string }> = (
 						overflowY: "auto",
 					},
 				})}
-				innerHTML={props.html}
+				innerHTML={html()}
 			/>
 			<Clipboard.Control position="absolute" right="2" top="2">
 				<Clipboard.Trigger
@@ -58,6 +60,5 @@ export const RawCodeBlock: Component<CodeBlockProps & { html?: string }> = (
 };
 
 export const CodeBlock: Component<CodeBlockProps> = (props) => {
-	const html = createAsync(() => highlight(props.code, props.lang));
-	return <RawCodeBlock html={html()} {...props} />;
+	return <RawCodeBlock {...props} />;
 };
