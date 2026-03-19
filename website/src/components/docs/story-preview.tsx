@@ -1,6 +1,12 @@
-import { createAsync } from "@solidjs/router";
 import { TbOutlineReload } from "solid-icons/tb";
-import { type Component, Show, Suspense, createSignal, lazy } from "solid-js";
+import {
+	type Component,
+	Show,
+	Suspense,
+	createMemo,
+	createSignal,
+	lazy,
+} from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { Center } from "styled-system/jsx";
 import { type ComponentFramework, getStoryComponent } from "~/lib/docs";
@@ -17,15 +23,12 @@ interface StoryPreviewProps {
 }
 
 export const StoryPreview: Component<StoryPreviewProps> = (props) => {
-	const highlightedStorySource = createAsync(
-		() => getStorySource(props.framework, props.component, props.name),
-		{
-			name: "story-source",
-			initialValue: {
+	const highlightedStorySource = createMemo(
+		() =>
+			getStorySource(props.framework, props.component, props.name) ?? {
 				source: "",
 				html: "",
 			},
-		},
 	);
 	const StoryComponent = () => {
 		const loadStory = getStoryComponent(

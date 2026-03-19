@@ -1,3 +1,4 @@
+import { A } from "@solidjs/router";
 import { type Component, For } from "solid-js";
 import { css, cx } from "styled-system/css";
 import type { ComponentFramework } from "~/lib/docs";
@@ -30,7 +31,7 @@ export const GalleryFrameworkSwitcher: Component<
 		<div class={css({ display: "flex", flexWrap: "wrap", gap: "2" })}>
 			<For each={frameworkOptions}>
 				{(option) => (
-					<a
+					<A
 						href={option.href}
 						aria-current={props.framework === option.value ? "page" : undefined}
 						class={cx(
@@ -60,7 +61,7 @@ export const GalleryFrameworkSwitcher: Component<
 						)}
 					>
 						{option.label}
-					</a>
+					</A>
 				)}
 			</For>
 		</div>

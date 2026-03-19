@@ -26,7 +26,7 @@ export const route = {
 			return;
 		}
 
-		await Promise.all([getStorySource(framework, componentId, "default")]);
+		getStorySource(framework, componentId, "default");
 	},
 } satisfies RouteDefinition;
 

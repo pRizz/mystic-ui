@@ -1,4 +1,4 @@
-import { useLocation } from "@solidjs/router";
+import { A, useLocation } from "@solidjs/router";
 import { useStore } from "@tanstack/solid-store";
 import type { Component } from "solid-js";
 import { css } from "styled-system/css";
@@ -82,23 +82,23 @@ export const Navbar: Component = () => {
 				<HStack justify="space-between">
 					<HStack>
 						<DocsSideNavToggle />
-						<a href="/" class={css({ textStyle: "lg", fontWeight: "bold" })}>
+						<A href="/" class={css({ textStyle: "lg", fontWeight: "bold" })}>
 							Mystic UI
-						</a>
+						</A>
 						<Badge>alpha</Badge>
 						<HStack gap="3" hideBelow="md" ml="4">
-							<a
+							<A
 								href="/docs/panda"
 								class={css({ color: "fg.muted", textStyle: "sm" })}
 							>
 								Docs
-							</a>
-							<a
+							</A>
+							<A
 								href="/gallery/panda"
 								class={css({ color: "fg.muted", textStyle: "sm" })}
 							>
 								Gallery
-							</a>
+							</A>
 						</HStack>
 					</HStack>
 					<HStack gap="1">
