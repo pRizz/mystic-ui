@@ -1,4 +1,4 @@
-export * from "../../../node_modules/solid-icons/tb/index.js";
+export * from "solid-icons/tb/index.js";
 
 import {
 	TbFillStar,
@@ -19,7 +19,7 @@ import {
 	TbOutlineReload,
 	TbOutlineSquare,
 	TbOutlineSun,
-} from "../../../node_modules/solid-icons/tb/index.js";
+} from "solid-icons/tb/index.js";
 
 type IconProps = Parameters<typeof TbOutlineSquare>[0];
 

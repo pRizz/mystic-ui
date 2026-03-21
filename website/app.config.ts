@@ -67,23 +67,38 @@ export default defineConfig({
 	vite: {
 		base: viteBasePath,
 		resolve: {
-			alias: {
-				clsx: fileURLToPath(
-					new URL("./src/lib/shims/clsx.ts", import.meta.url),
-				),
-				"rough-notation": fileURLToPath(
-					new URL("./src/lib/shims/rough-notation.ts", import.meta.url),
-				),
-				"rough-notation/lib/model": fileURLToPath(
-					new URL("./src/lib/shims/rough-notation-model.ts", import.meta.url),
-				),
-				"solid-icons/tb": fileURLToPath(
-					new URL("./src/lib/shims/solid-icons-tb.ts", import.meta.url),
-				),
-				"tailwind-merge": fileURLToPath(
-					new URL("./src/lib/shims/tailwind-merge.ts", import.meta.url),
-				),
-			},
+			alias: [
+				{
+					find: "clsx",
+					replacement: fileURLToPath(
+						new URL("./src/lib/shims/clsx.ts", import.meta.url),
+					),
+				},
+				{
+					find: "rough-notation",
+					replacement: fileURLToPath(
+						new URL("./src/lib/shims/rough-notation.ts", import.meta.url),
+					),
+				},
+				{
+					find: "rough-notation/lib/model",
+					replacement: fileURLToPath(
+						new URL("./src/lib/shims/rough-notation-model.ts", import.meta.url),
+					),
+				},
+				{
+					find: /^solid-icons\/tb$/u,
+					replacement: fileURLToPath(
+						new URL("./src/lib/shims/solid-icons-tb.ts", import.meta.url),
+					),
+				},
+				{
+					find: "tailwind-merge",
+					replacement: fileURLToPath(
+						new URL("./src/lib/shims/tailwind-merge.ts", import.meta.url),
+					),
+				},
+			],
 		},
 		plugins: [
 			tsconfigPaths(),
