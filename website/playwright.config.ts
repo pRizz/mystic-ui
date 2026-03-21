@@ -6,7 +6,7 @@ const { basePath } = resolveDeployConfig({
 	BASE_PATH: process.env.PLAYWRIGHT_BASE_PATH ?? process.env.BASE_PATH,
 });
 const baseURL = `http://127.0.0.1:3000${basePath === "/" ? "/" : `${basePath}/`}`;
-const webServerCommand = `BASE_PATH=${JSON.stringify(basePath)} pnpm dev --host 127.0.0.1 --port 3000`;
+const webServerCommand = `BASE_PATH=${JSON.stringify(basePath)} bun run dev --host 127.0.0.1 --port 3000`;
 
 export default defineConfig({
 	reporter: "list",
