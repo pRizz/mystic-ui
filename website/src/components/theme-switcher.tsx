@@ -1,6 +1,5 @@
-import { makePersisted } from "@solid-primitives/storage";
-import { createEffect, createSignal } from "solid-js";
 import { css } from "styled-system/css";
+import { useTheme } from "./theme-provider";
 
 const themeToggleClass = css({
 	alignItems: "center",
@@ -20,26 +19,16 @@ const themeToggleClass = css({
 });
 
 export const ThemeSwitcher = () => {
-	const [darkMode, setDarkMode] = makePersisted(createSignal(false), {
-		name: "darkMode",
-	});
-
-	createEffect(() => {
-		if (darkMode()) {
-			document.documentElement.classList.add("dark");
-		} else {
-			document.documentElement.classList.remove("dark");
-		}
-	});
+	const theme = useTheme();
 
 	return (
 		<button
 			type="button"
-			onClick={() => setDarkMode((theme) => !theme)}
+			onClick={theme.toggleMode}
 			aria-label="Toggle dark mode"
 			class={themeToggleClass}
 		>
-			{darkMode() ? "Light" : "Dark"}
+			{theme.isDark() ? "Light" : "Dark"}
 		</button>
 	);
 };

@@ -6,6 +6,7 @@ import {
 	type GalleryEntry,
 	getGalleryEntry,
 	getGalleryPreviewLoader,
+	getGalleryScreenshotPaths,
 } from "~/lib/component-gallery";
 import type { ComponentFramework } from "~/lib/docs";
 import { withBasePath } from "~/lib/site-path";
@@ -57,8 +58,9 @@ export const GalleryPreviewPage: Component<GalleryPreviewPageProps> = (
 							previewHref: withBasePath(
 								`/demos/${props.framework}/${props.componentId}`,
 							),
-							screenshotPath: withBasePath(
-								`/component-gallery/${props.framework}/${props.componentId}.png`,
+							screenshotPaths: getGalleryScreenshotPaths(
+								props.framework,
+								props.componentId,
 							),
 							supportsLivePreview: false,
 							title: "Preview unavailable",

@@ -1,6 +1,13 @@
 import { A } from "@solidjs/router";
-import { type Component, Show, createSignal } from "solid-js";
+import {
+	type Component,
+	Show,
+	createEffect,
+	createMemo,
+	createSignal,
+} from "solid-js";
 import { css } from "styled-system/css";
+import { useTheme } from "~/components/theme-provider";
 import type { GalleryEntry } from "~/lib/component-gallery";
 import { LivePreviewEmbed } from "./live-preview-embed";
 
@@ -20,7 +27,16 @@ const badgeClass = css({
 });
 
 export const GalleryCard: Component<GalleryCardProps> = (props) => {
+	const theme = useTheme();
 	const [screenshotLoadFailed, setScreenshotLoadFailed] = createSignal(false);
+	const screenshotPath = createMemo(
+		() => props.entry.screenshotPaths[theme.mode()],
+	);
+
+	createEffect(() => {
+		screenshotPath();
+		setScreenshotLoadFailed(false);
+	});
 
 	return (
 		<article
@@ -153,7 +169,7 @@ export const GalleryCard: Component<GalleryCardProps> = (props) => {
 								}
 							>
 								<img
-									src={props.entry.screenshotPath}
+									src={screenshotPath()}
 									alt={`${props.entry.title} screenshot`}
 									loading="lazy"
 									onError={() => setScreenshotLoadFailed(true)}

@@ -3,6 +3,9 @@ import path from "node:path";
 import { type Page, expect, test } from "@playwright/test";
 
 const frameworks = ["panda", "tailwind"] as const;
+const renderingModes = ["light", "dark"] as const;
+
+type RenderingMode = (typeof renderingModes)[number];
 
 async function collectGalleryEntries(
 	page: Page,
@@ -40,6 +43,29 @@ async function waitForPreviewReady(page: Page) {
 	});
 }
 
+async function configureRenderingMode(
+	page: Page,
+	renderingMode: RenderingMode,
+) {
+	await page.emulateMedia({ colorScheme: renderingMode });
+	await page.addInitScript((mode) => {
+		const isDark = mode === "dark";
+
+		try {
+			window.localStorage.setItem("theme", mode);
+			window.localStorage.setItem("darkMode", JSON.stringify(isDark));
+		} catch {}
+
+		document.documentElement.classList.toggle("dark", isDark);
+		document.documentElement.dataset.theme = mode;
+		document.documentElement.style.colorScheme = mode;
+	}, renderingMode);
+}
+
+function getScreenshotFileName(id: string, renderingMode: RenderingMode) {
+	return `${id}.${renderingMode}.png`;
+}
+
 test.beforeEach(async ({ context }) => {
 	await context.addInitScript(() => {
 		let seed = 1337;
@@ -62,64 +88,75 @@ test.beforeEach(async ({ context }) => {
 });
 
 for (const framework of frameworks) {
-	test(`generates ${framework} gallery screenshots`, async ({ page }) => {
-		const entries = await collectGalleryEntries(page, framework);
-		expect(entries.length).toBeGreaterThan(0);
-		const failedEntries: string[] = [];
+	for (const renderingMode of renderingModes) {
+		test(`generates ${framework} ${renderingMode} gallery screenshots`, async ({
+			page,
+		}) => {
+			await configureRenderingMode(page, renderingMode);
 
-		const outputDirectory = path.join(
-			process.cwd(),
-			"public",
-			"component-gallery",
-			framework,
-		);
-		await mkdir(outputDirectory, { recursive: true });
+			const entries = await collectGalleryEntries(page, framework);
+			expect(entries.length).toBeGreaterThan(0);
+			const failedEntries: string[] = [];
 
-		for (const entry of entries) {
-			try {
-				await page.goto(entry.previewHref, {
-					waitUntil: "domcontentloaded",
+			const outputDirectory = path.join(
+				process.cwd(),
+				"public",
+				"component-gallery",
+				framework,
+			);
+			await mkdir(outputDirectory, { recursive: true });
+
+			for (const entry of entries) {
+				try {
+					await page.goto(entry.previewHref, {
+						waitUntil: "domcontentloaded",
+					});
+					await waitForPreviewReady(page);
+				} catch (error) {
+					failedEntries.push(
+						`${entry.id}: ${
+							error instanceof Error ? error.message : String(error)
+						}`,
+					);
+					continue;
+				}
+
+				const captureProfile = await page
+					.locator("[data-gallery-preview-page]")
+					.evaluate((element) => ({
+						delayMs: Number(
+							element.getAttribute("data-capture-delay-ms") ?? "0",
+						),
+						scrollY: Number(element.getAttribute("data-capture-scroll-y") ?? "0"),
+					}));
+
+				if (captureProfile.scrollY > 0) {
+					await page.evaluate(
+						(scrollY) => window.scrollTo(0, scrollY),
+						captureProfile.scrollY,
+					);
+					await page.waitForTimeout(250);
+				}
+
+				if (captureProfile.delayMs > 0) {
+					await page.waitForTimeout(captureProfile.delayMs);
+				}
+
+				await page.screenshot({
+					path: path.join(
+						outputDirectory,
+						getScreenshotFileName(entry.id, renderingMode),
+					),
+					scale: "css",
 				});
-				await waitForPreviewReady(page);
-			} catch (error) {
-				failedEntries.push(
-					`${entry.id}: ${
-						error instanceof Error ? error.message : String(error)
-					}`,
-				);
-				continue;
 			}
 
-			const captureProfile = await page
-				.locator("[data-gallery-preview-page]")
-				.evaluate((element) => ({
-					delayMs: Number(element.getAttribute("data-capture-delay-ms") ?? "0"),
-					scrollY: Number(element.getAttribute("data-capture-scroll-y") ?? "0"),
-				}));
-
-			if (captureProfile.scrollY > 0) {
-				await page.evaluate(
-					(scrollY) => window.scrollTo(0, scrollY),
-					captureProfile.scrollY,
-				);
-				await page.waitForTimeout(250);
-			}
-
-			if (captureProfile.delayMs > 0) {
-				await page.waitForTimeout(captureProfile.delayMs);
-			}
-
-			await page.screenshot({
-				path: path.join(outputDirectory, `${entry.id}.png`),
-				scale: "css",
-			});
-		}
-
-		expect(
-			failedEntries,
-			failedEntries.length
-				? `Failed previews:\n${failedEntries.join("\n")}`
-				: "All previews rendered successfully.",
-		).toEqual([]);
-	});
+			expect(
+				failedEntries,
+				failedEntries.length
+					? `Failed previews:\n${failedEntries.join("\n")}`
+					: "All previews rendered successfully.",
+			).toEqual([]);
+		});
+	}
 }
