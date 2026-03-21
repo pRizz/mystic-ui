@@ -1,6 +1,7 @@
 // @refresh reload
 import { StartServer, createHandler } from "@solidjs/start/server";
 import { getBasePath, withBasePath } from "~/lib/site-path";
+import { createThemeBootstrapScript, defaultThemeMode } from "~/lib/theme";
 
 function createPagesRedirectScript(basePath: string) {
 	const normalizedBasePath = basePath === "/" ? "" : basePath;
@@ -35,10 +36,16 @@ function createPagesRedirectScript(basePath: string) {
 export default createHandler(() => (
 	<StartServer
 		document={({ assets, children, scripts }) => (
-			<html lang="en">
+			<html
+				lang="en"
+				class={defaultThemeMode === "dark" ? "dark" : undefined}
+				data-theme={defaultThemeMode}
+				style={{ "color-scheme": defaultThemeMode }}
+			>
 				<head>
 					<meta charset="utf-8" />
 					<meta name="viewport" content="width=device-width, initial-scale=1" />
+					<script>{createThemeBootstrapScript()}</script>
 					<link rel="icon" href={withBasePath("/favicon.ico")} />
 					<script>{createPagesRedirectScript(getBasePath())}</script>
 					{assets}

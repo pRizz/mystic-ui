@@ -1,6 +1,7 @@
 import type { ParentComponent } from "solid-js";
-import { Show } from "solid-js";
+import { Show, createMemo } from "solid-js";
 import { css } from "styled-system/css";
+import { useTheme } from "~/components/theme-provider";
 import type { GalleryEntry } from "~/lib/component-gallery";
 
 interface PreviewFrameProps {
@@ -8,6 +9,11 @@ interface PreviewFrameProps {
 }
 
 export const PreviewFrame: ParentComponent<PreviewFrameProps> = (props) => {
+	const theme = useTheme();
+	const background = createMemo(
+		() => props.entry.capture.background?.[theme.mode()],
+	);
+
 	return (
 		<div
 			data-gallery-preview-page=""
@@ -19,7 +25,7 @@ export const PreviewFrame: ParentComponent<PreviewFrameProps> = (props) => {
 			data-capture-viewport-width={props.entry.capture.viewportWidth ?? 1280}
 			minHeight="screen"
 			style={{
-				background: props.entry.capture.background,
+				background: background(),
 			}}
 		>
 			<div

@@ -7,6 +7,7 @@ import { allDocs } from "content-collections";
 import type { Component } from "solid-js";
 import type { ComponentFramework } from "./docs";
 import { withBasePath } from "./site-path";
+import type { ThemeMode } from "./theme";
 
 export type GalleryCategory =
 	| "text"
@@ -15,9 +16,11 @@ export type GalleryCategory =
 	| "device-mock"
 	| "effect";
 
+export type GalleryThemedValue<T> = Record<ThemeMode, T>;
+
 export interface GalleryCaptureProfile {
 	align?: "center" | "start";
-	background?: string;
+	background?: GalleryThemedValue<string>;
 	bottomSpacerHeight?: number;
 	delayMs?: number;
 	scrollY?: number;
@@ -35,7 +38,7 @@ export interface GalleryEntry {
 	isDocumented: boolean;
 	isExtra: boolean;
 	previewHref: string;
-	screenshotPath: string;
+	screenshotPaths: GalleryThemedValue<string>;
 	supportsLivePreview: boolean;
 	title: string;
 }
@@ -49,6 +52,16 @@ interface GalleryDocMetadata {
 type GalleryPreviewModule = {
 	default: Component;
 };
+
+function createThemeModeValue<T>(
+	lightValue: T,
+	darkValue: T = lightValue,
+): GalleryThemedValue<T> {
+	return {
+		dark: darkValue,
+		light: lightValue,
+	};
+}
 
 const docMetadata = new Map<string, GalleryDocMetadata>(
 	allDocs.map((doc) => [
@@ -88,13 +101,19 @@ const undocumentedComponentMetadata = {
 
 const captureProfileOverrides = {
 	"animated-list": { delayMs: 2600 },
-	"animated-theme-toggler": { background: "#111111" },
+	"animated-theme-toggler": {
+		background: createThemeModeValue("#f8fafc", "#111111"),
+	},
 	"background-lines": {
 		align: "start",
-		background:
+		background: createThemeModeValue(
+			"radial-gradient(circle at top, rgba(59, 130, 246, 0.14), transparent 52%), #f8fafc",
 			"radial-gradient(circle at top, rgba(125, 211, 252, 0.18), transparent 52%), #050816",
+		),
 	},
-	blur: { background: "#050816" },
+	blur: {
+		background: createThemeModeValue("#f8fafc", "#050816"),
+	},
 	"blur-fade": { delayMs: 500 },
 	"hyper-text": { delayMs: 1400 },
 	"morphing-text": { delayMs: 1600 },
@@ -102,8 +121,10 @@ const captureProfileOverrides = {
 	"sparkles-text": { delayMs: 800 },
 	"text-reveal": {
 		align: "start",
-		background:
+		background: createThemeModeValue(
+			"linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(226, 232, 240, 1) 100%)",
 			"linear-gradient(180deg, rgba(15, 23, 42, 1) 0%, rgba(2, 6, 23, 1) 100%)",
+		),
 		bottomSpacerHeight: 1400,
 		scrollY: 1200,
 	},
@@ -164,7 +185,10 @@ function createTitleFromId(id: string) {
 function getDefaultCaptureProfile(id: string): GalleryCaptureProfile {
 	return {
 		align: "center",
-		background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
+		background: createThemeModeValue(
+			"linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
+			"linear-gradient(180deg, #020617 0%, #0f172a 100%)",
+		),
 		delayMs: 400,
 		viewportHeight: 900,
 		viewportWidth: 1280,
@@ -190,8 +214,22 @@ function getPreviewHref(framework: ComponentFramework, id: string) {
 	return withBasePath(`/demos/${framework}/${id}`);
 }
 
-function getScreenshotPath(framework: ComponentFramework, id: string) {
-	return withBasePath(`/component-gallery/${framework}/${id}.png`);
+export function getGalleryScreenshotPath(
+	framework: ComponentFramework,
+	id: string,
+	mode: ThemeMode,
+) {
+	return withBasePath(`/component-gallery/${framework}/${id}.${mode}.png`);
+}
+
+export function getGalleryScreenshotPaths(
+	framework: ComponentFramework,
+	id: string,
+): GalleryThemedValue<string> {
+	return {
+		dark: getGalleryScreenshotPath(framework, id, "dark"),
+		light: getGalleryScreenshotPath(framework, id, "light"),
+	};
 }
 
 function getSupportRecord(framework: Framework) {
@@ -268,7 +306,7 @@ export function getGalleryEntries(
 				isDocumented: docMetadata.has(entry.id),
 				isExtra: entry.isExtra,
 				previewHref: getPreviewHref(framework, entry.id),
-				screenshotPath: getScreenshotPath(framework, entry.id),
+				screenshotPaths: getGalleryScreenshotPaths(framework, entry.id),
 				supportsLivePreview: Boolean(
 					getGalleryPreviewLoader(framework, entry.id),
 				),

@@ -5,6 +5,7 @@ import { type ParentComponent, Show, Suspense } from "solid-js";
 import "@fontsource-variable/rubik";
 import "./app.css";
 import { Navbar } from "./components/navbar";
+import { ThemeProvider } from "./components/theme-provider";
 
 const Layout: ParentComponent = (props) => {
 	const location = useLocation();
@@ -30,8 +31,9 @@ export default function App() {
 			root={(props) => (
 				<MetaProvider>
 					<Title>Mystic UI</Title>
-
-					<Layout>{props.children}</Layout>
+					<ThemeProvider>
+						<Layout>{props.children}</Layout>
+					</ThemeProvider>
 				</MetaProvider>
 			)}
 		>
