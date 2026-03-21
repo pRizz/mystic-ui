@@ -1,3 +1,4 @@
+import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import contentCollections from "@content-collections/solid-start";
 import { defineConfig } from "@solidjs/start/config";
@@ -15,6 +16,7 @@ import {
 	visit as remarkVisit,
 } from "unist-util-visit";
 
+const moduleRequire = createRequire(import.meta.url);
 const highlighter = await createHighlighter({
 	themes: ["vesper"],
 	langs: ["typescript", "tsx", "javascript", "jsx", "json", "shell"],
@@ -91,6 +93,10 @@ export default defineConfig({
 					replacement: fileURLToPath(
 						new URL("./src/lib/shims/solid-icons-tb.ts", import.meta.url),
 					),
+				},
+				{
+					find: "solid-icons-tb-source",
+					replacement: moduleRequire.resolve("solid-icons/tb"),
 				},
 				{
 					find: "tailwind-merge",
