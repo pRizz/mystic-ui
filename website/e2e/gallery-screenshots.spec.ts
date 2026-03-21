@@ -127,7 +127,9 @@ for (const framework of frameworks) {
 						delayMs: Number(
 							element.getAttribute("data-capture-delay-ms") ?? "0",
 						),
-						scrollY: Number(element.getAttribute("data-capture-scroll-y") ?? "0"),
+						scrollY: Number(
+							element.getAttribute("data-capture-scroll-y") ?? "0",
+						),
 					}));
 
 				if (captureProfile.scrollY > 0) {

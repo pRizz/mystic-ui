@@ -1,10 +1,7 @@
 // @refresh reload
 import { StartServer, createHandler } from "@solidjs/start/server";
-import {
-	createThemeBootstrapScript,
-	defaultThemeMode,
-} from "~/lib/theme";
 import { getBasePath, withBasePath } from "~/lib/site-path";
+import { createThemeBootstrapScript, defaultThemeMode } from "~/lib/theme";
 
 function createPagesRedirectScript(basePath: string) {
 	const normalizedBasePath = basePath === "/" ? "" : basePath;

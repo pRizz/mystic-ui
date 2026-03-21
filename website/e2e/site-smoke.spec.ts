@@ -3,9 +3,7 @@ import { type Page, expect, test } from "@playwright/test";
 async function expectDarkMode(page: Page) {
 	await expect
 		.poll(() =>
-			page.evaluate(() =>
-				document.documentElement.classList.contains("dark"),
-			),
+			page.evaluate(() => document.documentElement.classList.contains("dark")),
 		)
 		.toBe(true);
 }
@@ -64,9 +62,7 @@ test("uses light screenshot assets when a light theme is persisted", async ({
 	await page.goto("gallery/panda");
 	await expect
 		.poll(() =>
-			page.evaluate(() =>
-				document.documentElement.classList.contains("dark"),
-			),
+			page.evaluate(() => document.documentElement.classList.contains("dark")),
 		)
 		.toBe(false);
 

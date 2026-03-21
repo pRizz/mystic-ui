@@ -45,7 +45,9 @@ export function parseStoredThemeMode(
 	return parseDarkModeValue(maybeDarkModeValue);
 }
 
-export function getStoredThemeMode(storage: Pick<Storage, "getItem">): ThemeMode {
+export function getStoredThemeMode(
+	storage: Pick<Storage, "getItem">,
+): ThemeMode {
 	return (
 		parseStoredThemeMode(
 			storage.getItem(themeStorageKeys.theme),
@@ -58,6 +60,24 @@ export function getThemeModeFromDocument(
 	root: Pick<HTMLElement, "classList">,
 ): ThemeMode {
 	return root.classList.contains("dark") ? "dark" : "light";
+}
+
+function applyThemedScreenshotSources(
+	mode: ThemeMode,
+	rootDocument: Document = document,
+) {
+	const sourceAttribute = mode === "dark" ? "data-dark-src" : "data-light-src";
+
+	for (const image of rootDocument.querySelectorAll<HTMLImageElement>(
+		"img[data-themed-screenshot]",
+	)) {
+		const nextSource = image.getAttribute(sourceAttribute);
+		if (!nextSource || image.getAttribute("src") === nextSource) {
+			continue;
+		}
+
+		image.setAttribute("src", nextSource);
+	}
 }
 
 export function getInitialThemeMode(): ThemeMode {
@@ -75,6 +95,7 @@ export function applyThemeMode(
 	root.classList.toggle("dark", mode === "dark");
 	root.dataset.theme = mode;
 	root.style.colorScheme = mode;
+	applyThemedScreenshotSources(mode, root.ownerDocument ?? document);
 }
 
 export function persistThemeMode(
@@ -93,11 +114,24 @@ export function createThemeBootstrapScript() {
 	return `
 		(() => {
 			const root = document.documentElement;
+			const applyThemedScreenshots = (mode) => {
+				const sourceAttribute = mode === "dark" ? "data-dark-src" : "data-light-src";
+
+				for (const image of document.querySelectorAll("img[data-themed-screenshot]")) {
+					const nextSource = image.getAttribute(sourceAttribute);
+					if (!nextSource || image.getAttribute("src") === nextSource) {
+						continue;
+					}
+
+					image.setAttribute("src", nextSource);
+				}
+			};
 			const applyTheme = (mode) => {
 				const isDark = mode === "dark";
 				root.classList.toggle("dark", isDark);
 				root.dataset.theme = mode;
 				root.style.colorScheme = mode;
+				applyThemedScreenshots(mode);
 			};
 
 			try {
@@ -122,6 +156,14 @@ export function createThemeBootstrapScript() {
 			} catch {
 				applyTheme(${defaultMode});
 			}
+
+			document.addEventListener(
+				"DOMContentLoaded",
+				() => {
+					applyTheme(root.classList.contains("dark") ? "dark" : "light");
+				},
+				{ once: true },
+			);
 		})();
 	`;
 }

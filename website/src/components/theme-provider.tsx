@@ -10,12 +10,12 @@ import {
 	useContext,
 } from "solid-js";
 import {
+	type ThemeMode,
 	applyThemeMode,
 	getInitialThemeMode,
 	getStoredThemeMode,
 	getThemeModeFromDocument,
 	persistThemeMode,
-	type ThemeMode,
 	themeStorageKeys,
 } from "~/lib/theme";
 

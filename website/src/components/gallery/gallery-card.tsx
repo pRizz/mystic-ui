@@ -169,6 +169,9 @@ export const GalleryCard: Component<GalleryCardProps> = (props) => {
 								}
 							>
 								<img
+									data-themed-screenshot=""
+									data-dark-src={props.entry.screenshotPaths.dark}
+									data-light-src={props.entry.screenshotPaths.light}
 									src={screenshotPath()}
 									alt={`${props.entry.title} screenshot`}
 									loading="lazy"
