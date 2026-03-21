@@ -29,13 +29,13 @@ The website resolves its public base path in this order:
 Build for a standalone site at the root path:
 
 ```bash
-BASE_PATH=/ pnpm --filter @mystic-ui/website build
+BASE_PATH=/ bun run --filter @mystic-ui/website build
 ```
 
 Build for GitHub Pages with automatic repo-subpath detection:
 
 ```bash
-DEPLOY_TARGET=github-pages pnpm --filter @mystic-ui/website build:pages
+DEPLOY_TARGET=github-pages bun run --filter @mystic-ui/website build:pages
 ```
 
 The GitHub Actions Pages workflow also accepts an optional repository variable
@@ -45,17 +45,17 @@ another subpath when the site should live below the domain root.
 Build for a custom subpath:
 
 ```bash
-BASE_PATH=/marketing pnpm --filter @mystic-ui/website build:pages
+BASE_PATH=/marketing bun run --filter @mystic-ui/website build:pages
 ```
 
 Run the smoke test against the default root deployment:
 
 ```bash
-pnpm --filter @mystic-ui/website smoke:test
+bun run --filter @mystic-ui/website smoke:test
 ```
 
 Run the smoke test against a repo-subpath deployment:
 
 ```bash
-PLAYWRIGHT_BASE_PATH=/mystic-ui pnpm --filter @mystic-ui/website smoke:test
+PLAYWRIGHT_BASE_PATH=/mystic-ui bun run --filter @mystic-ui/website smoke:test
 ```
