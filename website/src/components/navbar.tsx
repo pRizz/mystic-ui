@@ -7,6 +7,8 @@ import { store } from "~/lib/store";
 import { ThemeSwitcher } from "./theme-switcher";
 import { Badge } from "./ui/badge";
 
+const forkRepositoryUrl = "https://github.com/pRizz/mystic-ui";
+
 const navbarIconButtonClass = css({
 	alignItems: "center",
 	borderRadius: "l2",
@@ -103,7 +105,7 @@ export const Navbar: Component = () => {
 					</HStack>
 					<HStack gap="1">
 						<a
-							href="https://github.com/TheComputerM/mystic-ui"
+							href={forkRepositoryUrl}
 							target="_blank"
 							aria-label="GitHub"
 							class={navbarIconButtonClass}

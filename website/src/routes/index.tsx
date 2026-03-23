@@ -20,6 +20,9 @@ import { Button } from "~/components/ui/button";
 import { Heading } from "~/components/ui/heading";
 import { Text } from "~/components/ui/text";
 
+const forkRepositoryUrl = "https://github.com/pRizz/mystic-ui";
+const upstreamRepositoryUrl = "https://github.com/TheComputerM/mystic-ui";
+
 const SolidLogo = () => (
 	<svg height="1.5em" viewBox="0 0 166 155" fill="none">
 		<title>SolidJS</title>
@@ -157,6 +160,17 @@ export default function Home() {
 							components and use them without having to worry about styling and
 							animations.
 						</Text>
+						<Text color="fg.muted" textStyle="sm">
+							This fork is maintained at{" "}
+							<a href={forkRepositoryUrl} target="_blank" rel="noreferrer">
+								pRizz/mystic-ui
+							</a>{" "}
+							and builds on{" "}
+							<a href={upstreamRepositoryUrl} target="_blank" rel="noreferrer">
+								TheComputerM/mystic-ui
+							</a>
+							.
+						</Text>
 						<Wrap>
 							<Button
 								size="2xl"
@@ -172,7 +186,7 @@ export default function Home() {
 								asChild={(parentProps) => (
 									<a
 										target="_blank"
-										href="https://github.com/TheComputerM/mystic-ui"
+										href={forkRepositoryUrl}
 										{...parentProps()}
 									>
 										<GitHubLogo />
@@ -225,7 +239,7 @@ export default function Home() {
 					</Heading>
 				</Marquee>
 				<a
-					href="https://github.com/TheComputerM/mystic-ui"
+					href={forkRepositoryUrl}
 					target="_blank"
 					rel="noreferrer"
 					class={linkOverlay()}

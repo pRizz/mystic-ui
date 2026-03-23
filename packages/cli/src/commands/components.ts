@@ -13,7 +13,7 @@ import {
 } from "../utils";
 
 export const DEFAULT_REGISTRY_BASE_URL =
-	"https://raw.githubusercontent.com/TheComputerM/mystic-ui/main/packages/registry";
+	"https://raw.githubusercontent.com/pRizz/mystic-ui/main/packages/registry";
 
 export function getRegistryBaseUrl() {
 	return process.env.MYSTIC_UI_REGISTRY_BASE_URL ?? DEFAULT_REGISTRY_BASE_URL;

@@ -14,6 +14,10 @@ import { Text } from "~/components/ui/text";
 import { type ComponentFramework, hasStoryComponent } from "~/lib/docs";
 import { store } from "~/lib/store";
 
+const forkRepositoryUrl = "https://github.com/pRizz/mystic-ui";
+const upstreamRepositoryUrl = "https://github.com/TheComputerM/mystic-ui";
+const upstreamAuthorUrl = "https://github.com/TheComputerM";
+
 const SideNavHeading: ParentComponent = (props) => {
 	return (
 		<Heading as="h4" mb="1">
@@ -203,13 +207,17 @@ export default function DocsLayout(props: RouteSectionProps) {
 							justify="space-between"
 						>
 							<Text>
-								Made by{" "}
-								<Link target="_blank" href="https://github.com/TheComputerM">
+								Fork of{" "}
+								<Link target="_blank" href={upstreamRepositoryUrl}>
+									TheComputerM/mystic-ui
+								</Link>{" "}
+								by{" "}
+								<Link target="_blank" href={upstreamAuthorUrl}>
 									TheComputerM
 								</Link>
 							</Text>
 							<a
-								href="https://github.com/TheComputerM/mystic-ui/stargazers"
+								href={`${forkRepositoryUrl}/stargazers`}
 								class={css({ _hover: { color: "yellow.300" } })}
 							>
 								<TbFillStar />
