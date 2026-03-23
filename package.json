@@ -15,9 +15,16 @@
     "typescript": "^5.3.3"
   },
   "author": {
-    "name": "Mudit Somani",
-    "email": "mudit.somani00@gmail.com",
-    "url": "https://thecomputerm.dev/"
+    "name": "Peter Ryszkiewicz",
+    "url": "https://github.com/pRizz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pRizz/mystic-ui.git"
+  },
+  "homepage": "https://github.com/pRizz/mystic-ui",
+  "bugs": {
+    "url": "https://github.com/pRizz/mystic-ui/issues"
   },
   "trustedDependencies": [
     "@biomejs/biome",

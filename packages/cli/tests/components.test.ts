@@ -124,7 +124,7 @@ describe("resolveProjectPath()", () => {
 describe("getRegistryEntryUrl()", () => {
 	test("builds the registry url for a component", () => {
 		expect(getRegistryEntryUrl("tailwind", "dock")).toBe(
-			"https://raw.githubusercontent.com/TheComputerM/mystic-ui/main/packages/registry/tailwind/dock.json",
+			"https://raw.githubusercontent.com/pRizz/mystic-ui/main/packages/registry/tailwind/dock.json",
 		);
 	});
 });
