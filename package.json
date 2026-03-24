@@ -7,17 +7,26 @@
   "exports": {
     ".": {
       "types": "./components/tailwind/types/index.d.ts",
-      "import": "./components/tailwind/src/index.ts"
+      "import": "./components/tailwind/src/index.ts",
+      "default": "./components/tailwind/src/index.ts"
     },
     "./tailwind": {
       "types": "./components/tailwind/types/index.d.ts",
-      "import": "./components/tailwind/src/index.ts"
-    }
+      "import": "./components/tailwind/src/index.ts",
+      "default": "./components/tailwind/src/index.ts"
+    },
+    "./tailwind/setup": {
+      "types": "./components/tailwind/types/setup/index.d.ts",
+      "import": "./components/tailwind/src/setup/index.ts",
+      "default": "./components/tailwind/src/setup/index.ts"
+    },
+    "./tailwind/theme.css": "./components/tailwind/src/setup/theme.css"
   },
   "types": "./components/tailwind/types/index.d.ts",
   "files": [
     "components/tailwind/src/index.ts",
     "components/tailwind/src/lib/utils.ts",
+    "components/tailwind/src/setup",
     "components/tailwind/src/ui",
     "components/tailwind/types",
     "README.md",
@@ -35,7 +44,7 @@
     "@types/bun": "latest"
   },
   "peerDependencies": {
-    "solid-js": "^1.9.3"
+    "solid-js": "^1.9.8"
   },
   "dependencies": {
     "@tsparticles/engine": "^3.7.1",
@@ -45,7 +54,8 @@
     "rough-notation": "^0.5.1",
     "solid-icons": "1.1.0",
     "solid-motionone": "^1.0.2",
-    "tailwind-merge": "^2.5.5"
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7"
   },
   "author": {
     "name": "Peter Ryszkiewicz",

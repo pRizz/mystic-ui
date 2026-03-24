@@ -6,26 +6,10 @@ category: component
 
 ## Usage
 
-```tsx
-import { Dock, DockIcon } from "@/components/mystic-ui/dock";
-
-export default function Example() {
-	return (
-		<Dock>
-			<DockIcon>
-				<button type="button" class="size-10 rounded-full border">
-					A
-				</button>
-			</DockIcon>
-			<DockIcon>
-				<button type="button" class="size-10 rounded-full border">
-					B
-				</button>
-			</DockIcon>
-		</Dock>
-	);
-}
-```
+<ComponentUsage
+  imports={["Dock","DockIcon"]}
+  body={"export default function Example() {\n\treturn (\n\t\t<Dock>\n\t\t\t<DockIcon>\n\t\t\t\t<button type=\"button\" class=\"size-10 rounded-full border\">\n\t\t\t\t\tA\n\t\t\t\t</button>\n\t\t\t</DockIcon>\n\t\t\t<DockIcon>\n\t\t\t\t<button type=\"button\" class=\"size-10 rounded-full border\">\n\t\t\t\t\tB\n\t\t\t\t</button>\n\t\t\t</DockIcon>\n\t\t</Dock>\n\t);\n}"}
+/>
 
 ## Props
 

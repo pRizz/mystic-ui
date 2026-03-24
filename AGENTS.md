@@ -6,6 +6,9 @@
 - Keep the public package contract limited to:
   - `mystic-ui`
   - `mystic-ui/tailwind`
+  - `mystic-ui/tailwind/setup`
+  - `mystic-ui/tailwind/theme.css`
+- The source-shipped GitHub package requires `solid-js@^1.9.8` or newer in the 1.x line.
 - Do not expose Panda from the root package until its generated `styled-system` output is part of the shipped package surface.
 - Do not add a root `prepare` script that installs git hooks automatically. This repo is also consumed as a GitHub dependency, so `prepare` would run in consumer installs.
 

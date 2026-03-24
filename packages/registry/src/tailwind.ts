@@ -1,13 +1,14 @@
 import type { Config } from "tailwindcss/types";
-import { merge } from "ts-deepmerge";
-import config from "./extend-config";
+import {
+	getMysticTailwindThemeExtend,
+	mysticTailwindComponentExtends,
+} from "../../../components/tailwind/src/setup/shared";
 
 export function componentTailwindConfig(component: string) {
-	if (!(component in config)) {
+	const extend = mysticTailwindComponentExtends[component];
+	if (!extend) {
 		return undefined;
 	}
-
-	const extend = config[component];
 
 	return {
 		theme: {
@@ -17,8 +18,9 @@ export function componentTailwindConfig(component: string) {
 }
 
 export function tailwindConfig() {
-	const configs = Object.keys(config)
-		.map((component) => componentTailwindConfig(component))
-		.filter((x) => x !== undefined);
-	return merge(...configs);
+	return {
+		theme: {
+			extend: getMysticTailwindThemeExtend(),
+		},
+	} as Config;
 }

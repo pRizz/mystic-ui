@@ -3,6 +3,7 @@
 import type { Component } from "solid-js";
 import { Box, Divider, styled } from "styled-system/jsx";
 import { RawCodeBlock } from "~/components/code-block";
+import { ComponentUsage } from "~/components/docs/component-usage";
 import { DocStory } from "~/components/docs/doc-story";
 import { StoryPreview } from "~/components/docs/story-preview";
 import { Code } from "~/components/ui/code";
@@ -23,6 +24,7 @@ export const useMDXComponents: () => Record<string, Component<any>> = () => ({
 	p: (props) => <Text textStyle="lg" my="4" color="fg.muted" {...props} />,
 	code: (props) => <Code variant="outline" fontFamily="monospace" {...props} />,
 	Text,
+	ComponentUsage,
 	Box,
 	DocStory,
 	RawCodeBlock,

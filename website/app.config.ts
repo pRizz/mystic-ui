@@ -19,7 +19,7 @@ import {
 const moduleRequire = createRequire(import.meta.url);
 const highlighter = await createHighlighter({
 	themes: ["vesper"],
-	langs: ["typescript", "tsx", "javascript", "jsx", "json", "shell"],
+	langs: ["typescript", "tsx", "javascript", "jsx", "json", "shell", "css"],
 });
 
 const { basePath } = resolveDeployConfig(process.env);

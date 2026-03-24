@@ -1,0 +1,349 @@
+type PlainObject = Record<string, unknown>;
+
+interface TailwindComponentExtend {
+	animation?: Record<string, string>;
+	keyframes?: Record<string, Record<string, PlainObject>>;
+}
+
+export const mysticTailwindComponentExtends: Record<
+	string,
+	TailwindComponentExtend
+> = {
+	"aurora-text": {
+		animation: {
+			aurora: "aurora 8s ease-in-out infinite alternate",
+		},
+		keyframes: {
+			aurora: {
+				"0%": {
+					backgroundPosition: "0% 50%",
+					transform: "rotate(-5deg) scale(0.9)",
+				},
+				"25%": {
+					backgroundPosition: "50% 100%",
+					transform: "rotate(5deg) scale(1.1)",
+				},
+				"50%": {
+					backgroundPosition: "100% 50%",
+					transform: "rotate(-3deg) scale(0.95)",
+				},
+				"75%": {
+					backgroundPosition: "50% 0%",
+					transform: "rotate(3deg) scale(1.05)",
+				},
+				"100%": {
+					backgroundPosition: "0% 50%",
+					transform: "rotate(-5deg) scale(0.9)",
+				},
+			},
+		},
+	},
+	"line-shadow-text": {
+		animation: {
+			"line-shadow": "line-shadow 15s linear infinite",
+		},
+		keyframes: {
+			"line-shadow": {
+				"0%": {
+					backgroundPosition: "0 0",
+				},
+				"100%": {
+					backgroundPosition: "100% -100%",
+				},
+			},
+		},
+	},
+	"pulsating-button": {
+		animation: {
+			pulse: "pulse var(--duration) ease-out infinite",
+		},
+		keyframes: {
+			pulse: {
+				"0%, 100%": {
+					boxShadow: "0 0 0 0 var(--pulse-color)",
+				},
+				"50%": {
+					boxShadow: "0 0 0 8px var(--pulse-color)",
+				},
+			},
+		},
+	},
+	"rainbow-button": {
+		animation: {
+			rainbow: "rainbow var(--speed, 2s) infinite linear",
+		},
+		keyframes: {
+			rainbow: {
+				"0%": {
+					backgroundPosition: "0%",
+				},
+				"100%": {
+					backgroundPosition: "200%",
+				},
+			},
+		},
+	},
+	"ripple-button": {
+		animation: {
+			rippling: "rippling var(--duration) ease-out",
+		},
+		keyframes: {
+			rippling: {
+				"0%": {
+					opacity: "1",
+				},
+				"100%": {
+					transform: "scale(2)",
+					opacity: "0",
+				},
+			},
+		},
+	},
+	"animated-gradient-text": {
+		animation: {
+			gradient: "gradient 8s linear infinite",
+		},
+		keyframes: {
+			gradient: {
+				to: {
+					backgroundPosition: "var(--bg-size, 300%) 0",
+				},
+			},
+		},
+	},
+	"animated-shiny-text": {
+		animation: {
+			"shiny-text": "shiny-text 8s infinite",
+		},
+		keyframes: {
+			"shiny-text": {
+				"0%, 90%, 100%": {
+					backgroundPosition: "calc(-100% - var(--shiny-width)) 0",
+				},
+				"30%, 60%": {
+					backgroundPosition: "calc(100% + var(--shiny-width)) 0",
+				},
+			},
+		},
+	},
+	"retro-grid": {
+		animation: {
+			grid: "grid 15s linear infinite",
+		},
+		keyframes: {
+			grid: {
+				"0%": { transform: "translateY(-50%)" },
+				"100%": { transform: "translateY(0)" },
+			},
+		},
+	},
+	marquee: {
+		animation: {
+			marquee: "marquee var(--duration) linear infinite",
+			"marquee-vertical": "marquee-vertical var(--duration) linear infinite",
+		},
+		keyframes: {
+			marquee: {
+				from: { transform: "translateX(0)" },
+				to: { transform: "translateX(calc(-100% - var(--gap)))" },
+			},
+			"marquee-vertical": {
+				from: { transform: "translateY(0)" },
+				to: { transform: "translateY(calc(-100% - var(--gap)))" },
+			},
+		},
+	},
+	"border-beam": {
+		animation: {
+			"border-beam": "border-beam var(--duration) infinite linear",
+		},
+		keyframes: {
+			"border-beam": {
+				"100%": {
+					offsetDistance: "100%",
+				},
+			},
+		},
+	},
+	"shine-border": {
+		animation: {
+			shine: "shine var(--duration) infinite linear",
+		},
+		keyframes: {
+			shine: {
+				"0%": {
+					backgroundPosition: "0% 0%",
+				},
+				"50%": {
+					backgroundPosition: "100% 100%",
+				},
+				to: {
+					backgroundPosition: "0% 0%",
+				},
+			},
+		},
+	},
+	meteors: {
+		animation: {
+			meteor: "meteor 5s linear infinite",
+		},
+		keyframes: {
+			meteor: {
+				"0%": { transform: "rotate(215deg) translateX(0)", opacity: "1" },
+				"70%": { opacity: "1" },
+				"100%": {
+					transform: "rotate(215deg) translateX(-500px)",
+					opacity: "0",
+				},
+			},
+		},
+	},
+	ripple: {
+		animation: {
+			ripple: "ripple var(--duration,2s) ease calc(var(--i, 0)*.2s) infinite",
+		},
+		keyframes: {
+			ripple: {
+				"0%, 100%": {
+					transform: "translate(-50%, -50%) scale(1)",
+				},
+				"50%": {
+					transform: "translate(-50%, -50%) scale(0.9)",
+				},
+			},
+		},
+	},
+	"shimmer-button": {
+		animation: {
+			"shimmer-slide":
+				"shimmer-slide var(--speed) ease-in-out infinite alternate",
+			"spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
+		},
+		keyframes: {
+			"spin-around": {
+				"0%": {
+					transform: "translateZ(0) rotate(0)",
+				},
+				"15%, 35%": {
+					transform: "translateZ(0) rotate(90deg)",
+				},
+				"65%, 85%": {
+					transform: "translateZ(0) rotate(270deg)",
+				},
+				"100%": {
+					transform: "translateZ(0) rotate(360deg)",
+				},
+			},
+			"shimmer-slide": {
+				to: {
+					transform: "translate(calc(100cqw - 100%), 0)",
+				},
+			},
+		},
+	},
+	spotlight: {
+		animation: {
+			spotlight: "spotlight 2s ease .75s 1 forwards",
+		},
+		keyframes: {
+			spotlight: {
+				"0%": {
+					opacity: "0",
+					transform: "translate(-72%, -62%) scale(0.5)",
+				},
+				"100%": {
+					opacity: "1",
+					transform: "translate(-50%,-40%) scale(1)",
+				},
+			},
+		},
+	},
+	"orbiting-circles": {
+		animation: {
+			orbit: "orbit var(--duration) linear infinite",
+		},
+		keyframes: {
+			orbit: {
+				"0%": {
+					transform: "rotate(0deg) translateY(var(--radius)) rotate(0deg)",
+				},
+				"100%": {
+					transform: "rotate(360deg) translateY(var(--radius)) rotate(-360deg)",
+				},
+			},
+		},
+	},
+};
+
+const mysticSemanticColors = {
+	colors: {
+		background: "hsl(var(--background) / <alpha-value>)",
+		foreground: "hsl(var(--foreground) / <alpha-value>)",
+		primary: {
+			DEFAULT: "hsl(var(--primary) / <alpha-value>)",
+			foreground: "hsl(var(--primary-foreground) / <alpha-value>)",
+		},
+		accent: {
+			DEFAULT: "hsl(var(--accent) / <alpha-value>)",
+			foreground: "hsl(var(--accent-foreground) / <alpha-value>)",
+		},
+		input: "hsl(var(--input) / <alpha-value>)",
+	},
+};
+
+export const mysticTailwindManualPackageContentGlob =
+	"./node_modules/mystic-ui/components/tailwind/src/ui/**/*.{js,ts,jsx,tsx}";
+
+export const mysticThemeCssText = `:root {
+\tcolor-scheme: light;
+\t--background: 0 0% 100%;
+\t--foreground: 222.2 84% 4.9%;
+\t--primary: 222.2 47.4% 11.2%;
+\t--primary-foreground: 210 40% 98%;
+\t--accent: 210 40% 96.1%;
+\t--accent-foreground: 222.2 47.4% 11.2%;
+\t--input: 214.3 31.8% 91.4%;
+}
+
+.dark {
+\tcolor-scheme: dark;
+\t--background: 222.2 84% 4.9%;
+\t--foreground: 210 40% 98%;
+\t--primary: 210 40% 98%;
+\t--primary-foreground: 222.2 47.4% 11.2%;
+\t--accent: 217.2 32.6% 17.5%;
+\t--accent-foreground: 210 40% 98%;
+\t--input: 217.2 32.6% 17.5%;
+}
+`;
+
+export function isPlainObject(value: unknown): value is PlainObject {
+	return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+export function mergePlainObjects(
+	base: PlainObject,
+	override: PlainObject,
+): PlainObject {
+	const result: PlainObject = { ...base };
+
+	for (const [key, value] of Object.entries(override)) {
+		const currentValue = result[key];
+		if (isPlainObject(currentValue) && isPlainObject(value)) {
+			result[key] = mergePlainObjects(currentValue, value);
+			continue;
+		}
+
+		result[key] = value;
+	}
+
+	return result;
+}
+
+export function getMysticTailwindThemeExtend(): PlainObject {
+	return Object.values(mysticTailwindComponentExtends).reduce<PlainObject>(
+		(extend, componentExtend) =>
+			mergePlainObjects(extend, componentExtend as PlainObject),
+		mysticSemanticColors as PlainObject,
+	);
+}

@@ -8,6 +8,6 @@
     "rootDir": "./src",
     "outDir": "./types"
   },
-  "include": ["src/index.ts"],
+  "include": ["src/index.ts", "src/setup/index.ts"],
   "exclude": ["src/stories/**", "src/lib/storybook.tsx"]
 }

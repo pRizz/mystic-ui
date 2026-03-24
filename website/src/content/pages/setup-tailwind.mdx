@@ -2,23 +2,87 @@
 title: Setup TailwindCSS
 ---
 
+import {
+	manualTailwindConfigSnippet,
+	manualThemeCssSnippet,
+} from "~/lib/tailwind-package-docs";
+
 # Setup with Tailwind
 
-You can use Mystic UI with your Tailwind projects, also works with tailwind based frameworks like [Solid UI](https://www.solid-ui.com/) and [shadcn-solid](https://shadcn-solid.com/).
+Mystic UI can be used directly from GitHub as a package-first Tailwind dependency for **Vite + SolidJS** apps.
 
-Run `npx @mystic-ui/cli init` with whatever package manager you prefer and make sure you choose *tailwind* as your css framework. You will have to add the `cn` utility manually where you specify the utils path alias.
+## Supported setup
+
+- Vite + `vite-plugin-solid`
+- SolidJS with `solid-js@^1.9.8` or newer in the 1.x line
+- Tailwind CSS 3.x
+- class-based dark mode (`.dark` on `document.documentElement`)
+- `github:pRizz/mystic-ui`
+
+## 1. Install Mystic UI
 
 ```sh
-npm i clsx tailwind-merge
+npm install github:pRizz/mystic-ui
 ```
 
-<br />
+## 2. Wrap your Tailwind config
+
+Use `tailwind.config.ts` as the primary path. `withMysticUI` adds the package content globs, shared keyframes and animations, semantic color tokens, `darkMode: "class"`, and `tailwindcss-animate`.
 
 ```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import type { Config } from "tailwindcss";
+import { withMysticUI } from "mystic-ui/tailwind/setup";
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+const config = withMysticUI({
+	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+}) satisfies Config;
+
+export default config;
+```
+
+## 3. Import the shared theme tokens once
+
+Import the stylesheet at the top of your app CSS entry so the semantic variables land in the built CSS bundle before Tailwind expands the component classes.
+
+```css
+@import "mystic-ui/tailwind/theme.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+If your app already provides equivalent `background`, `foreground`, `primary`, `primary-foreground`, `accent-foreground`, and `input` tokens, you can keep your own theme CSS instead of importing Mystic's.
+
+## 4. Import components from the package
+
+```tsx
+import { RippleButton } from "mystic-ui";
+
+export default function Example() {
+	return <RippleButton>Deploy</RippleButton>;
 }
 ```
+
+`mystic-ui/tailwind` re-exports the same Tailwind component surface.
+
+## Troubleshooting
+
+- The GitHub package support in this pass is verified only for **Vite + SolidJS**.
+- Panda components are **not** part of the GitHub package contract yet.
+- If your build complains about missing `solid-js/web` helpers such as `setStyleProperty`, upgrade to `solid-js@^1.9.8` or newer.
+- If a component renders unstyled, Tailwind is probably not scanning the Mystic package content or `withMysticUI` was skipped.
+- If animation utilities are missing, the shared config or `tailwindcss-animate` path was skipped.
+- Keep `skipLibCheck: true` in your app `tsconfig` for now. That matches the verified consumer spike and avoids current upstream Motion One lib-check noise.
+
+## Manual appendix
+
+If your project cannot use `tailwind.config.ts`, install the animation plugin yourself and copy the current Mystic Tailwind extension and token CSS.
+
+```sh
+npm install tailwindcss-animate
+```
+
+<RawCodeBlock code={manualTailwindConfigSnippet} lang="ts" />
+
+<RawCodeBlock code={manualThemeCssSnippet} lang="css" />

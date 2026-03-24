@@ -33,26 +33,60 @@ function run(command, args) {
 const packageJson = JSON.parse(readFileSync(path.join(repoRoot, "package.json"), "utf8"));
 const expectedTypesPath = "./components/tailwind/types/index.d.ts";
 const expectedImportPath = "./components/tailwind/src/index.ts";
+const expectedSetupTypesPath = "./components/tailwind/types/setup/index.d.ts";
+const expectedSetupImportPath = "./components/tailwind/src/setup/index.ts";
+const expectedThemeCssPath = "./components/tailwind/src/setup/theme.css";
+const expectedSolidPeerVersion = "^1.9.8";
 const rootExport = packageJson.exports?.["."];
 const tailwindExport = packageJson.exports?.["./tailwind"];
+const setupExport = packageJson.exports?.["./tailwind/setup"];
+const themeCssExport = packageJson.exports?.["./tailwind/theme.css"];
 
-if (!rootExport || !tailwindExport) {
-	fail("[check:github-package] package.json must export both \".\" and \"./tailwind\".");
+if (!rootExport || !tailwindExport || !setupExport || !themeCssExport) {
+	fail(
+		"[check:github-package] package.json must export \".\", \"./tailwind\", \"./tailwind/setup\", and \"./tailwind/theme.css\".",
+	);
 }
 
 for (const [key, entry] of Object.entries({
 	".": rootExport,
 	"./tailwind": tailwindExport,
 })) {
-	if (entry.types !== expectedTypesPath || entry.import !== expectedImportPath) {
+	if (
+		entry.types !== expectedTypesPath ||
+		entry.import !== expectedImportPath ||
+		entry.default !== expectedImportPath
+	) {
 		fail(
 			`[check:github-package] ${key} must point to ${expectedTypesPath} and ${expectedImportPath}.`,
 		);
 	}
 }
 
+if (
+	setupExport.types !== expectedSetupTypesPath ||
+	setupExport.import !== expectedSetupImportPath ||
+	setupExport.default !== expectedSetupImportPath
+) {
+	fail(
+		`[check:github-package] ./tailwind/setup must point to ${expectedSetupTypesPath} and ${expectedSetupImportPath}.`,
+	);
+}
+
+if (themeCssExport !== expectedThemeCssPath) {
+	fail(
+		`[check:github-package] ./tailwind/theme.css must point to ${expectedThemeCssPath}.`,
+	);
+}
+
 if (packageJson.exports["./panda"]) {
 	fail("[check:github-package] Panda must not be exported from the root package.");
+}
+
+if (packageJson.peerDependencies?.["solid-js"] !== expectedSolidPeerVersion) {
+	fail(
+		`[check:github-package] solid-js peer dependency must stay at ${expectedSolidPeerVersion} or the documented consumer baseline drifts.`,
+	);
 }
 
 console.log("[agent hint] Verifying Tailwind workspace checks.");
@@ -71,7 +105,10 @@ const requiredFiles = [
 	"README.md",
 	"LICENSE.md",
 	"components/tailwind/src/index.ts",
+	"components/tailwind/src/setup/index.ts",
+	"components/tailwind/src/setup/theme.css",
 	"components/tailwind/types/index.d.ts",
+	"components/tailwind/types/setup/index.d.ts",
 ];
 
 for (const requiredFile of requiredFiles) {

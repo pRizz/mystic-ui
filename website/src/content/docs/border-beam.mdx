@@ -6,18 +6,10 @@ category: effect
 
 ## Usage
 
-```tsx
-import { BorderBeam } from "@/components/mystic-ui/border-beam";
-
-export default function Example() {
-	return (
-		<div class="relative overflow-hidden rounded-xl border p-6">
-			<BorderBeam size={180} duration={12} />
-			<p>Animated border accent</p>
-		</div>
-	);
-}
-```
+<ComponentUsage
+  imports={["BorderBeam"]}
+  body={"export default function Example() {\n\treturn (\n\t\t<div class=\"relative overflow-hidden rounded-xl border p-6\">\n\t\t\t<BorderBeam size={180} duration={12} />\n\t\t\t<p>Animated border accent</p>\n\t\t</div>\n\t);\n}"}
+/>
 
 ## Props
 

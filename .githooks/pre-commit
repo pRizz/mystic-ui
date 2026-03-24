@@ -15,7 +15,8 @@ fi
 
 cat <<'EOF'
 [agent hint] GitHub package surface change detected.
-[agent hint] Expected public contract: mystic-ui + mystic-ui/tailwind (Tailwind only).
+[agent hint] Expected public contract: mystic-ui, mystic-ui/tailwind, mystic-ui/tailwind/setup, and mystic-ui/tailwind/theme.css.
+[agent hint] Source-shipped consumers need solid-js ^1.9.8 or newer in the 1.x line.
 [agent hint] Generated declarations under components/tailwind/types must stay committed and in sync.
 [agent hint] If workspace tools are missing, run: bun install
 EOF

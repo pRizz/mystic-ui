@@ -6,25 +6,10 @@ category: text
 
 ## Usage
 
-```tsx
-import { Highlighter } from "@/components/mystic-ui/highlighter";
-
-export default function Example() {
-	return (
-		<p>
-			The{" "}
-			<Highlighter action="underline" color="#FF9800">
-				Magic UI Highlighter
-			</Highlighter>{" "}
-			makes important{" "}
-			<Highlighter action="highlight" color="#87CEFA">
-				text stand out
-			</Highlighter>{" "}
-			effortlessly.
-		</p>
-	);
-}
-```
+<ComponentUsage
+  imports={["Highlighter"]}
+  body={"export default function Example() {\n\treturn (\n\t\t<p>\n\t\t\tThe{\" \"}\n\t\t\t<Highlighter action=\"underline\" color=\"#FF9800\">\n\t\t\t\tMagic UI Highlighter\n\t\t\t</Highlighter>{\" \"}\n\t\t\tmakes important{\" \"}\n\t\t\t<Highlighter action=\"highlight\" color=\"#87CEFA\">\n\t\t\t\ttext stand out\n\t\t\t</Highlighter>{\" \"}\n\t\t\teffortlessly.\n\t\t</p>\n\t);\n}"}
+/>
 
 ## Props
 

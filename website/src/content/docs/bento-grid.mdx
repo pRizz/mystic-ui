@@ -6,24 +6,10 @@ category: component
 
 ## Usage
 
-```tsx
-import { BentoCard, BentoGrid } from "@/components/mystic-ui/bento-grid";
-
-export default function Example() {
-	return (
-		<BentoGrid>
-			<BentoCard
-				name="Save your files"
-				description="We automatically save your files as you type."
-				href="/"
-				cta="Learn more"
-				Icon={() => <div />}
-				background={<div />}
-			/>
-		</BentoGrid>
-	);
-}
-```
+<ComponentUsage
+  imports={["BentoCard","BentoGrid"]}
+  body={"export default function Example() {\n\treturn (\n\t\t<BentoGrid>\n\t\t\t<BentoCard\n\t\t\t\tname=\"Save your files\"\n\t\t\t\tdescription=\"We automatically save your files as you type.\"\n\t\t\t\thref=\"/\"\n\t\t\t\tcta=\"Learn more\"\n\t\t\t\tIcon={() => <div />}\n\t\t\t\tbackground={<div />}\n\t\t\t/>\n\t\t</BentoGrid>\n\t);\n}"}
+/>
 
 ## Props
 

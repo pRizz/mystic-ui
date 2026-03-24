@@ -1,15 +1,6 @@
-import { tailwindConfig as mysticConfig } from "@mystic-ui/registry/src/tailwind";
-import { merge } from "ts-deepmerge";
-
+import { withMysticUI } from "./src/setup/index.ts";
 
 /** @type {import('tailwindcss').Config} */
-const config = {
-	darkMode: "class",
+export default withMysticUI({
 	content: ["./src/**/*.{tsx,ts,jsx,js}"],
-	theme: {
-		extend: {},
-	},
-	plugins: [],
-};
-
-export default merge(mysticConfig(), config);
+});

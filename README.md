@@ -2,25 +2,54 @@
 
 Components that fill the gap of *cool and beautiful components* in the **SolidJS** ecosystem. Crafted with care using **TailwindCSS**, **PandaCSS** and **Motion One**.
 
-## GitHub Package Support
+## Tailwind Package Quickstart
 
-The repo root can now be installed directly from GitHub as a source-only package for **Vite/Solid** consumers.
+The repo root can be installed directly from GitHub as a source-only package for **Vite + SolidJS + Tailwind CSS 3.x** consumers.
 
 ```bash
 npm install github:pRizz/mystic-ui
 ```
 
-Supported imports in this compatibility pass:
+Configure Tailwind with the public setup helper:
 
 ```ts
-import { WordRotate } from "mystic-ui";
-import { WordRotate as TailwindWordRotate } from "mystic-ui/tailwind";
+import type { Config } from "tailwindcss";
+import { withMysticUI } from "mystic-ui/tailwind/setup";
+
+const config = withMysticUI({
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+}) satisfies Config;
+
+export default config;
 ```
 
-Current boundary for GitHub dependency usage:
+Import the shared theme tokens once from your app stylesheet:
+
+```css
+@import "mystic-ui/tailwind/theme.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Then import components from the package:
+
+```tsx
+import { WordRotate } from "mystic-ui";
+```
+
+`mystic-ui/tailwind` re-exports the same Tailwind component surface.
+
+Important compatibility notes:
 
 - Only the **Tailwind** component surface is exported from the root package.
 - This package contract is intended for **Vite** projects using **SolidJS** / `vite-plugin-solid`.
+- Use `solid-js@^1.9.8` or newer in the 1.x line. Earlier 1.9 releases do not export the runtime helpers required by source-shipped components.
+- `mystic-ui/tailwind/setup` and `mystic-ui/tailwind/theme.css` are the supported one-time setup assets for package consumers.
+- Import `mystic-ui/tailwind/theme.css` from your app stylesheet, not from `main.tsx`, so the shared tokens land in the built CSS output.
+- Use class-based dark mode. Mystic components expect `.dark` on `document.documentElement`.
+- Keep `skipLibCheck: true` in your app `tsconfig` for now to match the verified consumer setup.
 - **Panda** components are not exported yet because they depend on generated `styled-system` files that are not shipped in the root package contract.
 
 ## Features
@@ -32,7 +61,7 @@ Current boundary for GitHub dependency usage:
 
 ## GitHub Dependency Notes
 
-- The root package exports `mystic-ui` and `mystic-ui/tailwind`.
+- The root package exports `mystic-ui`, `mystic-ui/tailwind`, `mystic-ui/tailwind/setup`, and `mystic-ui/tailwind/theme.css`.
 - Deep imports into workspace packages such as `@mystic-ui/tailwind` are not part of the GitHub install contract.
 - The GitHub package is source-only on purpose; no `dist` output is committed for this compatibility pass.
 
