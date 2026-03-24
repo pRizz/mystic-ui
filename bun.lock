@@ -4,11 +4,21 @@
   "workspaces": {
     "": {
       "name": "mystic-ui",
+      "dependencies": {
+        "@tsparticles/engine": "^3.7.1",
+        "@tsparticles/slim": "^3.7.1",
+        "clsx": "^2.1.1",
+        "motion": "^11.13.1",
+        "rough-notation": "^0.5.1",
+        "solid-icons": "^1.1.0",
+        "solid-motionone": "^1.0.2",
+        "tailwind-merge": "^2.5.5",
+      },
       "devDependencies": {
         "@types/bun": "latest",
       },
       "peerDependencies": {
-        "typescript": "^5.3.3",
+        "solid-js": "^1.9.3",
       },
     },
     "components/panda": {

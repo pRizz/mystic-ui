@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import {
 	type JSX,
 	type ParentComponent,
@@ -8,6 +7,7 @@ import {
 	onCleanup,
 	splitProps,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 interface ButtonRipple {
 	key: number;

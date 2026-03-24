@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import {
 	type Component,
 	For,
@@ -7,6 +6,7 @@ import {
 	splitProps,
 } from "solid-js";
 import { Motion } from "solid-motionone";
+import { cn } from "../lib/utils";
 
 export interface WordFadeInProps extends JSX.HTMLAttributes<HTMLDivElement> {
 	text: string;

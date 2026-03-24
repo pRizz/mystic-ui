@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import {
 	type Component,
 	type JSX,
@@ -7,6 +6,7 @@ import {
 	onCleanup,
 	splitProps,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 export interface NoSignalScreenProps
 	extends JSX.CanvasHTMLAttributes<HTMLCanvasElement> {

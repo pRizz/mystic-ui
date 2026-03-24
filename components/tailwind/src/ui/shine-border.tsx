@@ -1,5 +1,5 @@
-import { cn } from "../lib/utils";
 import { type ParentComponent, mergeProps } from "solid-js";
+import { cn } from "../lib/utils";
 
 export interface ShineBorderProps {
 	borderRadius?: number;

@@ -1,7 +1,7 @@
-import { cn } from "../lib/utils";
 import type { JSX } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { Motion } from "solid-motionone";
+import { cn } from "../lib/utils";
 
 type AnimationType = "text" | "word" | "character" | "line";
 type AnimationVariant =

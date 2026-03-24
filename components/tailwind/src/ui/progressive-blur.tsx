@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import {
 	type Component,
 	For,
@@ -6,6 +5,7 @@ import {
 	mergeProps,
 	splitProps,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 export interface ProgressiveBlurProps
 	extends JSX.HTMLAttributes<HTMLDivElement> {

@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import { scroll } from "motion";
 import {
 	type Component,
@@ -8,6 +7,7 @@ import {
 	onCleanup,
 	onMount,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 interface TextRevealByWordProps {
 	text: string;

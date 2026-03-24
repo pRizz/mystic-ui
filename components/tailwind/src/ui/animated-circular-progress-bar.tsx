@@ -1,5 +1,5 @@
-import { cn } from "../lib/utils";
 import { type Component, type JSX, mergeProps, splitProps } from "solid-js";
+import { cn } from "../lib/utils";
 
 const TAU = Math.PI * 2;
 

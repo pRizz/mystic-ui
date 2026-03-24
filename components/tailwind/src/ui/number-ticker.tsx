@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import { animate, inView } from "motion";
 import {
 	type Component,
@@ -7,6 +6,7 @@ import {
 	onMount,
 	splitProps,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 export interface NumberTickerProps extends JSX.HTMLAttributes<HTMLSpanElement> {
 	value?: number;

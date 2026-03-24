@@ -1,6 +1,6 @@
-import { cn } from "../lib/utils";
 import { animate, inView, stagger } from "motion";
 import { type Component, For, mergeProps, onCleanup, onMount } from "solid-js";
+import { cn } from "../lib/utils";
 
 export interface LetterPullupProps {
 	text: string;

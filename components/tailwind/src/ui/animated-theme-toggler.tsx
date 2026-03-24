@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import { TbOutlineMoon, TbOutlineSun } from "solid-icons/tb";
 import {
 	type Component,
@@ -9,6 +8,7 @@ import {
 	onMount,
 	splitProps,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 interface ViewTransitionDocument extends Document {
 	startViewTransition?: (callback: () => void) => {

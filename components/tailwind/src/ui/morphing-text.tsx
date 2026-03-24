@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import {
 	type Component,
 	For,
@@ -6,6 +5,7 @@ import {
 	onCleanup,
 	onMount,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 const morphTime = 1.5;
 const cooldownTime = 0.5;

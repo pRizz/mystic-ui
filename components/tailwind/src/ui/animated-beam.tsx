@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import { animate } from "motion";
 import {
 	type Component,
@@ -9,6 +8,7 @@ import {
 	onCleanup,
 	onMount,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 export interface AnimatedBeamProps {
 	class?: string;

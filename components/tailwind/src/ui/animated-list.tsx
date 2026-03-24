@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import {
 	type JSX,
 	type JSXElement,
@@ -11,6 +10,7 @@ import {
 	splitProps,
 } from "solid-js";
 import { Motion, type MotionComponentProps } from "solid-motionone";
+import { cn } from "../lib/utils";
 
 const animationProps = {
 	initial: { scale: 0, opacity: 0 },

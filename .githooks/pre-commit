@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+staged_files="$(git diff --cached --name-only --diff-filter=ACMR)"
+if [[ -z "$staged_files" ]]; then
+	exit 0
+fi
+
+if ! printf '%s\n' "$staged_files" | grep -Eq '^(package\.json|bun\.lock|README\.md|\.npmignore|components/tailwind/src/|components/tailwind/package\.json|scripts/check-github-package\.mjs|AGENTS\.md)'; then
+	exit 0
+fi
+
+cat <<'EOF'
+[agent hint] GitHub package surface change detected.
+[agent hint] Expected public contract: mystic-ui + mystic-ui/tailwind (Tailwind only).
+[agent hint] If workspace tools are missing, run: bun install
+EOF
+
+if [[ ! -d node_modules ]]; then
+	echo "[agent hint] node_modules is missing; run bun install before committing."
+	exit 1
+fi
+
+bun run check:github-package

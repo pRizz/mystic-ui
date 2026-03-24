@@ -1,6 +1,5 @@
 import { Motion } from "solid-motionone";
 
-import { cn } from "../lib/utils";
 import {
 	type Component,
 	Index,
@@ -12,6 +11,7 @@ import {
 	onMount,
 	splitProps,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 interface Sparkle {
 	color: string;

@@ -1,6 +1,6 @@
-import { cn } from "../lib/utils";
 import type { JSX, ParentComponent } from "solid-js";
 import { Motion, type MotionComponentProps } from "solid-motionone";
+import { cn } from "../lib/utils";
 
 const animationProps = {
 	initial: { "--x": "100%", scale: 0.8 },

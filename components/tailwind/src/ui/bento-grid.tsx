@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import { TbOutlineArrowRight } from "solid-icons/tb";
 import {
 	type Component,
@@ -6,6 +5,7 @@ import {
 	type ParentComponent,
 	splitProps,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 export interface BentoGridProps extends JSX.HTMLAttributes<HTMLDivElement> {}
 

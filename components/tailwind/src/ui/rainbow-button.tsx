@@ -1,10 +1,10 @@
-import { cn } from "../lib/utils";
 import {
 	type JSX,
 	type ParentComponent,
 	mergeProps,
 	splitProps,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 const sizeClasses = {
 	default: "h-9 px-4 py-2",

@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import {
 	For,
 	type JSX,
@@ -6,6 +5,7 @@ import {
 	mergeProps,
 	splitProps,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 export interface MarqueeProps extends JSX.HTMLAttributes<HTMLDivElement> {
 	pauseOnHover?: boolean;

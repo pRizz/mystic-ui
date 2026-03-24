@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import {
 	type Component,
 	type JSX,
@@ -10,6 +9,7 @@ import {
 	onMount,
 	splitProps,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 interface GridParameters {
 	cols: number;

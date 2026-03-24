@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import {
 	type Component,
 	type JSX,
@@ -6,6 +5,7 @@ import {
 	createUniqueId,
 	splitProps,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 const PHONE_WIDTH = 433;
 const PHONE_HEIGHT = 882;

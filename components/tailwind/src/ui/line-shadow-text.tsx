@@ -1,7 +1,7 @@
-import { cn } from "../lib/utils";
 import { type JSX, mergeProps, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { Motion } from "solid-motionone";
+import { cn } from "../lib/utils";
 
 const motionElements = {
 	article: Motion.article,

@@ -1,6 +1,6 @@
-import { cn } from "../lib/utils";
 import type { Component, JSX } from "solid-js";
 import { Motion } from "solid-motionone";
+import { cn } from "../lib/utils";
 
 export interface ComicTextProps extends JSX.HTMLAttributes<HTMLDivElement> {
 	children: string;

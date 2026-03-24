@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import {
 	type Accessor,
 	type JSX,
@@ -9,6 +8,7 @@ import {
 	splitProps,
 	useContext,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 export interface DockProps extends JSX.HTMLAttributes<HTMLDivElement> {
 	magnification?: number;

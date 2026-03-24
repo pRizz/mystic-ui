@@ -1,7 +1,7 @@
 import { Motion } from "solid-motionone";
 
-import { cn } from "../lib/utils";
 import { type Component, For, mergeProps } from "solid-js";
+import { cn } from "../lib/utils";
 
 export interface WordPullupProps {
 	text: string;

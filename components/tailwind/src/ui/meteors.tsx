@@ -1,4 +1,3 @@
-import { cn } from "../lib/utils";
 import {
 	type Component,
 	For,
@@ -7,6 +6,7 @@ import {
 	createSignal,
 	mergeProps,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 export interface MeteorsProps {
 	number?: number;

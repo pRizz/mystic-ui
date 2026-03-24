@@ -1,10 +1,10 @@
-import { cn } from "../lib/utils";
 import {
 	type JSX,
 	type ParentComponent,
 	mergeProps,
 	splitProps,
 } from "solid-js";
+import { cn } from "../lib/utils";
 
 export interface AnimatedGradientTextProps
 	extends JSX.HTMLAttributes<HTMLSpanElement> {
