@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 import type { JSX, ParentComponent } from "solid-js";
 import { Motion, type MotionComponentProps } from "solid-motionone";
 

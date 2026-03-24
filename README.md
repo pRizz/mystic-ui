@@ -2,12 +2,39 @@
 
 Components that fill the gap of *cool and beautiful components* in the **SolidJS** ecosystem. Crafted with care using **TailwindCSS**, **PandaCSS** and **Motion One**.
 
+## GitHub Package Support
+
+The repo root can now be installed directly from GitHub as a source-only package for **Vite/Solid** consumers.
+
+```bash
+npm install github:pRizz/mystic-ui
+```
+
+Supported imports in this compatibility pass:
+
+```ts
+import { WordRotate } from "mystic-ui";
+import { WordRotate as TailwindWordRotate } from "mystic-ui/tailwind";
+```
+
+Current boundary for GitHub dependency usage:
+
+- Only the **Tailwind** component surface is exported from the root package.
+- This package contract is intended for **Vite** projects using **SolidJS** / `vite-plugin-solid`.
+- **Panda** components are not exported yet because they depend on generated `styled-system` files that are not shipped in the root package contract.
+
 ## Features
 
 - **Compatible with both Tailwind and Panda** - Use with the css framework of your choice!
 - **Copy+Paste Components** - As simple as it sounds.
 - **CLI Support** - Add Mystic components to your projects even faster.
 - **TypeScript** - Get all the intellisense you want.
+
+## GitHub Dependency Notes
+
+- The root package exports `mystic-ui` and `mystic-ui/tailwind`.
+- Deep imports into workspace packages such as `@mystic-ui/tailwind` are not part of the GitHub install contract.
+- The GitHub package is source-only on purpose; no `dist` output is committed for this compatibility pass.
 
 ## Why?
 

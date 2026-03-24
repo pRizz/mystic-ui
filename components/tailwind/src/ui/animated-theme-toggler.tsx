@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { TbMoon, TbSun } from "solid-icons/tb";
+import { cn } from "../lib/utils";
+import { TbOutlineMoon, TbOutlineSun } from "solid-icons/tb";
 import {
 	type Component,
 	type JSX,
@@ -115,7 +115,7 @@ export const AnimatedThemeToggler: Component<AnimatedThemeTogglerProps> = (
 					"::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }"
 				}
 			</style>
-			{isDark() ? <TbSun /> : <TbMoon />}
+			{isDark() ? <TbOutlineSun /> : <TbOutlineMoon />}
 			<span class="sr-only">Toggle theme</span>
 		</button>
 	);

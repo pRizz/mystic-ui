@@ -1,0 +1,26 @@
+## task-github-installable-package | 2026-03-23 19:07 | GitHub-installable root package
+- Status: completed
+- Goal: Make the repo root installable from GitHub as `mystic-ui` with `mystic-ui` and `mystic-ui/tailwind` import paths for Tailwind components.
+- Planned changes:
+  - Add a Tailwind runtime barrel and keep story-only files out of the package contract.
+  - Replace Tailwind runtime alias imports with package-safe relative imports.
+  - Convert the root package metadata and packlist into a consumer-facing source-only package.
+  - Document the GitHub install/import contract and Panda exclusion.
+- Verification:
+  - `npm pack --dry-run` only includes runtime-relevant Tailwind files and package metadata.
+  - A fresh Vite + `vite-plugin-solid` consumer builds with imports from `mystic-ui`.
+  - A fresh Vite + `vite-plugin-solid` consumer builds with imports from `mystic-ui/tailwind`.
+  - TypeScript resolves the package exports in the temp consumer.
+- Progress notes:
+  - Reproduced the current failure: root package has no entrypoint and raw deep-imported `.tsx` files are not a safe package contract.
+  - Confirmed a source-only tarball-installed package can work in Vite/Solid once runtime alias imports are removed.
+  - Added a public Tailwind barrel, a separate permissive `.d.ts` package surface, and root `exports` for `mystic-ui` and `mystic-ui/tailwind`.
+  - Replaced runtime `@/lib/utils` imports with relative imports so package consumers do not need the repo-local path alias.
+  - Fixed invalid `solid-icons/tb` imports that only surfaced once the full public barrel was exercised by a packed consumer build.
+- Completion review:
+  - `npm pack --dry-run --json` now produces a focused tarball around 50 KB instead of the earlier multi-megabyte monorepo-wide pack output.
+  - A fresh Vite + `vite-plugin-solid` consumer successfully typechecked and built with imports from both `mystic-ui` and `mystic-ui/tailwind`.
+  - `git diff --check` passed after the refactor.
+- Residual risks:
+  - The published type surface is intentionally permissive for now; it stabilizes editor/module resolution without claiming exact prop typings for every component.
+  - The internal Tailwind workspace `check` script could not be run in this environment because `biome` was not installed on the path.

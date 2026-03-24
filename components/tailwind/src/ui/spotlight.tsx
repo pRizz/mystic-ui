@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 import type { Component } from "solid-js";
 
 export interface SpotlightProps {

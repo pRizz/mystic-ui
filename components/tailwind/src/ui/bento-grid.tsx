@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { TbArrowRight } from "solid-icons/tb";
+import { cn } from "../lib/utils";
+import { TbOutlineArrowRight } from "solid-icons/tb";
 import {
 	type Component,
 	type JSX,
@@ -60,7 +60,7 @@ const BentoCard: Component<BentoCardProps> = (props) => {
 						class="pointer-events-auto inline-flex items-center p-0 text-sm font-medium"
 					>
 						{props.cta}
-						<TbArrowRight class="ml-2 h-4 w-4" />
+						<TbOutlineArrowRight class="ml-2 h-4 w-4" />
 					</a>
 				</div>
 			</div>
@@ -71,7 +71,7 @@ const BentoCard: Component<BentoCardProps> = (props) => {
 					class="pointer-events-auto inline-flex items-center p-0 text-sm font-medium"
 				>
 					{props.cta}
-					<TbArrowRight class="ml-2 h-4 w-4" />
+					<TbOutlineArrowRight class="ml-2 h-4 w-4" />
 				</a>
 			</div>
 

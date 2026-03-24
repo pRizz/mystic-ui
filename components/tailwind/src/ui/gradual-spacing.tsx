@@ -1,6 +1,6 @@
 import { Motion, type Options } from "solid-motionone";
 
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 import { type Component, For, mergeProps } from "solid-js";
 
 export interface GradualSpacingProps {

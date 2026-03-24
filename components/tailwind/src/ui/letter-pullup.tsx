@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 import { animate, inView, stagger } from "motion";
 import { type Component, For, mergeProps, onCleanup, onMount } from "solid-js";
 

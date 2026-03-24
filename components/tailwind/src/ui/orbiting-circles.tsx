@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 import { type ParentComponent, Show, mergeProps } from "solid-js";
 
 export interface OrbitingCirclesProps {

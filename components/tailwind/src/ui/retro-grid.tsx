@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 import { type Component, mergeProps } from "solid-js";
 
 export interface RetroGridProps {

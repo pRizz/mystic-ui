@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 import type { Component, JSX } from "solid-js";
 import { createUniqueId, mergeProps, splitProps } from "solid-js";
 
