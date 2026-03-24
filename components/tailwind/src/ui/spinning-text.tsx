@@ -1,25 +1,30 @@
-import type { JSX, ParentComponent } from "solid-js";
-import { Motion } from "solid-motionone";
+import { For, type JSX, type ParentComponent } from "solid-js";
+import {
+	Motion,
+	type MotionComponentProps,
+	type VariantDefinition,
+} from "solid-motionone";
 import { cn } from "../lib/utils";
 
-type VariantDefinition = Record<string, unknown>;
+type MotionTransition = NonNullable<MotionComponentProps["transition"]>;
+type MotionVariants = NonNullable<MotionComponentProps["variants"]>;
 
 export interface SpinningTextProps extends JSX.HTMLAttributes<HTMLDivElement> {
 	children: string | string[];
 	duration?: number;
 	reverse?: boolean;
 	radius?: number;
-	transition?: Record<string, unknown>;
+	transition?: MotionTransition;
 	variants?: {
-		container?: VariantDefinition;
-		item?: VariantDefinition;
+		container?: MotionVariants;
+		item?: MotionVariants;
 	};
 }
 
 const BASE_TRANSITION = {
 	repeat: Number.POSITIVE_INFINITY,
 	easing: "linear",
-};
+} satisfies MotionTransition;
 
 const BASE_ITEM_VARIANTS = {
 	initial: {
@@ -28,7 +33,7 @@ const BASE_ITEM_VARIANTS = {
 	animate: {
 		opacity: 1,
 	},
-};
+} satisfies MotionVariants;
 
 export const SpinningText: ParentComponent<SpinningTextProps> = (props) => {
 	if (typeof props.children !== "string" && !Array.isArray(props.children)) {
@@ -45,7 +50,7 @@ export const SpinningText: ParentComponent<SpinningTextProps> = (props) => {
 	const letters = childText.split("");
 	letters.push(" ");
 
-	const finalTransition = {
+	const finalTransition: MotionTransition = {
 		...BASE_TRANSITION,
 		...props.transition,
 		duration:
@@ -53,11 +58,12 @@ export const SpinningText: ParentComponent<SpinningTextProps> = (props) => {
 				? props.transition.duration
 				: (props.duration ?? 10),
 	};
-	const containerVariants = {
+	const containerVariants: MotionVariants = {
+		initial: { rotate: 0 } satisfies VariantDefinition,
 		animate: { rotate: props.reverse ? -360 : 360 },
 		...props.variants?.container,
 	};
-	const itemVariants = {
+	const itemVariants: MotionVariants = {
 		...BASE_ITEM_VARIANTS,
 		...props.variants?.item,
 	};
@@ -71,27 +77,28 @@ export const SpinningText: ParentComponent<SpinningTextProps> = (props) => {
 			variants={containerVariants}
 			transition={finalTransition}
 		>
-			{letters.map((letter, index) => (
-				<Motion.span
-					aria-hidden="true"
-					key={`${index}-${letter}`}
-					variants={itemVariants}
-					class="absolute left-1/2 top-1/2 inline-block"
-					style={{
-						"--index": index,
-						"--total": letters.length,
-						"--radius": props.radius ?? 5,
-						transform: `
-							translate(-50%, -50%)
-							rotate(calc(360deg / var(--total) * var(--index)))
-							translateY(calc(var(--radius, 5) * -1ch))
-						`,
-						"transform-origin": "center",
-					}}
-				>
-					{letter}
-				</Motion.span>
-			))}
+			<For each={letters}>
+				{(letter, index) => (
+					<Motion.span
+						aria-hidden="true"
+						variants={itemVariants}
+						class="absolute left-1/2 top-1/2 inline-block"
+						style={{
+							"--index": `${index()}`,
+							"--total": `${letters.length}`,
+							"--radius": `${props.radius ?? 5}`,
+							transform: `
+								translate(-50%, -50%)
+								rotate(calc(360deg / var(--total) * var(--index)))
+								translateY(calc(var(--radius, 5) * -1ch))
+							`,
+							"transform-origin": "center",
+						}}
+					>
+						{letter}
+					</Motion.span>
+				)}
+			</For>
 			<span class="sr-only">{childText}</span>
 		</Motion.div>
 	);

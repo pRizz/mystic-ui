@@ -1,4 +1,5 @@
 import {
+	For,
 	type JSX,
 	type ParentComponent,
 	createEffect,
@@ -38,6 +39,25 @@ export const RippleButton: ParentComponent<RippleButtonProps> = (props) => {
 		_localProps,
 	);
 	const [buttonRipples, setButtonRipples] = createSignal<ButtonRipple[]>([]);
+
+	const runClickHandler = (
+		handler: RippleButtonProps["onClick"],
+		event: MouseEvent & {
+			currentTarget: HTMLButtonElement;
+			target: Element;
+		},
+	) => {
+		if (!handler) {
+			return;
+		}
+
+		if (typeof handler === "function") {
+			handler(event);
+			return;
+		}
+
+		handler[0](handler[1], event);
+	};
 
 	const createRipple = (event: MouseEvent) => {
 		const button = event.currentTarget as HTMLButtonElement;
@@ -85,28 +105,29 @@ export const RippleButton: ParentComponent<RippleButtonProps> = (props) => {
 			)}
 			onClick={(event) => {
 				createRipple(event);
-				localProps.onClick?.(event);
+				runClickHandler(localProps.onClick, event);
 			}}
 			ref={forwardProps.ref}
 			{...forwardProps}
 		>
 			<div class="relative z-10">{localProps.children}</div>
 			<span class="pointer-events-none absolute inset-0">
-				{buttonRipples().map((ripple) => (
-					<span
-						key={ripple.key}
-						class="absolute animate-rippling rounded-full bg-background opacity-30"
-						style={{
-							width: `${ripple.size}px`,
-							height: `${ripple.size}px`,
-							top: `${ripple.y}px`,
-							left: `${ripple.x}px`,
-							"background-color": localProps.rippleColor,
-							transform: "scale(0)",
-							"--duration": localProps.duration,
-						}}
-					/>
-				))}
+				<For each={buttonRipples()}>
+					{(ripple) => (
+						<span
+							class="absolute animate-rippling rounded-full bg-background opacity-30"
+							style={{
+								width: `${ripple.size}px`,
+								height: `${ripple.size}px`,
+								top: `${ripple.y}px`,
+								left: `${ripple.x}px`,
+								"background-color": localProps.rippleColor,
+								transform: "scale(0)",
+								"--duration": localProps.duration,
+							}}
+						/>
+					)}
+				</For>
 			</span>
 		</button>
 	);

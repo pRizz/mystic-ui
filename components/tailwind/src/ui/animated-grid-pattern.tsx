@@ -1,5 +1,6 @@
 import {
 	type Component,
+	For,
 	type JSX,
 	createMemo,
 	createSignal,
@@ -14,7 +15,6 @@ import { cn } from "../lib/utils";
 
 interface Square {
 	id: number;
-	position: [number, number];
 }
 
 export interface AnimatedGridPatternProps
@@ -41,39 +41,38 @@ const AnimatedSquare: Component<{
 	squareHeight: number;
 	squareWidth: number;
 }> = (props) => {
-	const [iteration, setIteration] = createSignal(0);
 	const [position, setPosition] = createSignal(props.getPosition());
 
 	onMount(() => {
 		const initialDelay = props.index * 100;
 		const cycleDuration = (props.duration * 2 + props.repeatDelay) * 1000;
+		let interval: number | undefined;
 
 		const initialTimeout = window.setTimeout(() => {
-			setIteration((currentIteration) => currentIteration + 1);
-		}, initialDelay);
-
-		const interval = window.setInterval(() => {
 			setPosition(props.getPosition());
-			setIteration((currentIteration) => currentIteration + 1);
-		}, cycleDuration);
+			interval = window.setInterval(() => {
+				setPosition(props.getPosition());
+			}, cycleDuration);
+		}, initialDelay);
 
 		onCleanup(() => {
 			window.clearTimeout(initialTimeout);
-			window.clearInterval(interval);
+			if (interval) {
+				window.clearInterval(interval);
+			}
 		});
 	});
 
 	return (
 		<Motion.rect
-			key={`${props.id}-${iteration()}`}
 			initial={{ opacity: 0 }}
 			animate={{ opacity: props.maxOpacity }}
 			transition={{
 				duration: props.duration,
-				repeat: 1,
+				repeat: Number.POSITIVE_INFINITY,
 				delay: props.index * 0.1,
-				repeatType: "reverse",
-				repeatDelay: props.repeatDelay,
+				direction: "alternate",
+				endDelay: props.repeatDelay,
 			}}
 			width={props.squareWidth - 1}
 			height={props.squareHeight - 1}
@@ -127,7 +126,6 @@ export const AnimatedGridPattern: Component<AnimatedGridPatternProps> = (
 	const squares = createMemo<Square[]>(() =>
 		Array.from({ length: localProps.numSquares }, (_, squareId) => ({
 			id: squareId,
-			position: getPosition(),
 		})),
 	);
 
@@ -182,7 +180,7 @@ export const AnimatedGridPattern: Component<AnimatedGridPatternProps> = (
 					<path
 						d={`M.5 ${localProps.height}V.5H${localProps.width}`}
 						fill="none"
-						stroke-dasharray={localProps.strokeDasharray}
+						stroke-dasharray={`${localProps.strokeDasharray}`}
 					/>
 				</pattern>
 			</defs>
@@ -193,19 +191,20 @@ export const AnimatedGridPattern: Component<AnimatedGridPatternProps> = (
 				class="overflow-visible"
 				aria-hidden="true"
 			>
-				{squares().map((square, index) => (
-					<AnimatedSquare
-						key={square.id}
-						id={square.id}
-						index={index}
-						getPosition={getPosition}
-						maxOpacity={localProps.maxOpacity}
-						repeatDelay={localProps.repeatDelay}
-						duration={localProps.duration}
-						squareWidth={localProps.width}
-						squareHeight={localProps.height}
-					/>
-				))}
+				<For each={squares()}>
+					{(square, index) => (
+						<AnimatedSquare
+							id={square.id}
+							index={index()}
+							getPosition={getPosition}
+							maxOpacity={localProps.maxOpacity}
+							repeatDelay={localProps.repeatDelay}
+							duration={localProps.duration}
+							squareWidth={localProps.width}
+							squareHeight={localProps.height}
+						/>
+					)}
+				</For>
 			</svg>
 		</svg>
 	);

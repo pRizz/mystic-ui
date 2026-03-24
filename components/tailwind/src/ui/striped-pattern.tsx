@@ -3,7 +3,7 @@ import { createUniqueId, mergeProps, splitProps } from "solid-js";
 import { cn } from "../lib/utils";
 
 export interface StripedPatternProps
-	extends JSX.SvgSVGAttributes<SVGSVGElement> {
+	extends Omit<JSX.SvgSVGAttributes<SVGSVGElement>, "direction"> {
 	direction?: "left" | "right";
 }
 

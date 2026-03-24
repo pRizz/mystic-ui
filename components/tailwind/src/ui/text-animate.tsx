@@ -1,6 +1,5 @@
-import type { JSX } from "solid-js";
-import { Dynamic } from "solid-js/web";
-import { Motion } from "solid-motionone";
+import { type Component, For, type JSX } from "solid-js";
+import { Motion, type VariantDefinition } from "solid-motionone";
 import { cn } from "../lib/utils";
 
 type AnimationType = "text" | "word" | "character" | "line";
@@ -28,27 +27,28 @@ type MotionElementType =
 	| "p"
 	| "section"
 	| "span";
-type VariantState = Record<string, unknown>;
+type MotionElementComponent = Component<JSX.HTMLAttributes<HTMLElement>>;
+type VariantState = Exclude<VariantDefinition, string>;
 type Variants = {
 	hidden?: VariantState;
-	show?: VariantState;
-	exit?: VariantState;
+	show?: VariantDefinition;
+	exit?: VariantDefinition;
 };
 
 const motionElements = {
-	article: Motion.article,
-	div: Motion.div,
-	h1: Motion.h1,
-	h2: Motion.h2,
-	h3: Motion.h3,
-	h4: Motion.h4,
-	h5: Motion.h5,
-	h6: Motion.h6,
-	li: Motion.li,
-	p: Motion.p,
-	section: Motion.section,
-	span: Motion.span,
-} as const satisfies Record<MotionElementType, unknown>;
+	article: Motion.article as MotionElementComponent,
+	div: Motion.div as MotionElementComponent,
+	h1: Motion.h1 as MotionElementComponent,
+	h2: Motion.h2 as MotionElementComponent,
+	h3: Motion.h3 as MotionElementComponent,
+	h4: Motion.h4 as MotionElementComponent,
+	h5: Motion.h5 as MotionElementComponent,
+	h6: Motion.h6 as MotionElementComponent,
+	li: Motion.li as MotionElementComponent,
+	p: Motion.p as MotionElementComponent,
+	section: Motion.section as MotionElementComponent,
+	span: Motion.span as MotionElementComponent,
+} satisfies Record<MotionElementType, MotionElementComponent>;
 
 const staggerTimings: Record<AnimationType, number> = {
 	text: 0.06,
@@ -156,42 +156,31 @@ export const TextAnimate = (props: TextAnimateProps) => {
 	const once = props.once ?? false;
 	const accessible = props.accessible ?? true;
 	const stagger = duration / Math.max(segments.length, 1);
-	const seenSegments = new Map<string, number>();
-	const segmentEntries = segments.map((segment) => {
-		const seenCount = (seenSegments.get(segment) ?? 0) + 1;
-		seenSegments.set(segment, seenCount);
-
-		return {
-			key: `${by}-${segment}-${seenCount}`,
-			segment,
-		};
-	});
-
 	return (
-		<Dynamic
-			component={MotionComponent as never}
+		<MotionComponent
 			class={cn("whitespace-pre-wrap", props.class)}
 			aria-label={accessible ? props.children : undefined}
 		>
 			{accessible ? <span class="sr-only">{props.children}</span> : null}
-			{segmentEntries.map(({ key, segment }, index) => (
-				<Motion.span
-					key={key}
-					initial={itemVariants.hidden}
-					inView={startOnView ? itemVariants.show : undefined}
-					animate={startOnView ? undefined : itemVariants.show}
-					exit={itemVariants.exit}
-					inViewOptions={{ once }}
-					transition={{
-						delay: delay + index * staggerTimings[by],
-						duration: stagger || duration,
-					}}
-					class={getSegmentClass(by, props.segmentClass)}
-					aria-hidden={accessible ? "true" : undefined}
-				>
-					{segment}
-				</Motion.span>
-			))}
-		</Dynamic>
+			<For each={segments}>
+				{(segment, index) => (
+					<Motion.span
+						initial={itemVariants.hidden}
+						inView={startOnView ? itemVariants.show : undefined}
+						animate={startOnView ? undefined : itemVariants.show}
+						exit={itemVariants.exit}
+						inViewOptions={{ once }}
+						transition={{
+							delay: delay + index() * staggerTimings[by],
+							duration: stagger || duration,
+						}}
+						class={getSegmentClass(by, props.segmentClass)}
+						aria-hidden={accessible ? "true" : undefined}
+					>
+						{segment}
+					</Motion.span>
+				)}
+			</For>
+		</MotionComponent>
 	);
 };

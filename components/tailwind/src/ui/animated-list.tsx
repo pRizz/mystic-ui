@@ -1,4 +1,5 @@
 import {
+	For,
 	type JSX,
 	type JSXElement,
 	type ParentComponent,
@@ -14,14 +15,14 @@ import { cn } from "../lib/utils";
 
 const animationProps = {
 	initial: { scale: 0, opacity: 0 },
-	animate: { scale: 1, opacity: 1, originY: 0 },
+	animate: { scale: 1, opacity: 1 },
 	exit: { scale: 0, opacity: 0 },
-	transition: { type: "spring", stiffness: 350, damping: 40 },
+	transition: { duration: 0.3, easing: "ease-out" },
 } satisfies Omit<MotionComponentProps, "children">;
 
 export const AnimatedListItem: ParentComponent = (props) => {
 	return (
-		<Motion.div {...animationProps} class="mx-auto w-full">
+		<Motion.div {...animationProps} class="mx-auto w-full origin-bottom">
 			{props.children}
 		</Motion.div>
 	);
@@ -78,9 +79,9 @@ export const AnimatedList: ParentComponent<AnimatedListProps> = (props) => {
 			class={cn("flex flex-col items-center gap-4", localProps.class)}
 			{...forwardProps}
 		>
-			{visibleItems().map((item) => (
-				<AnimatedListItem key={item.key}>{item.child}</AnimatedListItem>
-			))}
+			<For each={visibleItems()}>
+				{(item) => <AnimatedListItem>{item.child}</AnimatedListItem>}
+			</For>
 		</div>
 	);
 };

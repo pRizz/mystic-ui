@@ -9,13 +9,14 @@ if [[ -z "$staged_files" ]]; then
 	exit 0
 fi
 
-if ! printf '%s\n' "$staged_files" | grep -Eq '^(package\.json|bun\.lock|README\.md|\.npmignore|components/tailwind/src/|components/tailwind/package\.json|scripts/check-github-package\.mjs|AGENTS\.md)'; then
+if ! printf '%s\n' "$staged_files" | grep -Eq '^(package\.json|bun\.lock|README\.md|\.npmignore|components/tailwind/package\.json|components/tailwind/src/|components/tailwind/tsconfig\.types\.json|components/tailwind/types/|scripts/build-types\.mjs|scripts/check-types\.mjs|scripts/check-github-package\.mjs|AGENTS\.md)'; then
 	exit 0
 fi
 
 cat <<'EOF'
 [agent hint] GitHub package surface change detected.
 [agent hint] Expected public contract: mystic-ui + mystic-ui/tailwind (Tailwind only).
+[agent hint] Generated declarations under components/tailwind/types must stay committed and in sync.
 [agent hint] If workspace tools are missing, run: bun install
 EOF
 

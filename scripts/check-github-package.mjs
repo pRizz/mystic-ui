@@ -31,7 +31,7 @@ function run(command, args) {
 }
 
 const packageJson = JSON.parse(readFileSync(path.join(repoRoot, "package.json"), "utf8"));
-const expectedTypesPath = "./components/tailwind/src/index.d.ts";
+const expectedTypesPath = "./components/tailwind/types/index.d.ts";
 const expectedImportPath = "./components/tailwind/src/index.ts";
 const rootExport = packageJson.exports?.["."];
 const tailwindExport = packageJson.exports?.["./tailwind"];
@@ -58,6 +58,9 @@ if (packageJson.exports["./panda"]) {
 console.log("[agent hint] Verifying Tailwind workspace checks.");
 run("bun", ["run", "--filter", "@mystic-ui/tailwind", "check"]);
 
+console.log("[agent hint] Verifying committed generated types.");
+run("bun", ["run", "check:types"]);
+
 console.log("[agent hint] Verifying npm pack contents stay package-focused.");
 const packOutput = run("npm", ["pack", "--dry-run", "--json"]);
 const packResults = JSON.parse(packOutput);
@@ -68,7 +71,7 @@ const requiredFiles = [
 	"README.md",
 	"LICENSE.md",
 	"components/tailwind/src/index.ts",
-	"components/tailwind/src/index.d.ts",
+	"components/tailwind/types/index.d.ts",
 ];
 
 for (const requiredFile of requiredFiles) {
@@ -87,6 +90,9 @@ const forbiddenPrefixes = [
 ];
 
 for (const packedFile of packedFiles) {
+	if (packedFile === "components/tailwind/src/index.d.ts") {
+		fail("[check:github-package] The hand-written declaration shim must not be packed.");
+	}
 	const forbiddenPrefix = forbiddenPrefixes.find((prefix) => packedFile.startsWith(prefix));
 	if (forbiddenPrefix) {
 		fail(

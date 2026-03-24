@@ -6,26 +6,28 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./components/tailwind/src/index.d.ts",
+      "types": "./components/tailwind/types/index.d.ts",
       "import": "./components/tailwind/src/index.ts"
     },
     "./tailwind": {
-      "types": "./components/tailwind/src/index.d.ts",
+      "types": "./components/tailwind/types/index.d.ts",
       "import": "./components/tailwind/src/index.ts"
     }
   },
-  "types": "./components/tailwind/src/index.d.ts",
+  "types": "./components/tailwind/types/index.d.ts",
   "files": [
-    "components/tailwind/src/index.d.ts",
     "components/tailwind/src/index.ts",
     "components/tailwind/src/lib/utils.ts",
     "components/tailwind/src/ui",
+    "components/tailwind/types",
     "README.md",
     "LICENSE.md"
   ],
   "packageManager": "bun@1.3.11",
   "scripts": {
+    "build:types": "bun scripts/build-types.mjs",
     "check": "bun run --filter '*' check",
+    "check:types": "bun scripts/check-types.mjs",
     "check:github-package": "bun scripts/check-github-package.mjs",
     "githooks:install": "bun scripts/install-githooks.mjs"
   },
@@ -41,7 +43,7 @@
     "clsx": "^2.1.1",
     "motion": "^11.13.1",
     "rough-notation": "^0.5.1",
-    "solid-icons": "^1.1.0",
+    "solid-icons": "1.1.0",
     "solid-motionone": "^1.0.2",
     "tailwind-merge": "^2.5.5"
   },

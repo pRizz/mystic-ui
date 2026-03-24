@@ -1,5 +1,6 @@
 import {
-	type Accessor,
+	type Component,
+	For,
 	createEffect,
 	createSignal,
 	mergeProps,
@@ -8,7 +9,6 @@ import {
 	splitProps,
 } from "solid-js";
 import type { JSX } from "solid-js";
-import { Dynamic } from "solid-js/web";
 import { Motion } from "solid-motionone";
 import { cn } from "../lib/utils";
 
@@ -26,21 +26,22 @@ type MotionElementType =
 	| "p"
 	| "section"
 	| "span";
+type MotionElementComponent = Component<JSX.HTMLAttributes<HTMLElement>>;
 
 const motionElements = {
-	article: Motion.article,
-	div: Motion.div,
-	h1: Motion.h1,
-	h2: Motion.h2,
-	h3: Motion.h3,
-	h4: Motion.h4,
-	h5: Motion.h5,
-	h6: Motion.h6,
-	li: Motion.li,
-	p: Motion.p,
-	section: Motion.section,
-	span: Motion.span,
-} as const satisfies Record<MotionElementType, unknown>;
+	article: Motion.article as MotionElementComponent,
+	div: Motion.div as MotionElementComponent,
+	h1: Motion.h1 as MotionElementComponent,
+	h2: Motion.h2 as MotionElementComponent,
+	h3: Motion.h3 as MotionElementComponent,
+	h4: Motion.h4 as MotionElementComponent,
+	h5: Motion.h5 as MotionElementComponent,
+	h6: Motion.h6 as MotionElementComponent,
+	li: Motion.li as MotionElementComponent,
+	p: Motion.p as MotionElementComponent,
+	section: Motion.section as MotionElementComponent,
+	span: Motion.span as MotionElementComponent,
+} satisfies Record<MotionElementType, MotionElementComponent>;
 
 const DEFAULT_CHARACTER_SET = Object.freeze(
 	"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),
@@ -171,8 +172,7 @@ export const HyperText = (props: HyperTextProps) => {
 	});
 
 	return (
-		<Dynamic
-			component={MotionComponent as Accessor<unknown>}
+		<MotionComponent
 			ref={(node: HTMLElement) => {
 				elementRef = node;
 			}}
@@ -186,14 +186,15 @@ export const HyperText = (props: HyperTextProps) => {
 			}}
 			{...forwardProps}
 		>
-			{displayText().map((letter, index) => (
-				<span
-					key={`${index}-${letter}`}
-					class={cn("font-mono", letter === " " ? "inline-block w-3" : "")}
-				>
-					{letter.toUpperCase()}
-				</span>
-			))}
-		</Dynamic>
+			<For each={displayText()}>
+				{(letter) => (
+					<span
+						class={cn("font-mono", letter === " " ? "inline-block w-3" : "")}
+					>
+						{letter.toUpperCase()}
+					</span>
+				)}
+			</For>
+		</MotionComponent>
 	);
 };

@@ -3,22 +3,13 @@ import { Motion, type MotionComponentProps } from "solid-motionone";
 import { cn } from "../lib/utils";
 
 const animationProps = {
-	initial: { "--x": "100%", scale: 0.8 },
-	animate: { "--x": "-100%", scale: 1 },
+	initial: { "--x": "100%" },
+	animate: { "--x": "-100%" },
 	transition: {
 		repeat: Number.POSITIVE_INFINITY,
-		repeatType: "loop",
-		repeatDelay: 1,
-		type: "spring",
-		stiffness: 20,
-		damping: 15,
-		mass: 2,
-		scale: {
-			type: "spring",
-			stiffness: 200,
-			damping: 5,
-			mass: 0.5,
-		},
+		duration: 1.5,
+		easing: "linear",
+		endDelay: 1,
 	},
 } satisfies Omit<MotionComponentProps, "children">;
 

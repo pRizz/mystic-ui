@@ -16,8 +16,14 @@
   - `bun.lock`
   - `.npmignore`
   - `README.md`
+  - `components/tailwind/tsconfig.types.json`
   - `components/tailwind/src/**`
+  - `components/tailwind/types/**`
+  - `scripts/build-types.mjs`
+  - `scripts/check-types.mjs`
+  - `scripts/check-github-package.mjs`
 - If the check says dependencies are missing, run `bun install`.
+- If you touch the public Tailwind barrel or exported UI components, regenerate declarations with `bun run build:types` and commit the resulting `components/tailwind/types/**` updates.
 
 ## Pre-Commit Hook
 

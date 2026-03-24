@@ -1,4 +1,4 @@
-import { TbOutlineMoon, TbOutlineSun } from "solid-icons/tb";
+import { TbMoon, TbSun } from "solid-icons/tb";
 import {
 	type Component,
 	type JSX,
@@ -10,11 +10,11 @@ import {
 } from "solid-js";
 import { cn } from "../lib/utils";
 
-interface ViewTransitionDocument extends Document {
+type ViewTransitionCapableDocument = Document & {
 	startViewTransition?: (callback: () => void) => {
-		ready?: Promise<unknown>;
+		ready: Promise<void>;
 	};
-}
+};
 
 export interface AnimatedThemeTogglerProps
 	extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -49,7 +49,7 @@ export const AnimatedThemeToggler: Component<AnimatedThemeTogglerProps> = (
 			return;
 		}
 
-		const viewTransitionDocument = document as ViewTransitionDocument;
+		const viewTransitionDocument = document as ViewTransitionCapableDocument;
 		const { top, left, width, height } = buttonRef.getBoundingClientRect();
 		const x = left + width / 2;
 		const y = top + height / 2;
@@ -69,7 +69,7 @@ export const AnimatedThemeToggler: Component<AnimatedThemeTogglerProps> = (
 			applyTheme();
 		});
 
-		transition.ready?.then(() => {
+		transition.ready.then(() => {
 			document.documentElement.animate(
 				{
 					clipPath: [
@@ -115,7 +115,7 @@ export const AnimatedThemeToggler: Component<AnimatedThemeTogglerProps> = (
 					"::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }"
 				}
 			</style>
-			{isDark() ? <TbOutlineSun /> : <TbOutlineMoon />}
+			{isDark() ? <TbSun /> : <TbMoon />}
 			<span class="sr-only">Toggle theme</span>
 		</button>
 	);

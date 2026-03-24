@@ -77,7 +77,7 @@ const Ray: Component<LightRay> = (props) => {
 				repeat: Number.POSITIVE_INFINITY,
 				easing: "ease-in-out",
 				delay: props.delay,
-				repeatDelay: props.duration * 0.1,
+				endDelay: props.duration * 0.1,
 			}}
 		/>
 	);

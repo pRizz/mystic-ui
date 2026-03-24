@@ -15,7 +15,15 @@ export interface AnimatedCircularProgressBarProps
 export const AnimatedCircularProgressBar: Component<
 	AnimatedCircularProgressBarProps
 > = (props) => {
-	const [localProps, forwardProps] = splitProps(props, ["class", "style"]);
+	const [localProps, forwardProps] = splitProps(props, [
+		"class",
+		"style",
+		"max",
+		"min",
+		"value",
+		"gaugePrimaryColor",
+		"gaugeSecondaryColor",
+	]);
 	const mergedProps = mergeProps({ max: 100, min: 0 }, localProps);
 	const circumference = TAU * 45;
 	const percentPx = circumference / 100;
